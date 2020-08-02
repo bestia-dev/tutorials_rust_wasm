@@ -22,9 +22,11 @@ Run the server in a separate terminal so it can stay running all the time:
 Open the browser on:  
 `http://127.0.0.1:4000`  
 
-## Minimal Wasm/Webassembly
+## Minimal vanilla Html, Css, javascript and Wasm/Webassembly
 
-I will try to use no Javascript at all and use Rust web-sys for all the programming need.  
+First decision - no frameworks. Then no javascript.
+Some basic html. Some basic css. 
+All the rest is in Rust with web-sys for all the programming needs.  
 No other special requirements.  
 
 ## PWA

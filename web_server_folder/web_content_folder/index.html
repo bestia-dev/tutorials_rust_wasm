@@ -55,23 +55,59 @@
 <body>
       <!-- a standard service worker is a must for PWA 
       <script src="start_service_worker.js"></script>-->
-      <!-- warning if javascript iis not enabled -->
-      <noscript>
-            <h2>
-                  !!!???!!!<br>
-                  This app <br>
-                  cannot work <br>
-                  without javascript<br>
-                  enabled<br>
-                  !!!???!!!</h2>
-      </noscript>
-      
-      <div id="div_for_virtual_dom">
-            <!-- first I will make some fixed text boxes -->
-            <textarea name="expression" id="expression" cols="30" rows="10"></textarea>
-            <button id="run_button" style="width:100%;" >run</button>
-            <textarea name="explanation" id="explanation" cols="30" rows="10"></textarea>
+      <div class="container_0">
+            <div class="container0_content_grid_0"style="grid-template-columns: 15fr 85fr;">
+                  <div class="grid0_c bold">
+                        <label for="regex_text">regex_text</label>
+                  </div>
+                  <div class="grid0_c bold" >
+                        <textarea name="regex_text" id="regex_text" class="textarea_full_width height_100px" ></textarea>
+                  </div>
+
+                  <div class="grid0_c bold">
+                        <label for="substitution">substitution</label>
+                  </div>
+                  <div class="grid0_c bold" >
+                        <textarea name="substitution" id="substitution" class="textarea_full_width height_100px" class="textarea_full_width" ></textarea>
+                  </div>
+
+                  <div class="grid0_c bold">
+                        <label for="test_string">test_string</label>
+                  </div>
+                  <div class="grid0_c bold" >
+                        <textarea name="test_string" id="test_string" class="textarea_full_width height_100px" ></textarea>
+                  </div>
+            </div>
       </div>
+      <div class="container_0">
+            <div class="container0_content_not_grid">
+                  <button id="run_button" class="button" >execute regex</button>
+            </div>
+      </div>
+            <div class="container_0">
+                  <div class="container0_content_grid_0"style="grid-template-columns: 15fr 85fr;">
+                        <div class="grid0_c bold">
+                              <label for="explanation">explanation</label>
+                        </div>
+                        <div class="grid0_c bold" >
+                              <textarea name="explanation" id="explanation" class="textarea_full_width height_400px" ></textarea>
+                        </div>
+
+                        <div class="grid0_c bold">
+                              <label for="regex_result">regex_result</label>
+                        </div>
+                        <div class="grid0_c bold" >
+                              <textarea name="regex_result" id="regex_result" class="textarea_full_width height_400px" ></textarea>
+                        </div>
+
+                        <div class="grid0_c bold">
+                              <label for="code_gen">code_gen</label>
+                        </div>
+                        <div class="grid0_c bold" >
+                              <textarea name="code_gen" id="code_gen" class="textarea_full_width height_400px" ></textarea>
+                        </div>
+                  </div>
+            </div>      
       <!-- import and init the wasm code -->
       <script type="module">
             import init from "./pkg/rust_regex_explanation_pwa.js";

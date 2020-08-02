@@ -1,25 +1,28 @@
 use core::ops::Range;
 use regex_syntax::ast::*;
 
-pub fn lib_main(reg_str: String) {
+pub fn lib_main(reg_str: String) -> String {
     let mut exp = Explanation {
         reg_str,
         ..Default::default()
     };
-    println!("regex:{}", &exp.reg_str);
-    println!("parsing...{}", "");
+    exp.explanation_all
+        .push_str(&format!("regex:{}\n", &exp.reg_str));
+    exp.explanation_all.push_str("parsing...\n");
     let mut ast = regex_syntax::ast::parse::Parser::new();
     let ast = ast.parse(&exp.reg_str).unwrap();
 
     //dbg!(&ast);
     process_ast(&mut exp, &Box::new(ast));
+    // return
+    exp.explanation_all.to_string()
 }
 
 #[derive(Debug, Default)]
 pub struct Explanation {
     pub reg_str: String,
-    pub last_token: String,
     pub indent: usize,
+    pub explanation_all: String,
     // print literals in one line for brevity
     pub fragment: String,
     pub symbol: String,
@@ -29,8 +32,9 @@ pub struct Explanation {
 impl Explanation {
     fn print_literals(&mut self) {
         if !self.fragment.is_empty() {
-            print_fragment(&self.fragment);
-            println!("{}", self.explanation);
+            self.print_fragment(&self.fragment.clone());
+            self.explanation_all
+                .push_str(&format!("{}\n", self.explanation));
             self.fragment.clear();
             self.explanation.clear();
         }
@@ -45,29 +49,33 @@ impl Explanation {
         self.explanation.clear();
         self.explanation.push_str(name);
     }
-}
-fn print_fragment(fragment: &str) {
-    // the left 16 col are for the regex fragment
-    const COL_WIDTH: usize = 16;
-    let mut pos_start = 0;
-    loop {
-        let pos_end = fragment.len().min(pos_start + COL_WIDTH);
-        print!("{}", &fragment[pos_start..pos_end]);
-        if pos_end == fragment.len() {
-            let rest = COL_WIDTH - (pos_end % COL_WIDTH);
-            print!("{}", " ".repeat(rest));
-            break;
+    fn print_fragment(&mut self, fragment: &str) {
+        // the left 16 col are for the regex fragment
+        const COL_WIDTH: usize = 16;
+        let mut pos_start = 0;
+        loop {
+            let pos_end = fragment.len().min(pos_start + COL_WIDTH);
+            self.explanation_all
+                .push_str(&format!("{}", &fragment[pos_start..pos_end]));
+            if pos_end == fragment.len() {
+                let rest = COL_WIDTH - (pos_end % COL_WIDTH);
+                self.explanation_all
+                    .push_str(&format!("{}", " ".repeat(rest)));
+                break;
+            }
+            pos_start = pos_end;
+            self.explanation_all.push_str(&format!("\n"));
         }
-        pos_start = pos_end;
-        println!("");
     }
 }
+
 /// print any token except literals
 fn print(exp: &mut Explanation, symbol: &str, name: &str, range: Range<usize>) {
     exp.print_literals();
-    print_fragment(&exp.reg_str[range]);
+    exp.print_fragment(&exp.reg_str[range].to_string());
     exp.set_explanation(symbol, name);
-    println!("{}{}", &exp.symbol, &exp.explanation);
+    exp.explanation_all
+        .push_str(&format!("{}{}\n", &exp.symbol, &exp.explanation));
 }
 
 fn greed(greedy: bool) -> &'static str {
@@ -128,7 +136,7 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
                 );
                 match &b.kind {
                     ClassSet::Item(i) => class_set_item(exp, i, b.negated),
-                    _ => println!("unimplemented 1"),
+                    _ => exp.explanation_all.push_str(&format!("unimplemented 1\n")),
                 }
             }
             Class::Perl(p) => match p.kind {
@@ -151,7 +159,9 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
                     p.span.start.offset..p.span.end.offset,
                 ),
             },
-            _ => println!("unimplemented Class"),
+            _ => exp
+                .explanation_all
+                .push_str(&format!("unimplemented Class\n")),
         },
         Ast::Concat(c) => {
             for a in c.asts.iter() {
@@ -166,7 +176,9 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
                 "Asserts position at the end of a line",
                 a.span.start.offset..a.span.end.offset,
             ),
-            _ => println!("unimplemented Assertion"),
+            _ => exp
+                .explanation_all
+                .push_str(&format!("unimplemented Assertion\n")),
         },
         Ast::Alternation(a) => {
             print(
@@ -240,7 +252,9 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
                         ),
                         r.span.start.offset..r.span.end.offset,
                     ),
-                    _ => println!("unimplemented RepetitionRange"),
+                    _ => exp
+                        .explanation_all
+                        .push_str(&format!("unimplemented RepetitionRange\n")),
                 },
             }
             process_ast(exp, &r.ast);
@@ -255,7 +269,7 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
             );
             flags(exp, &f.flags);
         }
-        _ => println!("unimplemented Ast"),
+        _ => exp.explanation.push_str(&format!("unimplemented Ast")),
     }
     exp.indent -= 1;
 }
@@ -445,7 +459,9 @@ pub fn class_set_item(exp: &mut Explanation, i: &ClassSetItem, negated: bool) {
                 a.span.start.offset..a.span.end.offset,
             ),
         },
-        _ => println!("unimplemented class_set_item"),
+        _ => exp
+            .explanation_all
+            .push_str(&format!("unimplemented class_set_item\n")),
     }
 }
 pub fn literal(exp: &mut Explanation, l: &Literal, negated: bool) {
@@ -471,6 +487,8 @@ pub fn literal(exp: &mut Explanation, l: &Literal, negated: bool) {
             "Matches the escaped character literally",
             l.span.start.offset..l.span.end.offset,
         ),
-        _ => println!("unimplemented literal"),
+        _ => exp
+            .explanation_all
+            .push_str(&format!("unimplemented literal\n")),
     }
 }
