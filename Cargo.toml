@@ -1,0 +1,62 @@
+[package]
+name = "rust_regex_explanation_pwa"
+version = "2020.510.439"
+authors = ["Luciano Bestia <Luciano.Bestia@gmail.com>"]
+edition = "2018"
+description = "Rust regex explanations in PWA"
+repository = "https://github.com/LucianoBestia/rust_regex_explanation_pwa"
+readme = "README.md"
+license = "MIT"
+keywords = ["wasm"]
+categories = []
+publish = false
+
+[lib]
+# cdylib is for the wasm module library
+crate-type = ["cdylib"]
+
+[dependencies]
+regex-syntax="0.6.18"
+rust_wasm_websys_utils = "0.4.3"
+unwrap = "1.2.1"
+wasm-bindgen = "0.2.67"
+console_error_panic_hook = "0.1.6"
+js-sys = "0.3.44"
+
+[dependencies.web-sys]
+version = "0.3.39"
+features = [
+  "AbortController",
+  "console",
+  "Document",
+  "Element",
+  "ErrorEvent",
+  "Event",
+  "EventListener",
+  "EventTarget",
+  "FormData",
+  "HtmlElement",
+  "HtmlFormElement",
+  "HtmlHtmlElement",
+  "HtmlInputElement",
+  "HtmlSpanElement",
+  "HtmlTextAreaElement",
+  "KeyboardEvent",
+  "Location",
+  "MediaQueryList",
+  "MouseEvent",
+  "Navigator",
+  "Node",
+  "Request",
+  "RequestCache",
+  "RequestCredentials",
+  "RequestInit",
+  "RequestMode",
+  "RequestRedirect",
+  "Response",
+  "Screen",
+  "Window",
+]
+
+[profile.release]
+panic = "abort"
