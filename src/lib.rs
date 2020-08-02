@@ -17,7 +17,7 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     set_text_area_element_value_string_by_id("regex_text", regex_text);
     let substitution = "OnlyThe$1";
     set_text_area_element_value_string_by_id("substitution", substitution);
-    let test_string = "origin  git@github.com:LucianoBestia/regex101_rust.git (fetch)\norigin  https://github.com/LucianoBestia/regex101_rust (fetch)";
+    let test_string = "origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)";
     set_text_area_element_value_string_by_id("test_string", test_string);
     //prepare the event listener for the button click
     set_run_button_on_click();
@@ -42,7 +42,6 @@ fn set_run_button_on_click() {
 
         let code_gen = code_gen_mod::code_gen(&regex_text, &substitution, &test_string);
         set_text_area_element_value_string_by_id("code_gen", &code_gen);
-        
     }) as Box<dyn FnMut()>);
 
     html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));

@@ -33,3 +33,5 @@ No other special requirements.
 
 Progressive Web App need a manifest, a worker and a bunch of icons.  
 todo...
+
+todo: store the last input locally

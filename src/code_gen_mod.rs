@@ -1,11 +1,11 @@
 pub fn code_gen(regex_text: &str, substitution: &str, test_string: &str) -> String {
-    let gen = String::from( r#####"
-    //! <https://github.com/LucianoBestia/regex101_rust>  
-//! Run this code online in the playground:
+    let gen = String::from( r#####"//! Rust Regex code-gen  
+//! <https://github.com/LucianoBestia/rust_regex_explanation_pwa>  
+//! Run this code online in the playground:  
 //! <https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=10717a3fe934b9583fb675e327833edc>  
 //!
 //! In Cargo.toml include the dependency to the regex crate:  
-//! regex = "1.3.6"
+//! regex = "1.3.6"  
 use regex::Regex;
 
 // To avoid multiple initialization of the regex and achieve better performance,
@@ -23,10 +23,10 @@ lazy_static! {
 }
 
 fn main() {
-    println!("--- regex101_rust start ---");
+    println!("--- rust_regex_explanation_pwa start ---");
 
     // prepared example
-    let test_string = r###"origin  git@github.com:LucianoBestia/regex101_rust.git (fetch)\norigin  https://github.com/LucianoBestia/regex101_rust (fetch)"###;
+    let test_string = r###"origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)"###;
     // substitution for replace_all()
     // the $1, $2,.. are placeholders for the found capture group
     let substitution = r###"OnlyThe$1"###;
@@ -43,7 +43,7 @@ fn main() {
     captures_iter(&regex, &test_string);
     replace_all(&regex, &test_string, substitution);
 
-    println!("--- regex101_rust end ---");
+    println!("--- rust_regex_explanation_pwa end ---");
 }
 
 /// example how to use the is_match() method
@@ -97,7 +97,11 @@ fn captures(regex: &Regex, test_string: &str) {
     // same 3 possible syntax to react to the `possibility of absence` Option:None
     // as in the function find()
     match regex.captures(test_string) {
-        Some(m) => println!("1. captures: {} - {} ", &m[1], &m[0]),
+        if m.len() == 2 {
+            ret.push_str(&format!("1. captures: {} - {} \n", &m[1], &m[0]));
+        } else {
+            ret.push_str(&format!("1. captures: Zero\n"));
+        }
         None => println!("1. captures: None"),
     }
     println!("captures end");
@@ -107,7 +111,11 @@ fn captures(regex: &Regex, test_string: &str) {
 fn captures_iter(regex: &Regex, test_string: &str) {
     println!("captures_iter start");
     for m in regex.captures_iter(test_string) {
-        println!("captures_iter: {} - {}", &m[1], &m[0])
+        if m.len() == 2 {
+            ret.push_str(&format!("captures_iter: {} - {}\n", &m[1], &m[0]));
+        } else {
+            ret.push_str(&format!("captures_iter: Zero\n"));
+        }
     }
     println!("captures_iter end");
 }
@@ -120,7 +128,7 @@ fn replace_all(regex: &Regex, test_string: &str, replace_string: &str) {
     println!("replaced:\n{}", new_string);
     println!("replace_all end");
 }
-    "#####).replace("Luciano(Best)ia",regex_text).replace("OnlyThe$1", substitution).replace("origin  git@github.com:LucianoBestia/regex101_rust.git (fetch)\norigin  https://github.com/LucianoBestia/regex101_rust (fetch)",test_string);
+    "#####).replace("Luciano(Best)ia",regex_text).replace("OnlyThe$1", substitution).replace(r###"origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)"###,test_string);
 
     //return
     gen

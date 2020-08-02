@@ -6,14 +6,16 @@ pub fn lib_main(reg_str: String) -> String {
         reg_str,
         ..Default::default()
     };
+    exp.explanation_all.push_str("regex explanation start\n");
     exp.explanation_all
         .push_str(&format!("regex:{}\n", &exp.reg_str));
-    exp.explanation_all.push_str("parsing...\n");
     let mut ast = regex_syntax::ast::parse::Parser::new();
     let ast = ast.parse(&exp.reg_str).unwrap();
 
     //dbg!(&ast);
     process_ast(&mut exp, &Box::new(ast));
+    exp.print_literals();
+    exp.explanation_all.push_str("regex explanation end\n");
     // return
     exp.explanation_all.to_string()
 }
