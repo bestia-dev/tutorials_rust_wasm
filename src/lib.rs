@@ -68,11 +68,13 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     set_event_listener_regex_text_on_keyup();
     set_event_listener_substitution_on_keyup();
     set_event_listener_test_string_on_keyup();
+
+    set_event_listener_explanation_max();
     debug_write("--- rust_regex_explanation_pwa end ---");
     Ok(())
 }
 
-/// code of event handler
+/// on keyup code
 fn on_keyup() {
     let regex_text = get_text_area_element_value_string_by_id("regex_text");
     let substitution = get_text_area_element_value_string_by_id("substitution");
@@ -86,6 +88,16 @@ fn on_keyup() {
 
     let code_gen = code_gen_mod::code_gen(&regex_text, &substitution, &test_string);
     set_text_area_element_value_string_by_id("code_gen", &code_gen);
+}
+
+// on click code
+fn on_click_explanation_max() {
+    debug_write("on_click_explanation_max");
+    // textarea
+    let html_element = get_element_by_id("explanation");
+    let html_element: web_sys::HtmlElement =
+        unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
+    unwrap!(html_element.style().set_property("height", "800px"));
 }
 
 /// set event listener for the regex_text
@@ -124,5 +136,18 @@ fn set_event_listener_test_string_on_keyup() {
     }) as Box<dyn FnMut()>);
 
     html_element.set_onkeyup(Some(closure.as_ref().unchecked_ref()));
+    closure.forget();
+}
+
+/// set event listener for the explanation_max
+fn set_event_listener_explanation_max() {
+    let html_element = get_element_by_id("explanation_max");
+    let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
+
+    let closure = Closure::wrap(Box::new(move || {
+        on_click_explanation_max();
+    }) as Box<dyn FnMut()>);
+
+    html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));
     closure.forget();
 }

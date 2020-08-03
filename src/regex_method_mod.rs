@@ -2,17 +2,11 @@ use regex::Regex;
 
 pub fn lib_main(regex_text: &str, substitution: &str, test_string: &str) -> String {
     let mut ret = String::new();
-    ret.push_str(&format!("--- regex methods start ---\n"));
-    ret.push_str(&format!(
-        "This is using the same Rust code of the field code-gen.\n"
-    ));
-    ret.push_str(&format!(
-        "There are 6 important Regex methods for different use-cases.\n"
-    ));
-    ret.push_str(&format!(
-        "is_match(), find(), find_iter(), capture(), capture_iter(), replace_all()\n"
-    ));
-
+    ret.push_str("--- regex methods start ---\n");
+    ret.push_str("This is using the same Rust code of the field code-gen.\n");
+    ret.push_str("There are 6 important Regex methods for different use-cases.\n");
+    ret.push_str("is_match(), find(), find_iter(), capture(), capture_iter(), replace_all()\n");
+    ret.push_str("\n");
     // prepared example
     //let test_string = "origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)";
     // substitution for replace_all()
@@ -55,7 +49,7 @@ fn is_match(regex_text: &Regex, test_string: &str, ret: &mut String) {
 
 /// example how to find the first occurrence
 fn find(regex_text: &Regex, test_string: &str, ret: &mut String) {
-    ret.push_str("regex_text.find(test_string)\n");
+    ret.push_str("regex_text.find(test_string) - only the first occurrence\n");
     // method find() returns Option:None if not found.
     // There are more than one way in Rust to check for `possibility of absence`.
     // The first way is the methods unwrap() or expect(),
@@ -119,7 +113,7 @@ fn find_iter(regex_text: &Regex, test_string: &str, ret: &mut String) {
 /// example how to capture only the first occurrence of regex capture groups
 /// using the captures() method for regex capture groups
 fn captures(regex_text: &Regex, test_string: &str, ret: &mut String) {
-    ret.push_str("regex_text.captures(test_string)\n");
+    ret.push_str("regex_text.captures(test_string) - only the first occurrence\n");
     // same 3 possible syntax to react to the `possibility of absence` Option:None
     // as in the function find()
     match regex_text.captures(test_string) {
