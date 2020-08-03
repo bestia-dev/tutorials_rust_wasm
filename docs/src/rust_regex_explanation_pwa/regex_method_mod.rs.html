@@ -149,12 +149,33 @@
 <span id="149">149</span>
 <span id="150">150</span>
 <span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">regex</span>::<span class="ident">Regex</span>;
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lib_main</span>(<span class="ident">regex_text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">substitution</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ret</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
     <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;--- regex methods start ---\n&quot;</span>));
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
+        <span class="string">&quot;This is using the same Rust code of the field code-gen.\n&quot;</span>
+    ));
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
+        <span class="string">&quot;There are 6 important Regex methods for different use-cases.\n&quot;</span>
+    ));
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
+        <span class="string">&quot;is_match(), find(), find_iter(), capture(), capture_iter(), replace_all()\n&quot;</span>
+    ));
 
     <span class="comment">// prepared example</span>
     <span class="comment">//let test_string = &quot;origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)&quot;;</span>
@@ -167,7 +188,10 @@
     <span class="comment">// 2. uncomment for is_match = true</span>
     <span class="kw">let</span> <span class="ident">regex_text</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="ident">regex_text</span>) {
         <span class="prelude-val">Ok</span>(<span class="ident">t</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">t</span>,
-        <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="ident">e</span>.<span class="ident">to_string</span>(),
+        <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;Error: {}\n&quot;</span>, <span class="ident">e</span>));
+            <span class="kw">return</span> <span class="ident">ret</span>;
+        }
     };
 
     <span class="ident">is_match</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ret</span>);
@@ -204,40 +228,40 @@
     <span class="comment">// using pattern matching (match Control Flow Operator) for `case analysis `.</span>
     <span class="kw">match</span> <span class="ident">regex_text</span>.<span class="ident">find</span>(<span class="ident">test_string</span>) {
         <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
-            <span class="string">&quot;    1. find: {} {} {}\n&quot;</span>,
+            <span class="string">&quot;    1. syntax find: {} {} {}\n&quot;</span>,
             <span class="ident">m</span>.<span class="ident">start</span>(),
             <span class="ident">m</span>.<span class="ident">end</span>(),
             <span class="ident">m</span>.<span class="ident">as_str</span>()
         )),
-        <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    1. find: None\n&quot;</span>)),
+        <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    1. syntax find: None\n&quot;</span>)),
     }
     <span class="comment">// using `if let`syntax</span>
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="ident">regex_text</span>.<span class="ident">find</span>(<span class="ident">test_string</span>) {
         <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
-            <span class="string">&quot;    2. find: {} {} {}\n&quot;</span>,
+            <span class="string">&quot;    2. syntax find: {} {} {}\n&quot;</span>,
             <span class="ident">m</span>.<span class="ident">start</span>(),
             <span class="ident">m</span>.<span class="ident">end</span>(),
             <span class="ident">m</span>.<span class="ident">as_str</span>()
         ));
     } <span class="kw">else</span> {
-        <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    2. find: None\n&quot;</span>));
+        <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    2. syntax find: None\n&quot;</span>));
     }
 
     <span class="comment">// using map_or_else()</span>
-    <span class="comment">// error ret is 2 time borrowed</span>
-    <span class="comment">/*
-    regex_text.find(test_string).map_or_else(
-        || ret.push_str(&amp;format!(&quot;    3. find: None\n&quot;)),
-        |m| {
-            ret.push_str(&amp;format!(
-                &quot;    3. find: {} {} {}\n&quot;,
-                m.start(),
-                m.end(),
-                m.as_str()
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">workaround</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
+    <span class="ident">regex_text</span>.<span class="ident">find</span>(<span class="ident">test_string</span>).<span class="ident">map_or_else</span>(
+        <span class="op">|</span><span class="op">|</span> <span class="ident">workaround</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    3. syntax find: None\n&quot;</span>)),
+        <span class="op">|</span><span class="ident">m</span><span class="op">|</span> {
+            <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
+                <span class="string">&quot;    3. syntax find: {} {} {}\n&quot;</span>,
+                <span class="ident">m</span>.<span class="ident">start</span>(),
+                <span class="ident">m</span>.<span class="ident">end</span>(),
+                <span class="ident">m</span>.<span class="ident">as_str</span>()
             ))
         },
     );
-    */</span>
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">workaround</span>);
+
     <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
 }
 
@@ -297,7 +321,7 @@
     <span class="kw">let</span> <span class="ident">new_string</span> <span class="op">=</span> <span class="ident">regex_text</span>
         .<span class="ident">replace_all</span>(<span class="ident">test_string</span>, <span class="ident">replace_string</span>)
         .<span class="ident">to_string</span>();
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    replaced:\n{}&quot;</span>, <span class="ident">new_string</span>));
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    replaced string:\n{}\n&quot;</span>, <span class="ident">new_string</span>));
     <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;replace_all end\n&quot;</span>));
     <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
 }

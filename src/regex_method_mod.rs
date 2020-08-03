@@ -3,10 +3,16 @@ use regex::Regex;
 pub fn lib_main(regex_text: &str, substitution: &str, test_string: &str) -> String {
     let mut ret = String::new();
     ret.push_str(&format!("--- regex methods start ---\n"));
-    ret.push_str(&format!("This is using the same Rust code of the field code-gen.\n"));
-    ret.push_str(&format!("There are 6 important Regex methods for different use-cases.\n"));
-    ret.push_str(&format!("is_match(), find(), find_iter(), capture(), capture_iter(), replace_all()\n"));
-    
+    ret.push_str(&format!(
+        "This is using the same Rust code of the field code-gen.\n"
+    ));
+    ret.push_str(&format!(
+        "There are 6 important Regex methods for different use-cases.\n"
+    ));
+    ret.push_str(&format!(
+        "is_match(), find(), find_iter(), capture(), capture_iter(), replace_all()\n"
+    ));
+
     // prepared example
     //let test_string = "origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)";
     // substitution for replace_all()
