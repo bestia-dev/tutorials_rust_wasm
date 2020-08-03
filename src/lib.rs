@@ -69,7 +69,8 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     set_event_listener_substitution_on_keyup();
     set_event_listener_test_string_on_keyup();
 
-    set_event_listener_explanation_max();
+    set_event_listener_explanation_more();
+    set_event_listener_explanation_less();
     debug_write("--- rust_regex_explanation_pwa end ---");
     Ok(())
 }
@@ -91,13 +92,43 @@ fn on_keyup() {
 }
 
 // on click code
-fn on_click_explanation_max() {
-    debug_write("on_click_explanation_max");
+fn on_click_explanation_more() {
+    debug_write("on_click_explanation_more");
     // textarea
     let html_element = get_element_by_id("explanation");
     let html_element: web_sys::HtmlElement =
         unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
-    unwrap!(html_element.style().set_property("height", "800px"));
+    // get_property_value(&self, property: &str) -> Result<String, JsValue>
+    let height = unwrap!(html_element.style().get_property_value("height"));
+    debug_write(&format!("height: {:?}", height));
+    if height.is_empty() {
+        unwrap!(html_element.style().set_property("height", "400px"));
+    } else {
+        let height: String = height.replace("px", "");
+        let h = unwrap!(height.parse::<i32>());
+        let new_height = format!("{}px", h + 50);
+        unwrap!(html_element.style().set_property("height", &new_height));
+    }
+}
+
+// on click code
+fn on_click_explanation_less() {
+    debug_write("on_click_explanation_less");
+    // textarea
+    let html_element = get_element_by_id("explanation");
+    let html_element: web_sys::HtmlElement =
+        unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
+    // get_property_value(&self, property: &str) -> Result<String, JsValue>
+    let height = unwrap!(html_element.style().get_property_value("height"));
+    debug_write(&format!("height: {:?}", height));
+    if height.is_empty() {
+        unwrap!(html_element.style().set_property("height", "300px"));
+    } else {
+        let height: String = height.replace("px", "");
+        let h = unwrap!(height.parse::<i32>());
+        let new_height = format!("{}px", h - 50);
+        unwrap!(html_element.style().set_property("height", &new_height));
+    }
 }
 
 /// set event listener for the regex_text
@@ -139,13 +170,26 @@ fn set_event_listener_test_string_on_keyup() {
     closure.forget();
 }
 
-/// set event listener for the explanation_max
-fn set_event_listener_explanation_max() {
-    let html_element = get_element_by_id("explanation_max");
+/// set event listener for the explanation_more
+fn set_event_listener_explanation_more() {
+    let html_element = get_element_by_id("explanation_more");
     let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
 
     let closure = Closure::wrap(Box::new(move || {
-        on_click_explanation_max();
+        on_click_explanation_more();
+    }) as Box<dyn FnMut()>);
+
+    html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));
+    closure.forget();
+}
+
+/// set event listener for the explanation_less
+fn set_event_listener_explanation_less() {
+    let html_element = get_element_by_id("explanation_less");
+    let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
+
+    let closure = Closure::wrap(Box::new(move || {
+        on_click_explanation_less();
     }) as Box<dyn FnMut()>);
 
     html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));

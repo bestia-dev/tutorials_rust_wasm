@@ -369,6 +369,11 @@ A small difference to help search and replace refactoring.
             color: var(--f_color_link);
         }
         
+        .pointer
+        {
+        cursor: pointer;
+        }
+        
         /* dark_white */
         .h2u {
             color: var(--f_color_06);
@@ -552,3 +557,4 @@ A small difference to help search and replace refactoring.
                 opacity: 0.1;
             }
         }
+        
