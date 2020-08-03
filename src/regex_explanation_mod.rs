@@ -10,7 +10,13 @@ pub fn lib_main(reg_str: String) -> String {
     exp.explanation_all
         .push_str(&format!("regex:{}\n", &exp.reg_str));
     let mut ast = regex_syntax::ast::parse::Parser::new();
-    let ast = ast.parse(&exp.reg_str).unwrap();
+    let ast = match ast.parse(&exp.reg_str) {
+        Ok(a) => a,
+        Err(e) => {
+            exp.explanation_all.push_str(&format!("Error: {}\n", e));
+            return exp.explanation_all.to_string();
+        }
+    };
 
     //dbg!(&ast);
     process_ast(&mut exp, &Box::new(ast));

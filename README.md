@@ -24,17 +24,19 @@
 
 Regex is great. But it is much easier to write and understand with a little help of explanations.  
 Regex has many flavors with subtle differences. This PWA uses Rust Regex crate.  
-
+We will need a web file server because security does not allow loading modules from local file.  
+Install this basic one:
 `cargo install basic-http-server`  
-`cd rustprojects/rust_regex_explanation_pwa/web_server_folder/web_content_folder`  
 Run the server in a separate terminal so it can stay running all the time:  
+Go to the content folder:  
+`cd rustprojects/rust_regex_explanation_pwa/web_server_folder/web_content_folder`  
 `basic-http-server`  
 Open the browser on:  
 `http://127.0.0.1:4000`  
 
-## Minimal vanilla Html, Css, javascript and Wasm/Webassembly
+## Minimal example of Wasm/Webassembly with vanilla Html, Css and javascript
 
-First decision - no frameworks. Then no javascript.  
+First decision - no frameworks. Just vanilla. Then no javascript.  
 Some basic html. Some basic css.  
 All the rest is in Rust with web-sys/wasm-bindgen for all the programming needs.  
 No other special requirements.  

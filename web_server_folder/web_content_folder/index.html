@@ -5,48 +5,31 @@
       <!-- classic header for a web page -->
       <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
       <title>rust_regex_explanation_pwa</title>
-      <meta name="Description"
-            content="Rust regex explanations in PWA">
+      <meta name="Description" content="Rust Regex explanations in PWA">
       <link rel="stylesheet" href="css/rust_regex_explanation_pwa.css">
-      <meta name="viewport"
-            content="width = device-width,initial-scale = 1.0" />
+      <meta name="viewport" content="width = device-width,initial-scale = 1.0" />
       <!-- A lot of metadata for PWA 
       <link rel="manifest" href="manifest.json">
       -->
       <meta name="mobile-web-app-capable" content="yes">
       <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta name="apple-mobile-web-app-status-bar-style"
-            content="black-translucent" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       <meta name="theme-color" content="#FFFF00">
-      <link rel="apple-touch-icon" sizes="57x57"
-            href="images/apple-icon-57x57.png">
-      <link rel="apple-touch-icon" sizes="60x60"
-            href="images/apple-icon-60x60.png">
-      <link rel="apple-touch-icon" sizes="72x72"
-            href="images/apple-icon-72x72.png">
-      <link rel="apple-touch-icon" sizes="76x76"
-            href="images/apple-icon-76x76.png">
-      <link rel="apple-touch-icon" sizes="114x114"
-            href="images/apple-icon-114x114.png">
-      <link rel="apple-touch-icon" sizes="120x120"
-            href="images/apple-icon-120x120.png">
-      <link rel="apple-touch-icon" sizes="144x144"
-            href="images/apple-icon-144x144.png">
-      <link rel="apple-touch-icon" sizes="152x152"
-            href="images/apple-icon-152x152.png">
-      <link rel="apple-touch-icon" sizes="180x180"
-            href="images/apple-icon-180x180.png">
+      <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
+      <link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
+      <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
+      <link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
       <link rel="apple-touch-icon" href="images/icons-192.png">
-      <link rel="icon" type="image/png" sizes="192x192"
-            href="images/android-icon-192x192.png">
-      <link rel="icon" type="image/png" sizes="32x32"
-            href="images/favicon-32x32.png">
-      <link rel="icon" type="image/png" sizes="96x96"
-            href="images/favicon-96x96.png">
-      <link rel="icon" type="image/png" sizes="16x16"
-            href="images/favicon-16x16.png">
-      <link rel="icon" type="image/png" href="images/icons-512.png"
-            sizes="512x512">
+      <link rel="icon" type="image/png" sizes="192x192" href="images/android-icon-192x192.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+      <link rel="icon" type="image/png" href="images/icons-512.png" sizes="512x512">
       <meta name="msapplication-TileColor" content="#FFFF00">
       <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
 
@@ -56,58 +39,154 @@
       <!-- a standard service worker is a must for PWA 
       <script src="start_service_worker.js"></script>-->
       <div class="container_0">
-            <div class="container0_content_grid_0"style="grid-template-columns: 15fr 85fr;">
+            <div class="container0_content_not_grid">
+                  <h2 class="c_yellow center">Rust Regex Explanation PWA</h2>
+                  <p>Click inside the Regex field (first field) and press the right arrow. You will immediately see the results.</p>
+                  <p>On every key stroke in the Regex field, this PWA will calculate and show you the explanation, result of Regex methods and the Rust code to use Regex.</p>
+            </div>
+      </div>
+      <div class="container_0">
+            <div class="container0_content_grid_0" style="grid-template-columns: 80px auto;">
                   <div class="grid0_c bold">
-                        <label for="regex_text">regex_text</label>
+                        <label class="c_yellow" for="regex_text">write your Regex</label>
                   </div>
-                  <div class="grid0_c bold" >
+                  <div class="grid0_c bold">
                         <textarea name="regex_text" id="regex_text" class="textarea_full_width height_100px" ></textarea>
                   </div>
-
                   <div class="grid0_c bold">
-                        <label for="substitution">substitution</label>
+                        <label for="substitution">substi- tution</label>
                   </div>
-                  <div class="grid0_c bold" >
+                  <div class="grid0_c bold">
                         <textarea name="substitution" id="substitution" class="textarea_full_width height_100px" class="textarea_full_width" ></textarea>
                   </div>
 
                   <div class="grid0_c bold">
-                        <label for="test_string">test_string</label>
+                        <label for="test_string">test string</label>
                   </div>
-                  <div class="grid0_c bold" >
+                  <div class="grid0_c bold">
                         <textarea name="test_string" id="test_string" class="textarea_full_width height_100px" ></textarea>
                   </div>
             </div>
       </div>
       <div class="container_0">
-            <div class="container0_content_not_grid">
-                  <button id="run_button" class="button" >execute regex</button>
+            <div class="container0_content_grid_0" style="grid-template-columns: 80px auto;">
+                  <div class="grid0_c bold">
+                        <label for="explanation">explan- ation</label>
+                  </div>
+                  <div class="grid0_c bold">
+                        <textarea name="explanation" id="explanation" class="textarea_full_width height_400px" ></textarea>
+                  </div>
+
+                  <div class="grid0_c bold">
+                        <label for="regex_result">Regex result</label>
+                  </div>
+                  <div class="grid0_c bold">
+                        <textarea name="regex_result" id="regex_result" class="textarea_full_width height_400px" ></textarea>
+                  </div>
+
+                  <div class="grid0_c bold">
+                        <label for="code_gen">code gen</label>
+                  </div>
+                  <div class="grid0_c bold">
+                        <textarea name="code_gen" id="code_gen" class="textarea_full_width height_400px" ></textarea>
+                  </div>
             </div>
       </div>
-            <div class="container_0">
-                  <div class="container0_content_grid_0"style="grid-template-columns: 15fr 85fr;">
-                        <div class="grid0_c bold">
-                              <label for="explanation">explanation</label>
-                        </div>
-                        <div class="grid0_c bold" >
-                              <textarea name="explanation" id="explanation" class="textarea_full_width height_400px" ></textarea>
-                        </div>
-
-                        <div class="grid0_c bold">
-                              <label for="regex_result">regex_result</label>
-                        </div>
-                        <div class="grid0_c bold" >
-                              <textarea name="regex_result" id="regex_result" class="textarea_full_width height_400px" ></textarea>
-                        </div>
-
-                        <div class="grid0_c bold">
-                              <label for="code_gen">code_gen</label>
-                        </div>
-                        <div class="grid0_c bold" >
-                              <textarea name="code_gen" id="code_gen" class="textarea_full_width height_400px" ></textarea>
-                        </div>
+      <div class="container_0">
+            <div class="container0_content_grid_0" style="grid-template-columns: 80px auto;">
+                  <div class="grid0_c bold">
+                        <label for="regex_help">Regex help</label>
                   </div>
-            </div>      
+                  <div class="grid0_c bold">
+                        <textarea name="regex_help" id="regex_help" class="textarea_full_width height_100px" >
+Basic Regex syntax
+abc…      Letters
+123…      Digits
+\d        Any Digit
+\D        Any Non-digit character
+.         Any Character
+\.        Period
+[abc]     Only a, b, or c
+[^abc]    Not a, b, nor c
+[a-z]     Characters a to z
+[0-9]     Numbers 0 to 9
+\w        Any Alphanumeric character
+\W        Any Non-alphanumeric character
+{m}       m Repetitions
+{m,n}     m to n Repetitions
+*         Zero or more repetitions
++         One or more repetitions
+?         Optional character
+\s        Any Whitespace
+\S        Any Non-whitespace character
+^…$       Starts and ends
+(…)       Capture Group
+(a(bc))   Capture Sub-group
+(.*)      Capture all
+(abc|def) Matches abc or def
+</textarea>
+                  </div>
+                  <div class="grid0_c bold">
+                        <label for="regex_suggestions">Regex suggestions</label>
+                  </div>
+                  <div class="grid0_c bold">
+                        <textarea name="regex_suggestions" id="regex_suggestions" class="textarea_full_width height_100px" >
+Avoid using .* dot (any character many times) because it is greedy. 
+Instead use a negation of the next delimiter like [^/]*.
+If needed, add Flags in the beginning like (?m).
+
+                        </textarea>
+                  </div>
+            </div>
+      </div>
+      <div class="container_0">
+            <div class="container0_content_not_grid">
+                  <p >Regular expressions or Regex is a special programming language for search, match, validate and replace sub-strings.</p>
+                  <p>It looks very cryptic. But it is powerful and you should use it. Look how crazy is this:</p>
+                  <p class="c_white" >^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</p>
+                  <p class="c_yellow">NO PANIC ! Try it !</p>
+                  <p>Click inside the Regex field (first field) and press the right arrow. You will immediately see the result.</p>
+                  <p>On every key stroke in the Regex field, this PWA will calculate and show you the explanation, result of Regex methods and the Rust code to use Regex.</p>
+                  <p>Use this web app when you are coding in Rust and need to write a Regex. Enter your Regex, substitution and test_string.</p>
+                  <p>Change your Regex gradually and observe the result. Great way to learn!</p>
+                  <p>The Regex explanation is 100% human readable. Easy like that!</p>
+                  <p>This is still in beta and a few minor bugs will be corrected soon.</p>
+                  <p>Every TextArea element is manually resizable (grab the bottom-right corner) if you need more or less space.</p>
+                  <p>This PWA (progressive web app) runs entirely inside your browser with Rust Wasm/WebAssembly.</p>
+                  <p>The web server only provides the files. No code is executed on the server. </p>
+                  <p>This means you can use this web app offline. No need for internet connection, except for downloading the code the first time.</p>
+                  <p>Regex has many features and libraries are not 100% compatible. This "flavors" have differences that are subtle, but important for practical use.</p>
+                  <p>The Rust code of this app uses the Rust Regex library: https://docs.rs/regex/</p>
+                  <p>If you also use the same Regex library, this PWA will show you exactly how Regex will work in your code.</p>
+                  <p>Repository: https://github.com/LucianoBestia/rust_regex_explanation_pwa/</p>
+                  <p>Licence MIT</p>
+            </div>
+      </div>
+      <div class="container_0">
+            <div class="container0_content_not_grid">
+                  <p>Exercise</p>
+                  <p>Go to the page https://en.wikipedia.org/wiki/Terminator_(character) and find all the T model names.</p>
+                  <p>Not very amusing for humans. Simplify it. Copy this shorter text into the field test_string:</p>
+                  <p>
+                        T-1000 (Robert Patrick) 
+                        Terminator known as T-101
+                        T-800 that managed to kill John Connor
+                        explicitly named T-600s and T-1000.
+                        it jams its remaining hydrogen fuel cell into the T-X's mouth
+                        from a T-1000 sent to kill her
+                        who has been transformed into a T-3000
+                        improvement over the earlier T-600 units
+                        also refers to the character as T-850
+                        used the T-800 and T-850 nomenclature
+                        memory of a T-888 model,
+                        tearing a malfunctioning T-600 in half</p>
+                  <p>---</p>
+                  <p>The names are always like T-something. Try the first regex to match literally: T-</p>
+                  <p>After that are some digits: T-\d+</p>
+                  <p>There are always some exceptions, the T-X model. Add it: T-(X|\d+)</p>
+                  <p>Let replace T- with the word Robot(). In the substitution field write: Robot($1)</p>
+            </div>
+      </div>
       <!-- import and init the wasm code -->
       <script type="module">
             import init from "./pkg/rust_regex_explanation_pwa.js";

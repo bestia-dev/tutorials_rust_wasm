@@ -3,7 +3,10 @@ use regex::Regex;
 pub fn lib_main(regex_text: &str, substitution: &str, test_string: &str) -> String {
     let mut ret = String::new();
     ret.push_str(&format!("--- regex methods start ---\n"));
-
+    ret.push_str(&format!("This is using the same Rust code of the field code-gen.\n"));
+    ret.push_str(&format!("There are 6 important Regex methods for different use-cases.\n"));
+    ret.push_str(&format!("is_match(), find(), find_iter(), capture(), capture_iter(), replace_all()\n"));
+    
     // prepared example
     //let test_string = "origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)";
     // substitution for replace_all()
@@ -15,7 +18,10 @@ pub fn lib_main(regex_text: &str, substitution: &str, test_string: &str) -> Stri
     // 2. uncomment for is_match = true
     let regex_text = match Regex::new(regex_text) {
         Ok(t) => t,
-        Err(e) => return e.to_string(),
+        Err(e) => {
+            ret.push_str(&format!("Error: {}\n", e));
+            return ret;
+        }
     };
 
     is_match(&regex_text, &test_string, &mut ret);
@@ -52,40 +58,40 @@ fn find(regex_text: &Regex, test_string: &str, ret: &mut String) {
     // using pattern matching (match Control Flow Operator) for `case analysis `.
     match regex_text.find(test_string) {
         Some(m) => ret.push_str(&format!(
-            "    1. find: {} {} {}\n",
+            "    1. syntax find: {} {} {}\n",
             m.start(),
             m.end(),
             m.as_str()
         )),
-        None => ret.push_str(&format!("    1. find: None\n")),
+        None => ret.push_str(&format!("    1. syntax find: None\n")),
     }
     // using `if let`syntax
     if let Some(m) = regex_text.find(test_string) {
         ret.push_str(&format!(
-            "    2. find: {} {} {}\n",
+            "    2. syntax find: {} {} {}\n",
             m.start(),
             m.end(),
             m.as_str()
         ));
     } else {
-        ret.push_str(&format!("    2. find: None\n"));
+        ret.push_str(&format!("    2. syntax find: None\n"));
     }
 
     // using map_or_else()
-    // error ret is 2 time borrowed
-    /*
+    let mut workaround = String::new();
     regex_text.find(test_string).map_or_else(
-        || ret.push_str(&format!("    3. find: None\n")),
+        || workaround.push_str(&format!("    3. syntax find: None\n")),
         |m| {
             ret.push_str(&format!(
-                "    3. find: {} {} {}\n",
+                "    3. syntax find: {} {} {}\n",
                 m.start(),
                 m.end(),
                 m.as_str()
             ))
         },
     );
-    */
+    ret.push_str(&workaround);
+
     ret.push_str("\n");
 }
 
@@ -145,7 +151,7 @@ fn replace_all(regex_text: &Regex, test_string: &str, replace_string: &str, ret:
     let new_string = regex_text
         .replace_all(test_string, replace_string)
         .to_string();
-    ret.push_str(&format!("    replaced:\n{}", new_string));
+    ret.push_str(&format!("    replaced string:\n{}\n", new_string));
     ret.push_str(&format!("replace_all end\n"));
     ret.push_str("\n");
 }
