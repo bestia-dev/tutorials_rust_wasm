@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["rust_regex_explanation_pwa"] = [{"text":"impl Freeze for <a class=\"struct\" href=\"rust_regex_explanation_pwa/regex_explanation_mod/struct.Explanation.html\" title=\"struct rust_regex_explanation_pwa::regex_explanation_mod::Explanation\">Explanation</a>","synthetic":true,"types":["rust_regex_explanation_pwa::regex_explanation_mod::Explanation"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

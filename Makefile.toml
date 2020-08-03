@@ -96,11 +96,11 @@ clear = true
 script = [
     "clear",
     # Binaries version is date
-    # "echo $ lmake_version_from_date",
-    # "lmake_version_from_date",
+    "echo $ lmake_version_from_date",
+    "lmake_version_from_date",
     # Library version is semver
-    "echo $ lmake_semver --increment=patch",
-    "lmake_semver --increment=patch",
+    # "echo $ lmake_semver --increment=patch",
+    # "lmake_semver --increment=patch",
     "echo $ cargo fmt",
     "cargo fmt",
     "echo $ wasm-pack build --target web --release ",

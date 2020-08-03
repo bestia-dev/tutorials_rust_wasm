@@ -1,10 +1,20 @@
+[comment]: # (lmake_md_to_doc_comments segment start A)
+
 # rust_regex_explanation_pwa
 
 [comment]: # (lmake_cargo_toml_to_md start)
 
+***version: 2020.803.618  date: 2020-08-03 authors: Luciano Bestia***  
+**Rust regex explanations in PWA**
+
 [comment]: # (lmake_cargo_toml_to_md end)
 
 [comment]: # (lmake_lines_of_code start)
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-768-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-27-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-58-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+[![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+[![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 
 [comment]: # (lmake_lines_of_code end)
 
@@ -35,3 +45,6 @@ Progressive Web App need a manifest, a worker and a bunch of icons.
 todo...
 
 todo: store the last input locally
+todo: read a json from file or url with the trio(regex,substitution,test_string)
+
+[comment]: # (lmake_md_to_doc_comments segment end A)
