@@ -45,8 +45,8 @@
         }
     ],
     "start_url": "/rust_regex_explanation_pwa/index.html",
-    "background_color": "#FFFF00",
+    "background_color": "#0b0c06",
     "display": "fullscreen",
     "orientation": "portrait",
-    "theme_color": "#FFFF00"
+    "theme_color": "#0b0c06"
 }
