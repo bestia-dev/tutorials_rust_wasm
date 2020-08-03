@@ -8,9 +8,8 @@
       <meta name="Description" content="Rust Regex explanations in PWA">
       <link rel="stylesheet" href="css/rust_regex_explanation_pwa.css">
       <meta name="viewport" content="width = device-width,initial-scale = 1.0" />
-      <!-- A lot of metadata for PWA 
+      <!-- A lot of metadata for PWA -->
       <link rel="manifest" href="manifest.json">
-      -->
       <meta name="mobile-web-app-capable" content="yes">
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -36,13 +35,11 @@
 </head>
 
 <body>
-      <!-- a standard service worker is a must for PWA 
-      <script src="start_service_worker.js"></script>-->
+      <!-- a standard service worker is a must for PWA -->
+      <script src="start_service_worker.js"></script>
       <div class="container_0">
             <div class="container0_content_not_grid">
-                  <h2 class="c_yellow center">Rust Regex Explanation PWA</h2>
-                  <p>Click inside the Regex field (first field) and press the right arrow. You will immediately see the results.</p>
-                  <p>On every key stroke in the Regex field, this PWA will calculate and show you the explanation, result of Regex methods and the Rust code to use Regex.</p>
+                  <h2 class="c_yellow center">PWA for Rust Regex Explanations and Testing</h2>
             </div>
       </div>
       <div class="container_0">
@@ -145,8 +142,7 @@ If needed, add Flags in the beginning like (?m).
                   <p>It looks very cryptic. But it is powerful and you should use it. Look how crazy is this:</p>
                   <p class="c_white" >^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</p>
                   <p class="c_yellow">NO PANIC ! Try it !</p>
-                  <p>Click inside the Regex field (first field) and press the right arrow. You will immediately see the result.</p>
-                  <p>On every key stroke in the Regex field, this PWA will calculate and show you the explanation, result of Regex methods and the Rust code to use Regex.</p>
+                  <p>On every key-up in the Regex field, this PWA will calculate and show you the explanation, result of Regex methods and the Rust code to use Regex.</p>
                   <p>Use this web app when you are coding in Rust and need to write a Regex. Enter your Regex, substitution and test_string.</p>
                   <p>Change your Regex gradually and observe the result. Great way to learn!</p>
                   <p>The Regex explanation is 100% human readable. Easy like that!</p>
@@ -164,7 +160,7 @@ If needed, add Flags in the beginning like (?m).
       </div>
       <div class="container_0">
             <div class="container0_content_not_grid">
-                  <p>Exercise</p>
+                  <p class="c_yellow big">Exercise</p>
                   <p>Go to the page https://en.wikipedia.org/wiki/Terminator_(character) and find all the T model names.</p>
                   <p>Not very amusing for humans. Simplify it. Copy this shorter text into the field test_string:</p>
                   <p>
