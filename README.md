@@ -4,7 +4,7 @@
 
 [comment]: # (lmake_cargo_toml_to_md start)
 
-***version: 2020.803.1014  date: 2020-08-03 authors: Luciano Bestia***  
+***version: 2020.803.1029  date: 2020-08-03 authors: Luciano Bestia***  
 **Rust regex explanations in PWA**
 
 [comment]: # (lmake_cargo_toml_to_md end)

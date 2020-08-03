@@ -1,7 +1,7 @@
 // region: lmake_md_to_doc_comments include README.md A //!
 //! # rust_regex_explanation_pwa
 //!
-//! ***version: 2020.803.1014  date: 2020-08-03 authors: Luciano Bestia***  
+//! ***version: 2020.803.1029  date: 2020-08-03 authors: Luciano Bestia***  
 //! **Rust regex explanations in PWA**
 //!
 //! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-864-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
@@ -12,7 +12,7 @@
 //!
 //! [![Documentation](https://docs.rs/rust_regex_explanation_pwa/badge.svg)](https://docs.rs/rust_regex_explanation_pwa/) [![crev reviews](https://web.crev.dev/rust-reviews/badge/crev_count/rust_regex_explanation_pwa.svg)](https://web.crev.dev/rust-reviews/crate/rust_regex_explanation_pwa/) [![Lib.rs](https://img.shields.io/badge/Lib.rs-rust-orange.svg)](https://lib.rs/crates/rust_regex_explanation_pwa/) [![Licence](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/blob/master/LICENSE) [![Rust](https://github.com/LucianoBestia/rust_regex_explanation_pwa/workflows/RustAction/badge.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //!
-//! ## regex explanation
+//! ## Regex explanation and testing
 //!
 //! Regex is great. But it is much easier to write and understand with a little help of explanations.  
 //! Regex has many flavors with subtle differences. This PWA uses Rust Regex crate.  
@@ -26,7 +26,7 @@
 //! Open the browser on:  
 //! `http://127.0.0.1:4000`  
 //!
-//! ## Minimal example of Wasm/Webassembly with vanilla Html, Css and javascript
+//! ## Minimal example of Wasm/Webassembly with vanilla Html, Css and Javascript
 //!
 //! First decision - no frameworks. Just vanilla. Then no javascript.  
 //! Some basic html. Some basic css.  
@@ -35,11 +35,8 @@
 //!
 //! ## PWA
 //!
-//! Progressive Web App need a manifest, a worker and a bunch of icons.  
-//! todo...
+//! I added the manifest, the worker and a bunch of icons.  
 //!
-//! todo: store the last input locally
-//! todo: read a json from file or url with the trio(regex,substitution,test_string)
 //!
 // endregion: lmake_md_to_doc_comments include README.md A //!
 
