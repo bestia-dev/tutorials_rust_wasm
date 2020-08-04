@@ -50,4 +50,30 @@ Ok, I had to use the javascript library `highlightjs` to bring some colors to th
 
 I added the manifest, the worker and a bunch of icons.  
 
+## Change colors
+
+Users can change the colors with the use of the Chrome extension User CSS:  
+<https://chrome.google.com/webstore/detail/user-css/okpjlejfhacmgjkmknjhadmkdbcldfcb>  
+Copy/paste and then edit and watch changes live:  
+```css
+:root {
+    /* color palette */
+    /* background color */
+    --b_color_body: #24292E;
+    --b_color_code: #1B1D23;
+    --b_color_grid_header: #181A1F;
+    --b_color_container: #333842;
+    --b_color_button: dodgerblue;
+    /* front color */
+    --f_color_body: #dce0e9;
+    --f_color_code: #78C379;
+    --f_color_link: white;
+    --f_color_05: yellow;
+    --f_color_06: dark-white;
+    --f_color_07: black;
+    /* border color*/
+    --brd_color_01: #000;
+    --brd_color_02: #eaecef;
+}
+```
 [comment]: # (lmake_md_to_doc_comments segment end A)
