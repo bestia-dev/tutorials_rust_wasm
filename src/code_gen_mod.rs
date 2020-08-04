@@ -1,11 +1,14 @@
 pub fn code_gen(regex_text: &str, substitution: &str, test_string: &str) -> String {
-    let gen = String::from( r#####"//! Rust Regex code-gen  
-//! <https://github.com/LucianoBestia/rust_regex_explanation_pwa>  
-//! Run this code online in the playground:  
-//! <https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=10717a3fe934b9583fb675e327833edc>  
-//!
-//! In Cargo.toml include the dependency to the regex crate:  
-//! regex = "1.3.6"  
+    let gen = String::from( r#####"// Rust Regex code-gen  
+// https://github.com/LucianoBestia/rust_regex_explanation_pwa  
+// Run this code online in the playground:  
+// https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=10717a3fe934b9583fb675e327833edc  
+
+// There are 6 important Regex methods for different use-cases:
+// is_match(), find(), find_iter(), capture(), capture_iter(), replace_all()
+
+// In Cargo.toml include the dependency to the regex crate:  
+// regex = "1.3.6"  
 use regex::Regex;
 
 // To avoid multiple initialization of the regex and achieve better performance,
@@ -15,11 +18,11 @@ use lazy_static::lazy_static;
 
 // Use "raw strings" syntax to avoid unnecessary escaping.
 // It will leave the regex expression unmodified. No more problems with \ or " characters.
-// Raw string syntax is like: `r#"one two three"#`
+// Raw string syntax is like: `r#"one two three"#` or `r##"one two three"##`  
 // If the expression is not correct, we want to know it immediately.
-// Let panic the constructor with `unwrap()`.
+// Let the constructor panic on error with `unwrap()`.
 lazy_static! {
-    static ref REGEX_01: Regex = Regex::new(r###"Luciano(Best)ia"###).unwrap();
+    static ref RGX_01: Regex = Regex::new(r###"Luciano(Best)ia"###).unwrap();
 }
 
 fn main() {
@@ -32,23 +35,23 @@ fn main() {
     let substitution = r###"OnlyThe$1"###;
 
     // 1.uncomment for is_match = false
-    //let regex: &Regex = &Regex::new(r#"xxx"#).unwrap();
+    //let rgx: &Regex = &Regex::new(r#"xxx"#).unwrap();
     // 2. uncomment for is_match = true
-    let regex = &REGEX_01;
+    let rgx = &RGX_01;
 
-    is_match(&regex, &test_string);
-    find(&regex, &test_string);
-    find_iter(&regex, &test_string);
-    captures(&regex, &test_string);
-    captures_iter(&regex, &test_string);
-    replace_all(&regex, &test_string, substitution);
+    is_match(&rgx, &test_string);
+    find(&rgx, &test_string);
+    find_iter(&rgx, &test_string);
+    captures(&rgx, &test_string);
+    captures_iter(&rgx, &test_string);
+    replace_all(&rgx, &test_string, substitution);
 
     println!("--- rust_regex_explanation_pwa end ---");
 }
 
 /// example how to use the is_match() method
-fn is_match(regex: &Regex, test_string: &str) {
-    if regex.is_match(test_string) {
+fn is_match(rgx: &Regex, test_string: &str) {
+    if rgx.is_match(test_string) {
         println!("True - is match.");
     } else {
         println!("False - no match.");
@@ -56,47 +59,47 @@ fn is_match(regex: &Regex, test_string: &str) {
 }
 
 /// example how to find the first occurrence
-fn find(regex: &Regex, test_string: &str) {
+fn find(rgx: &Regex, test_string: &str) {
     // method find() returns Option:None if not found.
     // There are more than one way in Rust to check for `possibility of absence`.
     // The first way is the methods unwrap() or expect(),
     // but they are good only for tests and examples. Never use them in production code.
 
     // using pattern matching (match Control Flow Operator) for `case analysis `.
-    match regex.find(test_string) {
+    match rgx.find(test_string) {
         Some(m) => println!("1. find: {} {} {}", m.start(), m.end(), m.as_str()),
         None => println!("1. find: None"),
     }
     // using `if let`syntax
-    if let Some(m) = regex.find(test_string) {
+    if let Some(m) = rgx.find(test_string) {
         println!("2. find: {} {} {}", m.start(), m.end(), m.as_str());
     } else {
         println!("2. find: None");
     }
 
     // using map_or_else() combinator
-    regex.find(test_string).map_or_else(
+    rgx.find(test_string).map_or_else(
         || println!("3. find: None"),
         |m| println!("3. find: {} {} {}", m.start(), m.end(), m.as_str()),
     );
 }
 
 /// example how to use find_iter() method - iterator
-fn find_iter(regex: &Regex, test_string: &str) {
+fn find_iter(rgx: &Regex, test_string: &str) {
     println!("find_iter start");
-    for m in regex.find_iter(test_string) {
+    for m in rgx.find_iter(test_string) {
         println!("find_iter: {} {} {}", m.start(), m.end(), m.as_str())
     }
     println!("find_iter end");
 }
 
-/// example how to capture only the first occurrence of regex capture groups
+/// example how to capture only the first occurrence of rgx capture groups
 /// using the captures() method for regex capture groups
-fn captures(regex: &Regex, test_string: &str) {
+fn captures(rgx: &Regex, test_string: &str) {
     println!("captures start");
     // same 3 possible syntax to react to the `possibility of absence` Option:None
     // as in the function find()
-    match regex.captures(test_string) {
+    match rgx.captures(test_string) {
         if m.len() == 2 {
             ret.push_str(&format!("1. captures: {} - {} \n", &m[1], &m[0]));
         } else {
@@ -108,9 +111,9 @@ fn captures(regex: &Regex, test_string: &str) {
 }
 
 /// example how to use captures_iter() method - iterator
-fn captures_iter(regex: &Regex, test_string: &str) {
+fn captures_iter(rgx: &Regex, test_string: &str) {
     println!("captures_iter start");
-    for m in regex.captures_iter(test_string) {
+    for m in rgx.captures_iter(test_string) {
         if m.len() == 2 {
             ret.push_str(&format!("captures_iter: {} - {}\n", &m[1], &m[0]));
         } else {
@@ -122,9 +125,9 @@ fn captures_iter(regex: &Regex, test_string: &str) {
 
 /// example of how to use replace_all() method
 /// the $1, $2,.. are placeholders for the found capture group
-fn replace_all(regex: &Regex, test_string: &str, replace_string: &str) {
+fn replace_all(rgx: &Regex, test_string: &str, replace_string: &str) {
     println!("replace_all start");
-    let new_string = regex.replace_all(test_string, replace_string).to_string();
+    let new_string = rgx.replace_all(test_string, replace_string).to_string();
     println!("replaced:\n{}", new_string);
     println!("replace_all end");
 }

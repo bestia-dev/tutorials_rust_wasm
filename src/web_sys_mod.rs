@@ -86,3 +86,11 @@ pub fn set_text_area_element_value_string_by_id(element_id: &str, value: &str) {
     //debug_write("before value()");
     text_area_html_element.set_value(value);
 }
+
+/// set code element value string by id
+pub fn set_element_inner_html_string_by_id(element_id: &str, value: &str) {
+    //debug_write("before get_element_by_id");
+    let element = get_element_by_id(element_id);
+    //debug_write("before value()");
+    element.set_inner_html(value);
+}

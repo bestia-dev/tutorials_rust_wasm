@@ -1,14 +1,29 @@
 use core::ops::Range;
 use regex_syntax::ast::*;
 
+#[derive(Debug, Default)]
+pub struct Explanation {
+    pub reg_str: String,
+    pub indent: usize,
+    pub explanation_all: String,
+    // print literals in one line for brevity
+    pub fragment: String,
+    pub symbol: String,
+    pub explanation_single: String,
+}
+
 pub fn lib_main(reg_str: String) -> String {
     let mut exp = Explanation {
         reg_str,
         ..Default::default()
     };
-    exp.explanation_all.push_str("regex explanation start\n");
-    exp.explanation_all
-        .push_str(&format!("regex:{}\n", &exp.reg_str));
+    // exp.explanation_all.push_str(r#"<span class="hljs-comment">regex explanation start</span>"#);
+    exp.explanation_all.push_str("\n");
+    exp.explanation_all.push_str(&format!(
+        r#"regex: <span class="hljs-section">{}</span>"#,
+        &exp.reg_str
+    ));
+    exp.explanation_all.push_str("\n");
     let mut ast = regex_syntax::ast::parse::Parser::new();
     let ast = match ast.parse(&exp.reg_str) {
         Ok(a) => a,
@@ -21,20 +36,10 @@ pub fn lib_main(reg_str: String) -> String {
     //dbg!(&ast);
     process_ast(&mut exp, &Box::new(ast));
     exp.print_literals();
-    exp.explanation_all.push_str("regex explanation end\n");
+    //exp.explanation_all.push_str(r#"<span class="hljs-comment">regex explanation end</span>"#);
+    exp.explanation_all.push_str("\n");
     // return
     exp.explanation_all.to_string()
-}
-
-#[derive(Debug, Default)]
-pub struct Explanation {
-    pub reg_str: String,
-    pub indent: usize,
-    pub explanation_all: String,
-    // print literals in one line for brevity
-    pub fragment: String,
-    pub symbol: String,
-    pub explanation: String,
 }
 
 impl Explanation {
@@ -42,9 +47,9 @@ impl Explanation {
         if !self.fragment.is_empty() {
             self.print_fragment(&self.fragment.clone());
             self.explanation_all
-                .push_str(&format!("{}\n", self.explanation));
+                .push_str(&format!("{}\n", self.explanation_single));
             self.fragment.clear();
-            self.explanation.clear();
+            self.explanation_single.clear();
         }
     }
     fn set_explanation(&mut self, symbol: &str, name: &str) {
@@ -54,25 +59,24 @@ impl Explanation {
         self.symbol
             .push_str(if symbol.is_empty() { "" } else { " " });
 
-        self.explanation.clear();
-        self.explanation.push_str(name);
+        self.explanation_single.clear();
+        self.explanation_single.push_str(name);
     }
     fn print_fragment(&mut self, fragment: &str) {
-        // the left 16 col are for the regex fragment
+        // if is longler than 16, than new line and 16 spaces
         const COL_WIDTH: usize = 16;
-        let mut pos_start = 0;
-        loop {
-            let pos_end = fragment.len().min(pos_start + COL_WIDTH);
+        self.explanation_all.push_str(&format!(
+            r#"<span class="hljs-section">{}</span>"#,
+            fragment
+        ));
+        if fragment.len() < COL_WIDTH + self.indent {
+            let rest = COL_WIDTH - fragment.len();
             self.explanation_all
-                .push_str(&format!("{}", &fragment[pos_start..pos_end]));
-            if pos_end == fragment.len() {
-                let rest = COL_WIDTH - (pos_end % COL_WIDTH);
-                self.explanation_all
-                    .push_str(&format!("{}", " ".repeat(rest)));
-                break;
-            }
-            pos_start = pos_end;
-            self.explanation_all.push_str(&format!("\n"));
+                .push_str(&format!("{}", " ".repeat(rest)));
+        } else {
+            self.explanation_all.push_str("\n");
+            self.explanation_all
+                .push_str(&format!("{}", " ".repeat(COL_WIDTH)));
         }
     }
 }
@@ -82,8 +86,11 @@ fn print(exp: &mut Explanation, symbol: &str, name: &str, range: Range<usize>) {
     exp.print_literals();
     exp.print_fragment(&exp.reg_str[range].to_string());
     exp.set_explanation(symbol, name);
-    exp.explanation_all
-        .push_str(&format!("{}{}\n", &exp.symbol, &exp.explanation));
+    exp.explanation_all.push_str(&format!(
+        r#"<span class="hljs-keyword">{}</span>{}"#,
+        &exp.symbol, &exp.explanation_single
+    ));
+    exp.explanation_all.push_str("\n");
 }
 
 fn greed(greedy: bool) -> &'static str {
@@ -277,7 +284,9 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
             );
             flags(exp, &f.flags);
         }
-        _ => exp.explanation.push_str(&format!("unimplemented Ast")),
+        _ => exp
+            .explanation_single
+            .push_str(&format!("unimplemented Ast")),
     }
     exp.indent -= 1;
 }
@@ -377,7 +386,17 @@ pub fn class_set_item(exp: &mut Explanation, i: &ClassSetItem, negated: bool) {
             if negated {
                 "Match a single character not present in the list below"
             } else {
-                "Match a single character present in the list"
+                if &exp.reg_str[r.span.start.offset..r.span.end.offset] == "a-z" {
+                    "Matches lower-case character"
+                } else if &exp.reg_str[r.span.start.offset..r.span.end.offset] == "a-z" {
+                    "Matches lower-case character"
+                } else if &exp.reg_str[r.span.start.offset..r.span.end.offset] == "A-Z" {
+                    "Matches uppercase-case character"
+                } else if &exp.reg_str[r.span.start.offset..r.span.end.offset] == "0-9" {
+                    r#"Matches a digit, same as \d"#
+                } else {
+                    "Match a single character present in the list"
+                }
             },
             r.span.start.offset..r.span.end.offset,
         ),

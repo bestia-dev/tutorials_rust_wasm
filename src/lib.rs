@@ -1,12 +1,12 @@
 // region: lmake_md_to_doc_comments include README.md A //!
 //! # rust_regex_explanation_pwa
 //!
-//! ***version: 2020.803.1029  date: 2020-08-03 authors: Luciano Bestia***  
+//! ***version: 2020.804.1141  date: 2020-08-04 authors: Luciano Bestia***  
 //! **Rust regex explanations in PWA**
 //!
-//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-864-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
-//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-81-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
-//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-74-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-971-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-75-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-97-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //! [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //! [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //!
@@ -40,6 +40,7 @@
 //!
 // endregion: lmake_md_to_doc_comments include README.md A //!
 
+use js_sys;
 use unwrap::unwrap;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::{JsCast, JsValue};
@@ -50,27 +51,115 @@ mod regex_explanation_mod;
 mod regex_method_mod;
 mod web_sys_mod;
 
+// region: macro for boilerplate code
+
+/// set_listener_change_height_on_click!(element_1_id, element_2_id,function_ident, height_lambda)
+/// set_listener_change_height_on_click!("explanation_less","explanation", explanation_less_on_click, -100)
+#[macro_export]
+macro_rules! set_listener_change_height_on_click {
+    ($element_1_id: expr, $element_2_id: expr, $function_ident: ident, $lambda:expr) => {{
+        let html_element = get_element_by_id($element_1_id);
+        let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
+
+        let closure = Closure::wrap(Box::new(move || {
+            $function_ident($element_2_id, $lambda);
+        }) as Box<dyn FnMut()>);
+
+        html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));
+        closure.forget();
+    }};
+}
+/// set_listener_on_keyup!(element_id, function_ident)
+/// set_listener_on_keyup!("regex_text", on_keyup)
+#[macro_export]
+macro_rules! set_listener_on_keyup {
+    ($element_id: expr, $function_ident: ident) => {{
+        let html_element = get_element_by_id($element_id);
+        let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
+
+        let closure = Closure::wrap(Box::new(move || {
+            $function_ident();
+        }) as Box<dyn FnMut()>);
+
+        html_element.set_onkeyup(Some(closure.as_ref().unchecked_ref()));
+        closure.forget();
+    }};
+}
+
 /// To start the Wasm application, wasm_bindgen runs this functions
 #[wasm_bindgen(start)]
 pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     debug_write("--- rust_regex_explanation_pwa start ---");
+
     // Initialize debugging for when/if something goes wrong.
     console_error_panic_hook::set_once();
+
+    // Initialize input fields
     let regex_text = r#"^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-zA-Z0-9-]+)*"#;
     set_text_area_element_value_string_by_id("regex_text", regex_text);
     let substitution = "The email domain is: $1";
     set_text_area_element_value_string_by_id("substitution", substitution);
     let test_string = "John.Connor@sky.net";
     set_text_area_element_value_string_by_id("test_string", test_string);
+
     // initial result
     on_keyup();
-    //prepare the event listeners for keyup
-    set_event_listener_regex_text_on_keyup();
-    set_event_listener_substitution_on_keyup();
-    set_event_listener_test_string_on_keyup();
 
-    set_event_listener_explanation_more();
-    set_event_listener_explanation_less();
+    //prepare the event listeners
+    set_listener_on_keyup!("regex_text", on_keyup);
+    set_listener_on_keyup!("substitution", on_keyup);
+    set_listener_on_keyup!("test_string", on_keyup);
+    set_listener_change_height_on_click!(
+        "explanation_less",
+        "explanation",
+        change_height_on_click,
+        -100
+    );
+    set_listener_change_height_on_click!(
+        "explanation_more",
+        "explanation",
+        change_height_on_click,
+        100
+    );
+    set_listener_change_height_on_click!(
+        "regex_result_less",
+        "regex_result",
+        change_height_on_click,
+        -100
+    );
+    set_listener_change_height_on_click!(
+        "regex_result_more",
+        "regex_result",
+        change_height_on_click,
+        100
+    );
+    set_listener_change_height_on_click!("code_gen_less", "code_gen", change_height_on_click, -100);
+    set_listener_change_height_on_click!("code_gen_more", "code_gen", change_height_on_click, 100);
+    set_listener_change_height_on_click!(
+        "test_string_less",
+        "test_string",
+        change_height_on_click,
+        -100
+    );
+    set_listener_change_height_on_click!(
+        "test_string_more",
+        "test_string",
+        change_height_on_click,
+        100
+    );
+    set_listener_change_height_on_click!(
+        "regex_help_less",
+        "regex_help",
+        change_height_on_click,
+        -100
+    );
+    set_listener_change_height_on_click!(
+        "regex_help_more",
+        "regex_help",
+        change_height_on_click,
+        100
+    );
+
     debug_write("--- rust_regex_explanation_pwa end ---");
     Ok(())
 }
@@ -82,116 +171,31 @@ fn on_keyup() {
     let test_string = get_text_area_element_value_string_by_id("test_string");
 
     let explanation = regex_explanation_mod::lib_main(regex_text.clone());
-    set_text_area_element_value_string_by_id("explanation", &explanation);
+    set_element_inner_html_string_by_id("explanation", &explanation);
 
     let regex_result = regex_method_mod::lib_main(&regex_text, &substitution, &test_string);
-    set_text_area_element_value_string_by_id("regex_result", &regex_result);
+    set_element_inner_html_string_by_id("regex_result", &regex_result);
 
     let code_gen = code_gen_mod::code_gen(&regex_text, &substitution, &test_string);
-    set_text_area_element_value_string_by_id("code_gen", &code_gen);
+    set_element_inner_html_string_by_id("code_gen", &code_gen);
+    // Applies highlighting to all <pre><code>...</code></pre> blocks on a page.
+    unwrap!(js_sys::eval(
+        "hljs.highlightBlock(document.getElementById('code_gen'))"
+    ));
 }
 
-// on click code
-fn on_click_explanation_more() {
-    debug_write("on_click_explanation_more");
-    // textarea
-    let html_element = get_element_by_id("explanation");
+// change height on click code
+fn change_height_on_click(element_id: &str, height_lambda: i32) {
+    let html_element = get_element_by_id(element_id);
     let html_element: web_sys::HtmlElement =
         unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
-    // get_property_value(&self, property: &str) -> Result<String, JsValue>
     let height = unwrap!(html_element.style().get_property_value("height"));
-    debug_write(&format!("height: {:?}", height));
-    if height.is_empty() {
-        unwrap!(html_element.style().set_property("height", "400px"));
-    } else {
-        let height: String = height.replace("px", "");
-        let h = unwrap!(height.parse::<i32>());
-        let new_height = format!("{}px", h + 50);
-        unwrap!(html_element.style().set_property("height", &new_height));
-    }
-}
-
-// on click code
-fn on_click_explanation_less() {
-    debug_write("on_click_explanation_less");
-    // textarea
-    let html_element = get_element_by_id("explanation");
-    let html_element: web_sys::HtmlElement =
-        unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
-    // get_property_value(&self, property: &str) -> Result<String, JsValue>
-    let height = unwrap!(html_element.style().get_property_value("height"));
-    debug_write(&format!("height: {:?}", height));
     if height.is_empty() {
         unwrap!(html_element.style().set_property("height", "300px"));
     } else {
         let height: String = height.replace("px", "");
         let h = unwrap!(height.parse::<i32>());
-        let new_height = format!("{}px", h - 50);
+        let new_height = format!("{}px", h + height_lambda);
         unwrap!(html_element.style().set_property("height", &new_height));
     }
-}
-
-/// set event listener for the regex_text
-fn set_event_listener_regex_text_on_keyup() {
-    let html_element = get_element_by_id("regex_text");
-    let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
-
-    let closure = Closure::wrap(Box::new(move || {
-        on_keyup();
-    }) as Box<dyn FnMut()>);
-
-    html_element.set_onkeyup(Some(closure.as_ref().unchecked_ref()));
-    closure.forget();
-}
-
-/// set event listener for the substitution
-fn set_event_listener_substitution_on_keyup() {
-    let html_element = get_element_by_id("substitution");
-    let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
-
-    let closure = Closure::wrap(Box::new(move || {
-        on_keyup();
-    }) as Box<dyn FnMut()>);
-
-    html_element.set_onkeyup(Some(closure.as_ref().unchecked_ref()));
-    closure.forget();
-}
-
-/// set event listener for the test_string
-fn set_event_listener_test_string_on_keyup() {
-    let html_element = get_element_by_id("test_string");
-    let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
-
-    let closure = Closure::wrap(Box::new(move || {
-        on_keyup();
-    }) as Box<dyn FnMut()>);
-
-    html_element.set_onkeyup(Some(closure.as_ref().unchecked_ref()));
-    closure.forget();
-}
-
-/// set event listener for the explanation_more
-fn set_event_listener_explanation_more() {
-    let html_element = get_element_by_id("explanation_more");
-    let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
-
-    let closure = Closure::wrap(Box::new(move || {
-        on_click_explanation_more();
-    }) as Box<dyn FnMut()>);
-
-    html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));
-    closure.forget();
-}
-
-/// set event listener for the explanation_less
-fn set_event_listener_explanation_less() {
-    let html_element = get_element_by_id("explanation_less");
-    let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
-
-    let closure = Closure::wrap(Box::new(move || {
-        on_click_explanation_less();
-    }) as Box<dyn FnMut()>);
-
-    html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));
-    closure.forget();
 }

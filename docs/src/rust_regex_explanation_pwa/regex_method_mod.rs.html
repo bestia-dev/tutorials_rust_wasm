@@ -161,22 +161,48 @@
 <span id="161">161</span>
 <span id="162">162</span>
 <span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">regex</span>::<span class="ident">Regex</span>;
 
+<span class="doccomment">/// runs 6 regex methods and show result as html</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lib_main</span>(<span class="ident">regex_text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">substitution</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ret</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;--- regex methods start ---\n&quot;</span>));
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
-        <span class="string">&quot;This is using the same Rust code of the field code-gen.\n&quot;</span>
-    ));
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
-        <span class="string">&quot;There are 6 important Regex methods for different use-cases.\n&quot;</span>
-    ));
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
-        <span class="string">&quot;is_match(), find(), find_iter(), capture(), capture_iter(), replace_all()\n&quot;</span>
-    ));
+    <span class="comment">//ret.push_str(r#&quot;&lt;span class=&quot;hljs-comment&quot;&gt;--- regex methods start ---&lt;/span&gt;&quot;#);</span>
 
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;This is using the same Rust code of the field code-gen.\n&quot;</span>);
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
+        <span class="string">r##&quot;&lt;span class=&quot;hljs-keyword&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;hljs-variable&quot;&gt;rgx&lt;/span&gt; =  &lt;span class=&quot;hljs-class&quot;&gt;Regex&lt;/span&gt;::&lt;span class=&quot;hljs-function&quot;&gt;new&lt;/span&gt;(r#&quot;&lt;span class=&quot;hljs-section&quot;&gt;{}&lt;/span&gt;&quot;#).&lt;span class=&quot;hljs-function&quot;&gt;unwrap()&lt;/span&gt;;&lt;/span&gt;&quot;##</span>,
+        <span class="ident">regex_text</span>)
+    );
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;There are 6 important Regex methods for different use-cases:\n&quot;</span>);
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;&lt;span class=&quot;hljs-function&quot;&gt;is_match()&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;find()&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;find_iter()&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;capture()&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;capture_iter()&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;replace_all()&lt;/span&gt;&quot;#</span>);
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
     <span class="comment">// prepared example</span>
     <span class="comment">//let test_string = &quot;origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)&quot;;</span>
     <span class="comment">// substitution for replace_all()</span>
@@ -184,9 +210,9 @@
     <span class="comment">//let substitution = &quot;OnlyThe$1&quot;;</span>
 
     <span class="comment">// 1.uncomment for is_match = false</span>
-    <span class="comment">//let regex_text: &amp;Regex = &amp;Regex::new(r#&quot;xxx&quot;#).unwrap();</span>
+    <span class="comment">//let rgx: &amp;Regex = &amp;Regex::new(r#&quot;xxx&quot;#).unwrap();</span>
     <span class="comment">// 2. uncomment for is_match = true</span>
-    <span class="kw">let</span> <span class="ident">regex_text</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="ident">regex_text</span>) {
+    <span class="kw">let</span> <span class="ident">rgx</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="ident">regex_text</span>) {
         <span class="prelude-val">Ok</span>(<span class="ident">t</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">t</span>,
         <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;Error: {}\n&quot;</span>, <span class="ident">e</span>));
@@ -194,66 +220,70 @@
         }
     };
 
-    <span class="ident">is_match</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ret</span>);
-    <span class="ident">find</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ret</span>);
-    <span class="ident">find_iter</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ret</span>);
-    <span class="ident">captures</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ret</span>);
-    <span class="ident">captures_iter</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ret</span>);
-    <span class="ident">replace_all</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>, <span class="ident">substitution</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ret</span>);
+    <span class="ident">is_match</span>(<span class="kw-2">&amp;</span><span class="ident">rgx</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ret</span>);
+    <span class="ident">find</span>(<span class="kw-2">&amp;</span><span class="ident">rgx</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ret</span>);
+    <span class="ident">find_iter</span>(<span class="kw-2">&amp;</span><span class="ident">rgx</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ret</span>);
+    <span class="ident">captures</span>(<span class="kw-2">&amp;</span><span class="ident">rgx</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ret</span>);
+    <span class="ident">captures_iter</span>(<span class="kw-2">&amp;</span><span class="ident">rgx</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ret</span>);
+    <span class="ident">replace_all</span>(<span class="kw-2">&amp;</span><span class="ident">rgx</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>, <span class="ident">substitution</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ret</span>);
 
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;--- regex methods end ---\n&quot;</span>));
+    <span class="comment">//ret.push_str(r#&quot;&lt;span class=&quot;hljs-comment&quot;&gt;--- regex methods end ---&lt;/span&gt;&quot;#);</span>
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
     <span class="comment">// return</span>
     <span class="ident">ret</span>
 }
 
 <span class="doccomment">/// example how to use the is_match() method</span>
-<span class="kw">fn</span> <span class="ident">is_match</span>(<span class="ident">regex_text</span>: <span class="kw-2">&amp;</span><span class="ident">Regex</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">ret</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">String</span>) {
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;regex_text.is_match(test_string)\n&quot;</span>);
-    <span class="kw">if</span> <span class="ident">regex_text</span>.<span class="ident">is_match</span>(<span class="ident">test_string</span>) {
-        <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    True - is match.\n&quot;</span>));
-    } <span class="kw">else</span> {
-        <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    False - no match.\n&quot;</span>));
-    }
+<span class="kw">fn</span> <span class="ident">is_match</span>(<span class="ident">rgx</span>: <span class="kw-2">&amp;</span><span class="ident">Regex</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">ret</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">String</span>) {
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;&lt;span class=&quot;hljs-function&quot;&gt;rgx.is_match(test_string)&lt;/span&gt;&quot;#</span>);
     <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
+    <span class="kw">if</span> <span class="ident">rgx</span>.<span class="ident">is_match</span>(<span class="ident">test_string</span>) {
+        <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;    &lt;span class=&quot;hljs-keyword&quot;&gt;True&lt;/span&gt; - is match.&quot;#</span>);
+    } <span class="kw">else</span> {
+        <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;    &lt;span class=&quot;hljs-keyword&quot;&gt;False&lt;/span&gt; - no match.&quot;#</span>);
+    }
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n\n&quot;</span>);
 }
 
 <span class="doccomment">/// example how to find the first occurrence</span>
-<span class="kw">fn</span> <span class="ident">find</span>(<span class="ident">regex_text</span>: <span class="kw-2">&amp;</span><span class="ident">Regex</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">ret</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">String</span>) {
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;regex_text.find(test_string)\n&quot;</span>);
+<span class="kw">fn</span> <span class="ident">find</span>(<span class="ident">rgx</span>: <span class="kw-2">&amp;</span><span class="ident">Regex</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">ret</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">String</span>) {
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;&lt;span class=&quot;hljs-function&quot;&gt;rgx.find(test_string)&lt;/span&gt; - &lt;span class=&quot;hljs-comment&quot;&gt;only the first occurrence&lt;/span&gt;&quot;#</span>);
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
     <span class="comment">// method find() returns Option:None if not found.</span>
     <span class="comment">// There are more than one way in Rust to check for `possibility of absence`.</span>
     <span class="comment">// The first way is the methods unwrap() or expect(),</span>
     <span class="comment">// but they are good only for tests and examples. Never use them in production code.</span>
 
     <span class="comment">// using pattern matching (match Control Flow Operator) for `case analysis `.</span>
-    <span class="kw">match</span> <span class="ident">regex_text</span>.<span class="ident">find</span>(<span class="ident">test_string</span>) {
+    <span class="kw">match</span> <span class="ident">rgx</span>.<span class="ident">find</span>(<span class="ident">test_string</span>) {
         <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
-            <span class="string">&quot;    1. syntax find: {} {} {}\n&quot;</span>,
+            <span class="string">r#&quot;    &lt;span class=&quot;hljs-comment&quot;&gt;1. syntax find:&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;{}..{}&lt;/span&gt; {}&quot;#</span>,
             <span class="ident">m</span>.<span class="ident">start</span>(),
             <span class="ident">m</span>.<span class="ident">end</span>(),
             <span class="ident">m</span>.<span class="ident">as_str</span>()
         )),
-        <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    1. syntax find: None\n&quot;</span>)),
+        <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;    &lt;span class=&quot;hljs-comment&quot;&gt;1. syntax find:&lt;/span&gt; None&quot;#</span>),
     }
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
     <span class="comment">// using `if let`syntax</span>
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="ident">regex_text</span>.<span class="ident">find</span>(<span class="ident">test_string</span>) {
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="ident">rgx</span>.<span class="ident">find</span>(<span class="ident">test_string</span>) {
         <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
-            <span class="string">&quot;    2. syntax find: {} {} {}\n&quot;</span>,
+            <span class="string">r#&quot;    &lt;span class=&quot;hljs-comment&quot;&gt;2. syntax find:&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;{}..{}&lt;/span&gt; {}&quot;#</span>,
             <span class="ident">m</span>.<span class="ident">start</span>(),
             <span class="ident">m</span>.<span class="ident">end</span>(),
             <span class="ident">m</span>.<span class="ident">as_str</span>()
         ));
     } <span class="kw">else</span> {
-        <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    2. syntax find: None\n&quot;</span>));
+        <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;    &lt;span class=&quot;hljs-comment&quot;&gt;2. syntax find:&lt;/span&gt; None&quot;#</span>);
     }
-
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
     <span class="comment">// using map_or_else()</span>
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">workaround</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
-    <span class="ident">regex_text</span>.<span class="ident">find</span>(<span class="ident">test_string</span>).<span class="ident">map_or_else</span>(
-        <span class="op">|</span><span class="op">|</span> <span class="ident">workaround</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    3. syntax find: None\n&quot;</span>)),
+    <span class="ident">rgx</span>.<span class="ident">find</span>(<span class="ident">test_string</span>).<span class="ident">map_or_else</span>(
+        <span class="op">|</span><span class="op">|</span> <span class="ident">workaround</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;    &lt;span class=&quot;hljs-comment&quot;&gt;3. syntax find:&lt;/span&gt; None&quot;#</span>),
         <span class="op">|</span><span class="ident">m</span><span class="op">|</span> {
             <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
-                <span class="string">&quot;    3. syntax find: {} {} {}\n&quot;</span>,
+                <span class="string">r#&quot;    &lt;span class=&quot;hljs-comment&quot;&gt;3. syntax find:&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;{}..{}&lt;/span&gt; {}&quot;#</span>,
                 <span class="ident">m</span>.<span class="ident">start</span>(),
                 <span class="ident">m</span>.<span class="ident">end</span>(),
                 <span class="ident">m</span>.<span class="ident">as_str</span>()
@@ -261,68 +291,86 @@
         },
     );
     <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">workaround</span>);
-
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
     <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
 }
 
 <span class="doccomment">/// example how to use find_iter() method - iterator</span>
-<span class="kw">fn</span> <span class="ident">find_iter</span>(<span class="ident">regex_text</span>: <span class="kw-2">&amp;</span><span class="ident">Regex</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">ret</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">String</span>) {
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;regex_text.find_iter(test_string)\n&quot;</span>);
-    <span class="kw">for</span> <span class="ident">m</span> <span class="kw">in</span> <span class="ident">regex_text</span>.<span class="ident">find_iter</span>(<span class="ident">test_string</span>) {
+<span class="kw">fn</span> <span class="ident">find_iter</span>(<span class="ident">rgx</span>: <span class="kw-2">&amp;</span><span class="ident">Regex</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">ret</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">String</span>) {
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;&lt;span class=&quot;hljs-function&quot;&gt;rgx.find_iter(test_string)&lt;/span&gt;&quot;#</span>);
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
+    <span class="kw">for</span> <span class="ident">m</span> <span class="kw">in</span> <span class="ident">rgx</span>.<span class="ident">find_iter</span>(<span class="ident">test_string</span>) {
         <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
-            <span class="string">&quot;    find_iter: {} {} {}\n&quot;</span>,
+            <span class="string">r#&quot;    &lt;span class=&quot;hljs-comment&quot;&gt;find_iter:&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;{}..{}&lt;/span&gt; {}&quot;#</span>,
             <span class="ident">m</span>.<span class="ident">start</span>(),
             <span class="ident">m</span>.<span class="ident">end</span>(),
             <span class="ident">m</span>.<span class="ident">as_str</span>()
-        ))
+        ));
+        <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
     }
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;find_iter end\n&quot;</span>));
+    <span class="comment">//ret.push_str(r#&quot;&lt;span class=&quot;hljs-comment&quot;&gt;find_iter end&lt;/span&gt;&quot;#);</span>
     <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
 }
 
 <span class="doccomment">/// example how to capture only the first occurrence of regex capture groups</span>
 <span class="doccomment">/// using the captures() method for regex capture groups</span>
-<span class="kw">fn</span> <span class="ident">captures</span>(<span class="ident">regex_text</span>: <span class="kw-2">&amp;</span><span class="ident">Regex</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">ret</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">String</span>) {
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;regex_text.captures(test_string)\n&quot;</span>);
+<span class="kw">fn</span> <span class="ident">captures</span>(<span class="ident">rgx</span>: <span class="kw-2">&amp;</span><span class="ident">Regex</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">ret</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">String</span>) {
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;&lt;span class=&quot;hljs-function&quot;&gt;rgx.captures(test_string)&lt;/span&gt;&lt;span class=&quot;hljs-comment&quot;&gt; - only the first occurrence&lt;/span&gt;&quot;#</span>);
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
     <span class="comment">// same 3 possible syntax to react to the `possibility of absence` Option:None</span>
     <span class="comment">// as in the function find()</span>
-    <span class="kw">match</span> <span class="ident">regex_text</span>.<span class="ident">captures</span>(<span class="ident">test_string</span>) {
+    <span class="kw">match</span> <span class="ident">rgx</span>.<span class="ident">captures</span>(<span class="ident">test_string</span>) {
         <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">if</span> <span class="ident">m</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">2</span> {
-                <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    1. captures: {} - {} \n&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">m</span>[<span class="number">1</span>], <span class="kw-2">&amp;</span><span class="ident">m</span>[<span class="number">0</span>]));
+                <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
+                    <span class="string">r#&quot;    &lt;span class=&quot;hljs-comment&quot;&gt;1. captures:&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;{}&lt;/span&gt; , {} &quot;#</span>,
+                    <span class="kw-2">&amp;</span><span class="ident">m</span>[<span class="number">1</span>], <span class="kw-2">&amp;</span><span class="ident">m</span>[<span class="number">0</span>]
+                ));
             } <span class="kw">else</span> {
-                <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    1. captures: Zero\n&quot;</span>));
+                <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;    &lt;span class=&quot;hljs-comment&quot;&gt;1. captures:&lt;/span&gt; Zero&quot;#</span>);
             }
         }
-        <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    1. captures: None\n&quot;</span>)),
+        <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;    &lt;span class=&quot;hljs-comment&quot;&gt;1. captures:&lt;/span&gt; None&quot;#</span>),
     }
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;captures end\n&quot;</span>));
+    <span class="comment">//ret.push_str(&quot;\n&quot;);</span>
+    <span class="comment">//ret.push_str(r#&quot;&lt;span class=&quot;hljs-comment&quot;&gt;captures end&lt;/span&gt;&quot;#);</span>
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
     <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
 }
 
 <span class="doccomment">/// example how to use captures_iter() method - iterator</span>
-<span class="kw">fn</span> <span class="ident">captures_iter</span>(<span class="ident">regex_text</span>: <span class="kw-2">&amp;</span><span class="ident">Regex</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">ret</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">String</span>) {
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;regex_text.captures_iter(test_string)\n&quot;</span>);
-    <span class="kw">for</span> <span class="ident">m</span> <span class="kw">in</span> <span class="ident">regex_text</span>.<span class="ident">captures_iter</span>(<span class="ident">test_string</span>) {
+<span class="kw">fn</span> <span class="ident">captures_iter</span>(<span class="ident">rgx</span>: <span class="kw-2">&amp;</span><span class="ident">Regex</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">ret</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">String</span>) {
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;&lt;span class=&quot;hljs-function&quot;&gt;rgx.captures_iter(test_string)&lt;/span&gt;&quot;#</span>);
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
+    <span class="kw">for</span> <span class="ident">m</span> <span class="kw">in</span> <span class="ident">rgx</span>.<span class="ident">captures_iter</span>(<span class="ident">test_string</span>) {
         <span class="kw">if</span> <span class="ident">m</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">2</span> {
-            <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    captures_iter: {} - {}\n&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">m</span>[<span class="number">1</span>], <span class="kw-2">&amp;</span><span class="ident">m</span>[<span class="number">0</span>]));
+            <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
+                <span class="string">r#&quot;    &lt;span class=&quot;hljs-comment&quot;&gt;captures_iter:&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;{}&lt;/span&gt; , {}&quot;#</span>,
+                <span class="kw-2">&amp;</span><span class="ident">m</span>[<span class="number">1</span>], <span class="kw-2">&amp;</span><span class="ident">m</span>[<span class="number">0</span>]
+            ));
         } <span class="kw">else</span> {
-            <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    captures_iter: Zero\n&quot;</span>));
+            <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;    &lt;span class=&quot;hljs-comment&quot;&gt;captures_iter:&lt;/span&gt; Zero&quot;#</span>);
         }
+        <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
     }
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;captures_iter end\n&quot;</span>));
+    <span class="comment">//ret.push_str(r#&quot;&lt;span class=&quot;hljs-comment&quot;&gt;captures_iter end&lt;/span&gt;&quot;#);</span>
     <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
 }
 
 <span class="doccomment">/// example of how to use replace_all() method</span>
 <span class="doccomment">/// the $1, $2,.. are placeholders for the found capture group</span>
-<span class="kw">fn</span> <span class="ident">replace_all</span>(<span class="ident">regex_text</span>: <span class="kw-2">&amp;</span><span class="ident">Regex</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">replace_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">ret</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">String</span>) {
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;regex_text.replace_all(test_string, replace_string)\n&quot;</span>);
-    <span class="kw">let</span> <span class="ident">new_string</span> <span class="op">=</span> <span class="ident">regex_text</span>
-        .<span class="ident">replace_all</span>(<span class="ident">test_string</span>, <span class="ident">replace_string</span>)
-        .<span class="ident">to_string</span>();
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;    replaced string:\n{}\n&quot;</span>, <span class="ident">new_string</span>));
-    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;replace_all end\n&quot;</span>));
+<span class="kw">fn</span> <span class="ident">replace_all</span>(<span class="ident">rgx</span>: <span class="kw-2">&amp;</span><span class="ident">Regex</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">replace_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">ret</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">String</span>) {
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(
+        <span class="string">r#&quot;&lt;span class=&quot;hljs-function&quot;&gt;rgx.replace_all(test_string, replace_string)&lt;/span&gt;&quot;#</span>,
+    );
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
+    <span class="kw">let</span> <span class="ident">new_string</span> <span class="op">=</span> <span class="ident">rgx</span>.<span class="ident">replace_all</span>(<span class="ident">test_string</span>, <span class="ident">replace_string</span>).<span class="ident">to_string</span>();
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">r#&quot;    &lt;span class=&quot;hljs-comment&quot;&gt;replaced string:&lt;/span&gt;&quot;#</span>);
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">new_string</span>));
+    <span class="comment">//ret.push_str(&quot;\n&quot;);</span>
+    <span class="comment">//ret.push_str(r#&quot;&lt;span class=&quot;hljs-comment&quot;&gt;replace_all end&lt;/span&gt;&quot;#);</span>
+    <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
     <span class="ident">ret</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
 }
 </pre></div>

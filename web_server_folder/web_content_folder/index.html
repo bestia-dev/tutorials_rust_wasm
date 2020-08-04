@@ -32,6 +32,9 @@
       <meta name="msapplication-TileColor" content="#FFFF00">
       <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
 
+      <!-- syntax highlighting for rust -->
+      <link rel="stylesheet" href="hljs/hljs_bestia.css">
+      <script src="hljs/highlight.pack.js"></script>
 </head>
 
 <body>
@@ -40,7 +43,7 @@
       <div class="container_0">
             <div class="container0_content_not_grid">
                   <h2 class="c_yellow center">PWA for Rust Regex Explanations and Testing</h2>
-                  <p class="small">You can "install" it in the browser's menu. It's a PWA for the desktop.</p>
+                  <p class="small">You can "install" it in the browser's menu. It's a Progressive Web App for the desktop, Cross-Platform.</p>
             </div>
       </div>
       <div class="container_0">
@@ -60,6 +63,8 @@
 
                   <div class="grid0_c bold">
                         <label for="test_string">test string</label>
+                        <p id="test_string_less" class="pointer c_white" >-</p>
+                        <p id="test_string_more" class="pointer c_white" >+</p>
                   </div>
                   <div class="grid0_c bold">
                         <textarea name="test_string" id="test_string" class="textarea_full_width height_100px" ></textarea>
@@ -70,25 +75,35 @@
             <div class="container0_content_grid_0" style="grid-template-columns: 80px auto;">
                   <div class="grid0_c bold">
                         <label for="explanation">explan- ation</label>
-                        <p id="explanation_more" class="small pointer c_white" >more</p>
-                        <p id="explanation_less" class="small pointer c_white" >less</p>
+                        <p id="explanation_less" class="pointer c_white" >-</p>
+                        <p id="explanation_more" class="pointer c_white" >+</p>
                   </div>
-                  <div class="grid0_c bold">
-                        <textarea name="explanation" id="explanation" class="textarea_full_width height_400px" ></textarea>
+                  <div class="grid0_c left">
+                        <pre ><code id="explanation" class="hljs" style="height:300px;">//comment
+                              println!("{}","one");
+                        </code></pre>
                   </div>
 
                   <div class="grid0_c bold">
                         <label for="regex_result">Regex result</label>
+                        <p id="regex_result_less" class="pointer c_white" >-</p>
+                        <p id="regex_result_more" class="pointer c_white" >+</p>
                   </div>
-                  <div class="grid0_c bold">
-                        <textarea name="regex_result" id="regex_result" class="textarea_full_width height_400px" ></textarea>
+                  <div class="grid0_c left">
+                        <pre ><code id="regex_result" class="hljs" style="height:300px;">//comment
+                              println!("{}","one");
+                        </code></pre>
                   </div>
 
                   <div class="grid0_c bold">
                         <label for="code_gen">code gen</label>
+                        <p id="code_gen_less" class="pointer c_white" >-</p>
+                        <p id="code_gen_more" class="pointer c_white" >+</p>
                   </div>
-                  <div class="grid0_c bold">
-                        <textarea name="code_gen" id="code_gen" class="textarea_full_width height_400px" ></textarea>
+                  <div class="grid0_c left">
+                        <pre ><code id="code_gen" style="height:300px;" class="language-rust hljs">//comment
+                              println!("{}","one");
+                        </code></pre>
                   </div>
             </div>
       </div>
@@ -96,35 +111,42 @@
             <div class="container0_content_grid_0" style="grid-template-columns: 80px auto;">
                   <div class="grid0_c bold">
                         <label for="regex_help">Regex help</label>
+                        <p id="regex_help_less" class="pointer c_white" >-</p>
+                        <p id="regex_help_less" class="pointer c_white" >+</p>
                   </div>
-                  <div class="grid0_c bold">
-                        <textarea name="regex_help" id="regex_help" class="textarea_full_width height_100px" >
-Basic Regex syntax
-abc…      Letters
-123…      Digits
-\d        Any Digit
-\D        Any Non-digit character
-.         Any Character
-\.        Period
-[abc]     Only a, b, or c
-[^abc]    Not a, b, nor c
-[a-z]     Characters a to z
-[0-9]     Numbers 0 to 9
-\w        Any Alphanumeric character
-\W        Any Non-alphanumeric character
-{m}       m Repetitions
-{m,n}     m to n Repetitions
-*         Zero or more repetitions
-+         One or more repetitions
-?         Optional character
-\s        Any Whitespace
-\S        Any Non-whitespace character
-^…$       Starts and ends
-(…)       Capture Group
-(a(bc))   Capture Sub-group
-(.*)      Capture all
-(abc|def) Matches abc or def
-</textarea>
+                  <div class="grid0_c left">
+                        <pre ><code id="regex_help" class="hljs" style="height:300px;">    Basic Regex syntax
+<span class="hljs-keyword">abc…</span>      Letters literally
+<span class="hljs-keyword">123…</span>      Digits literally
+<span class="hljs-keyword">[abc]</span>     Only a, b, or c
+<span class="hljs-keyword">[^abc]</span>    Not a, b, nor c
+<span class="hljs-keyword">[a-z]</span>     Characters a to z
+<span class="hljs-keyword">[0-9]</span>     Numbers 0 to 9
+<span class="hljs-keyword">\w</span>        Any Alphanumeric character
+<span class="hljs-keyword">\W</span>        Any Non-alphanumeric character
+<span class="hljs-keyword">\d</span>        Any Digit
+<span class="hljs-keyword">\D</span>        Any Non-digit character
+    Quantifiers:
+<span class="hljs-keyword">?</span>         Zero or one repetition
+<span class="hljs-keyword">*</span>         Zero or more repetitions
+<span class="hljs-keyword">+</span>         One or more repetitions
+<span class="hljs-keyword">{m}</span>       m Repetitions
+<span class="hljs-keyword">{m,n}</span>     m to n Repetitions
+
+<span class="hljs-keyword">\s</span>        Any Whitespace
+<span class="hljs-keyword">\S</span>        Any Non-whitespace character
+<span class="hljs-keyword">.</span>         Any Character (avoid using)
+<span class="hljs-keyword">\.</span>        Period - escaped
+<span class="hljs-keyword">^…$</span>       Starts and ends
+    Capture groups:
+<span class="hljs-keyword">(…)</span>       Capture Group    
+<span class="hljs-keyword">(?:…)</span>     Non-Capture Group
+<span class="hljs-keyword">(a(bc))</span>   Capture Sub-group
+<span class="hljs-keyword">(.*)</span>      Capture all
+<span class="hljs-keyword">(abc|def)</span> Matches abc or def
+    Substitution:
+<span class="hljs-keyword">$1, $2</span>    Captured group Substitution
+</code></pre>
                   </div>
                   <div class="grid0_c bold">
                         <label for="regex_suggestions">Regex suggestions</label>
@@ -166,6 +188,7 @@ If needed, add Flags in the beginning like (?m).
                   <p class="c_yellow big">Exercise</p>
                   <p>Go to the page https://en.wikipedia.org/wiki/Terminator_(character) and find all the T model names.</p>
                   <p>Not very amusing for humans. Simplify it. Copy this shorter text into the field test_string:</p>
+                  <p>---</p>
                   <p>
                         T-1000 (Robert Patrick) 
                         Terminator known as T-101
@@ -180,10 +203,13 @@ If needed, add Flags in the beginning like (?m).
                         memory of a T-888 model,
                         tearing a malfunctioning T-600 in half</p>
                   <p>---</p>
-                  <p>The names are always like T-something. Try the first regex to match literally: T-</p>
-                  <p>After that are some digits: T-\d+</p>
-                  <p>There are always some exceptions, the T-X model. Add it: T-(X|\d+)</p>
-                  <p>Let replace T- with the word Robot(). In the substitution field write: Robot($1)</p>
+                  <p>The names are always like T-something. Let start with that.</p>
+                  <p>Write in the Regex field and watch the Regex result field:</p>
+                  <p><span class="hljs-section">T-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find occurrences of this 2 literals.</p>
+                  <p><span class="hljs-section">T-\d+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After that are one or more digits.</p>
+                  <p><span class="hljs-section">T-(X|\d+)</span>&nbsp;&nbsp;There are always some exceptions, the T-X model.</p>
+                  <p>Write in the Substitution field and watch the last lines of Regex result:</p>
+                  <p><span class="hljs-section">Robot($1)</span>&nbsp;&nbsp;Let replace T- with the word Robot().</p>
                   <p>It works !</p>
             </div>
       </div>
