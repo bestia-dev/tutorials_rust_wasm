@@ -20,6 +20,10 @@
 
 [![Documentation](https://docs.rs/rust_regex_explanation_pwa/badge.svg)](https://docs.rs/rust_regex_explanation_pwa/) [![crev reviews](https://web.crev.dev/rust-reviews/badge/crev_count/rust_regex_explanation_pwa.svg)](https://web.crev.dev/rust-reviews/crate/rust_regex_explanation_pwa/) [![Lib.rs](https://img.shields.io/badge/Lib.rs-rust-orange.svg)](https://lib.rs/crates/rust_regex_explanation_pwa/) [![Licence](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/blob/master/LICENSE) [![Rust](https://github.com/LucianoBestia/rust_regex_explanation_pwa/workflows/RustAction/badge.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 
+## Try it
+
+<https://bestia.dev/rust_regex_explanation_pwa/>
+
 ## Regex explanation and testing
 
 Regex is great. But it is much easier to write and understand with a little help of explanations.  
@@ -40,10 +44,10 @@ First decision - no frameworks. Just vanilla. Then no javascript.
 Some basic html. Some basic css.  
 All the rest is in Rust with web-sys/wasm-bindgen for all the programming needs.  
 No other special requirements.  
+Ok, I had to use the javascript library `highlightjs` to bring some colors to the code.  
 
 ## PWA
 
 I added the manifest, the worker and a bunch of icons.  
-
 
 [comment]: # (lmake_md_to_doc_comments segment end A)
