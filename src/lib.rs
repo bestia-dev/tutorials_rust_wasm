@@ -174,6 +174,8 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     set_listener_on_click!("example_model2", example_model2);
     set_listener_on_click!("example_model3", example_model3);
 
+    set_listener_on_click!("code_gen_copy", code_gen_copy);
+
     debug_write("--- rust_regex_explanation_pwa end ---");
     Ok(())
 }
@@ -192,7 +194,7 @@ fn on_keyup() {
 
     let code_gen = code_gen_mod::code_gen(&regex_text, &substitution, &test_string);
     set_element_inner_html_string_by_id("code_gen", &code_gen);
-    // Applies highlighting to all <pre><code>...</code></pre> blocks on a page.
+    // Applies highlighting to the blocks on a page.
     unwrap!(js_sys::eval(
         "hljs.highlightBlock(document.getElementById('code_gen'))"
     ));
@@ -212,6 +214,18 @@ fn change_height_on_click(element_id: &str, height_lambda: i32) {
         let new_height = format!("{}px", h + height_lambda);
         unwrap!(html_element.style().set_property("height", &new_height));
     }
+}
+
+// copy to clipboard
+fn code_gen_copy() {
+    let regex_text = get_text_area_element_value_string_by_id("regex_text");
+    let substitution = get_text_area_element_value_string_by_id("substitution");
+    let test_string = get_text_area_element_value_string_by_id("test_string");
+    let code_gen = code_gen_mod::code_gen(&regex_text, &substitution, &test_string);
+    // escaping the backtick for the template string multi line that is delimited with backticks
+    let code_gen = code_gen.replace("`", r#"\`"#);
+    let js_cmd = format!(r#"navigator.clipboard.writeText(`{}`)"#, code_gen);
+    unwrap!(js_sys::eval(&js_cmd));
 }
 
 // example email

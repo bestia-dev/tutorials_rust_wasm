@@ -100,10 +100,12 @@ fn captures(rgx: &Regex, test_string: &str) {
     // same 3 possible syntax to react to the `possibility of absence` Option:None
     // as in the function find()
     match rgx.captures(test_string) {
-        if m.len() == 2 {
-            ret.push_str(&format!("1. captures: {} - {} \n", &m[1], &m[0]));
-        } else {
-            ret.push_str(&format!("1. captures: Zero\n"));
+        Some(m) => {
+            if m.len() == 2 {
+                ret.push_str(&format!("1. captures: {} - {} \n", &m[1], &m[0]));
+            } else {
+                ret.push_str(&format!("1. captures: Zero\n"));
+            }
         }
         None => println!("1. captures: None"),
     }
