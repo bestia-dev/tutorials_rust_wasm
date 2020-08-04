@@ -4,15 +4,15 @@
 
 [comment]: # (lmake_cargo_toml_to_md start)
 
-***version: 2020.804.1141  date: 2020-08-04 authors: Luciano Bestia***  
+***version: 2020.804.1245  date: 2020-08-04 authors: Luciano Bestia***  
 **Rust regex explanations in PWA**
 
 [comment]: # (lmake_cargo_toml_to_md end)
 
 [comment]: # (lmake_lines_of_code start)
-[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-971-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
-[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-75-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
-[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-97-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1027-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-77-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-102-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 

@@ -1,16 +1,20 @@
 // region: lmake_md_to_doc_comments include README.md A //!
 //! # rust_regex_explanation_pwa
 //!
-//! ***version: 2020.804.1141  date: 2020-08-04 authors: Luciano Bestia***  
+//! ***version: 2020.804.1245  date: 2020-08-04 authors: Luciano Bestia***  
 //! **Rust regex explanations in PWA**
 //!
-//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-971-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
-//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-75-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
-//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-97-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1027-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-77-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-102-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //! [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //! [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //!
 //! [![Documentation](https://docs.rs/rust_regex_explanation_pwa/badge.svg)](https://docs.rs/rust_regex_explanation_pwa/) [![crev reviews](https://web.crev.dev/rust-reviews/badge/crev_count/rust_regex_explanation_pwa.svg)](https://web.crev.dev/rust-reviews/crate/rust_regex_explanation_pwa/) [![Lib.rs](https://img.shields.io/badge/Lib.rs-rust-orange.svg)](https://lib.rs/crates/rust_regex_explanation_pwa/) [![Licence](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/blob/master/LICENSE) [![Rust](https://github.com/LucianoBestia/rust_regex_explanation_pwa/workflows/RustAction/badge.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//!
+//! ## Try it
+//!
+//! <https://bestia.dev/rust_regex_explanation_pwa/>
 //!
 //! ## Regex explanation and testing
 //!
@@ -32,11 +36,11 @@
 //! Some basic html. Some basic css.  
 //! All the rest is in Rust with web-sys/wasm-bindgen for all the programming needs.  
 //! No other special requirements.  
+//! Ok, I had to use the javascript library `highlightjs` to bring some colors to the code.  
 //!
 //! ## PWA
 //!
 //! I added the manifest, the worker and a bunch of icons.  
-//!
 //!
 // endregion: lmake_md_to_doc_comments include README.md A //!
 
@@ -53,18 +57,33 @@ mod web_sys_mod;
 
 // region: macro for boilerplate code
 
+/// set_listener_on_click!(element_1_id, function_ident)
+/// set_listener_on_click!("example_email",example_email)
+#[macro_export]
+macro_rules! set_listener_on_click {
+    ($element_1_id: expr, $function_ident: ident) => {{
+        let closure = Closure::wrap(Box::new(move || {
+            $function_ident();
+        }) as Box<dyn FnMut()>);
+
+        let html_element = get_element_by_id($element_1_id);
+        let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
+        html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));
+        closure.forget();
+    }};
+}
+
 /// set_listener_change_height_on_click!(element_1_id, element_2_id,function_ident, height_lambda)
 /// set_listener_change_height_on_click!("explanation_less","explanation", explanation_less_on_click, -100)
 #[macro_export]
 macro_rules! set_listener_change_height_on_click {
     ($element_1_id: expr, $element_2_id: expr, $function_ident: ident, $lambda:expr) => {{
-        let html_element = get_element_by_id($element_1_id);
-        let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
-
         let closure = Closure::wrap(Box::new(move || {
             $function_ident($element_2_id, $lambda);
         }) as Box<dyn FnMut()>);
 
+        let html_element = get_element_by_id($element_1_id);
+        let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
         html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));
         closure.forget();
     }};
@@ -74,13 +93,12 @@ macro_rules! set_listener_change_height_on_click {
 #[macro_export]
 macro_rules! set_listener_on_keyup {
     ($element_id: expr, $function_ident: ident) => {{
-        let html_element = get_element_by_id($element_id);
-        let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
-
         let closure = Closure::wrap(Box::new(move || {
             $function_ident();
         }) as Box<dyn FnMut()>);
 
+        let html_element = get_element_by_id($element_id);
+        let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
         html_element.set_onkeyup(Some(closure.as_ref().unchecked_ref()));
         closure.forget();
     }};
@@ -95,15 +113,7 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     console_error_panic_hook::set_once();
 
     // Initialize input fields
-    let regex_text = r#"^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-zA-Z0-9-]+)*"#;
-    set_text_area_element_value_string_by_id("regex_text", regex_text);
-    let substitution = "The email domain is: $1";
-    set_text_area_element_value_string_by_id("substitution", substitution);
-    let test_string = "John.Connor@sky.net";
-    set_text_area_element_value_string_by_id("test_string", test_string);
-
-    // initial result
-    on_keyup();
+    example_email();
 
     //prepare the event listeners
     set_listener_on_keyup!("regex_text", on_keyup);
@@ -159,6 +169,10 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
         change_height_on_click,
         100
     );
+    set_listener_on_click!("example_email", example_email);
+    set_listener_on_click!("example_model1", example_model1);
+    set_listener_on_click!("example_model2", example_model2);
+    set_listener_on_click!("example_model3", example_model3);
 
     debug_write("--- rust_regex_explanation_pwa end ---");
     Ok(())
@@ -198,4 +212,48 @@ fn change_height_on_click(element_id: &str, height_lambda: i32) {
         let new_height = format!("{}px", h + height_lambda);
         unwrap!(html_element.style().set_property("height", &new_height));
     }
+}
+
+// example email
+fn example_email() {
+    let regex_text = r#"^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-zA-Z0-9-]+)*"#;
+    set_text_area_element_value_string_by_id("regex_text", regex_text);
+    let substitution = "The email domain is: $1";
+    set_text_area_element_value_string_by_id("substitution", substitution);
+    let test_string = "John.Connor@sky.net";
+    set_text_area_element_value_string_by_id("test_string", test_string);
+    // initial result
+    on_keyup();
+}
+
+// example model_base
+fn example_model_base() {
+    let regex_text = r#"T-"#;
+    set_text_area_element_value_string_by_id("regex_text", regex_text);
+    let substitution = "Robot($1)";
+    set_text_area_element_value_string_by_id("substitution", substitution);
+    let test_string = r#"T-1000 (Robert Patrick) Terminator known as T-101 T-800 that managed to kill John Connor explicitly named T-600s and T-1000. it jams its remaining hydrogen fuel cell into the T-X's mouth from a T-1000 sent to kill her who has been transformed into a T-3000 improvement over the earlier T-600 units also refers to the character as T-850 used the T-800 and T-850 nomenclature memory of a T-888 model, tearing a malfunctioning T-600 in half"#;
+    set_text_area_element_value_string_by_id("test_string", test_string);
+}
+
+// example model1
+fn example_model1() {
+    example_model_base();
+    on_keyup();
+}
+
+// example model2
+fn example_model2() {
+    example_model_base();
+    let regex_text = r#"T-\d+"#;
+    set_text_area_element_value_string_by_id("regex_text", regex_text);
+    on_keyup();
+}
+
+// example model3
+fn example_model3() {
+    example_model_base();
+    let regex_text = r#"T-(X|\d+)"#;
+    set_text_area_element_value_string_by_id("regex_text", regex_text);
+    on_keyup();
 }

@@ -27,7 +27,16 @@ pub fn debug_write(text: &str) {
 /// get element by id
 pub fn get_element_by_id(element_id: &str) -> web_sys::Element {
     let document = unwrap!(window().document());
-    unwrap!(document.get_element_by_id(element_id))
+    match document.get_element_by_id(element_id) {
+        Some(el) => el,
+        None => {
+            debug_write(&format!(
+                "Error: not found get_element_by_id {}",
+                element_id
+            ));
+            panic!("")
+        }
+    }
 }
 
 #[allow(dead_code)]
