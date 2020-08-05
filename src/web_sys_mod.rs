@@ -245,3 +245,12 @@ pub fn html_encode(input: &str) -> String {
         .replace("<", "&lt;")
         .replace(">", "&gt;")
 }
+
+#[allow(dead_code)]
+/// pseudo random generator of javascript
+fn get_pseudo_random_int(max: i32) -> i32 {
+    let f = js_sys::Math::random() * (max as f64);
+    let f = f.floor();
+    // return
+    f as i32
+}
