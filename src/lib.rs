@@ -230,7 +230,7 @@ fn change_height_on_click(element_id: &str, height_lambda: i32) {
 fn code_gen_copy() {
     let regex_text = get_text_area_element_value_string_by_id("regex_text");
     let substitution = get_text_area_element_value_string_by_id("substitution");
-    let test_string = get_text_area_element_value_string_by_id("test_string");
+    let test_string = get_element_inner_text_by_id("test_string");
     let code_gen = code_gen_mod::code_gen_string(&regex_text, &substitution, &test_string);
     // escaping the backtick for the template string multi line that is delimited with backticks
     let code_gen = code_gen.replace("`", r#"\`"#);
