@@ -136,9 +136,75 @@
 <span id="136">136</span>
 <span id="137">137</span>
 <span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">code_gen</span>(<span class="ident">regex_text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">substitution</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
-    <span class="kw">let</span> <span class="ident">gen</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>( <span class="string">r#####&quot;// Rust Regex code-gen  
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">html_encoded_push</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">web_sys_mod</span>::<span class="ident">HtmlEncoded</span>;
+
+<span class="doccomment">/// the variables must be html_encoded</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">code_gen_html</span>(<span class="ident">regex_text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">substitution</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">HtmlEncoded</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">html</span> <span class="op">=</span> <span class="ident">HtmlEncoded</span>::<span class="ident">new</span>();
+    <span class="ident">init_code_template</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">html</span>);
+    <span class="ident">html</span>.<span class="ident">replace_with_html_encode</span>(<span class="string">&quot;Luciano(Best)ia&quot;</span>, <span class="ident">regex_text</span>);
+    <span class="ident">html</span>.<span class="ident">replace_with_html_encode</span>(<span class="string">&quot;OnlyThe$1&quot;</span>, <span class="ident">substitution</span>);
+    <span class="ident">html</span>.<span class="ident">replace_with_html_encode</span>(<span class="string">r###&quot;origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)&quot;###</span>,<span class="ident">test_string</span>);
+    <span class="comment">// return</span>
+    <span class="ident">html</span>
+}
+
+<span class="doccomment">/// variables must be not html_encoded</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">code_gen_string</span>(<span class="ident">regex_text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">substitution</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">html</span> <span class="op">=</span> <span class="ident">HtmlEncoded</span>::<span class="ident">new</span>();
+    <span class="ident">init_code_template</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">html</span>);
+    <span class="kw">let</span> <span class="ident">html</span> <span class="op">=</span> <span class="ident">html</span>.<span class="ident">get_html</span>();
+    <span class="kw">let</span> <span class="ident">html</span> <span class="op">=</span> <span class="ident">html</span>
+    .<span class="ident">replace</span>(<span class="string">&quot;Luciano(Best)ia&quot;</span>,<span class="ident">regex_text</span>)
+    .<span class="ident">replace</span>(<span class="string">&quot;OnlyThe$1&quot;</span>, <span class="ident">substitution</span>)
+    .<span class="ident">replace</span>(<span class="string">r###&quot;origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)&quot;###</span>,<span class="ident">test_string</span>);
+    <span class="comment">// return</span>
+    <span class="ident">html</span>
+}
+
+<span class="doccomment">/// the code template</span>
+<span class="kw">fn</span> <span class="ident">init_code_template</span>(<span class="ident">html</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">HtmlEncoded</span>) {
+    <span class="comment">// This template must be a string literal because</span>
+    <span class="comment">// it will be used in a format! macro.</span>
+    <span class="comment">// This is why I need to replace all { with {{ and } with }} manually in the literal.</span>
+    <span class="macro">html_encoded_push</span><span class="macro">!</span>(
+        <span class="ident">html</span>,
+        <span class="string">r#####&quot;// Rust Regex code-gen  
 // https://github.com/LucianoBestia/rust_regex_explanation_pwa  
 // Run this code online in the playground:  
 // https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=10717a3fe934b9583fb675e327833edc  
@@ -160,11 +226,11 @@ use lazy_static::lazy_static;
 // Raw string syntax is like: `r#&quot;one two three&quot;#` or `r##&quot;one two three&quot;##`  
 // If the expression is not correct, we want to know it immediately.
 // Let the constructor panic on error with `unwrap()`.
-lazy_static! {
+lazy_static! {{
     static ref RGX_01: Regex = Regex::new(r###&quot;Luciano(Best)ia&quot;###).unwrap();
-}
+}}
 
-fn main() {
+fn main() {{
     println!(&quot;--- rust_regex_explanation_pwa start ---&quot;);
 
     // prepared example
@@ -186,94 +252,94 @@ fn main() {
     replace_all(&amp;rgx, &amp;test_string, substitution);
 
     println!(&quot;--- rust_regex_explanation_pwa end ---&quot;);
-}
+}}
 
 /// example how to use the is_match() method
-fn is_match(rgx: &amp;Regex, test_string: &amp;str) {
-    if rgx.is_match(test_string) {
+fn is_match(rgx: &amp;Regex, test_string: &amp;str) {{
+    if rgx.is_match(test_string) {{
         println!(&quot;True - is match.&quot;);
-    } else {
+    }} else {{
         println!(&quot;False - no match.&quot;);
-    }
-}
+    }}
+}}
 
 /// example how to find the first occurrence
-fn find(rgx: &amp;Regex, test_string: &amp;str) {
+fn find(rgx: &amp;Regex, test_string: &amp;str) {{
     // method find() returns Option:None if not found.
     // There are more than one way in Rust to check for `possibility of absence`.
     // The first way is the methods unwrap() or expect(),
     // but they are good only for tests and examples. Never use them in production code.
 
     // using pattern matching (match Control Flow Operator) for `case analysis `.
-    match rgx.find(test_string) {
-        Some(m) =&gt; println!(&quot;1. find: {} {} {}&quot;, m.start(), m.end(), m.as_str()),
+    match rgx.find(test_string) {{
+        Some(m) =&gt; println!(&quot;1. find: {{}} {{}} {{}}&quot;, m.start(), m.end(), m.as_str()),
         None =&gt; println!(&quot;1. find: None&quot;),
-    }
+    }}
     // using `if let`syntax
-    if let Some(m) = rgx.find(test_string) {
-        println!(&quot;2. find: {} {} {}&quot;, m.start(), m.end(), m.as_str());
-    } else {
+    if let Some(m) = rgx.find(test_string) {{
+        println!(&quot;2. find: {{}} {{}} {{}}&quot;, m.start(), m.end(), m.as_str());
+    }} else {{
         println!(&quot;2. find: None&quot;);
-    }
+    }}
 
     // using map_or_else() combinator
     rgx.find(test_string).map_or_else(
         || println!(&quot;3. find: None&quot;),
-        |m| println!(&quot;3. find: {} {} {}&quot;, m.start(), m.end(), m.as_str()),
+        |m| println!(&quot;3. find: {{}} {{}} {{}}&quot;, m.start(), m.end(), m.as_str()),
     );
-}
+}}
 
 /// example how to use find_iter() method - iterator
-fn find_iter(rgx: &amp;Regex, test_string: &amp;str) {
+fn find_iter(rgx: &amp;Regex, test_string: &amp;str) {{
     println!(&quot;find_iter start&quot;);
-    for m in rgx.find_iter(test_string) {
-        println!(&quot;find_iter: {} {} {}&quot;, m.start(), m.end(), m.as_str())
-    }
+    for m in rgx.find_iter(test_string) {{
+        println!(&quot;find_iter: {{}} {{}} {{}}&quot;, m.start(), m.end(), m.as_str())
+    }}
     println!(&quot;find_iter end&quot;);
-}
+}}
 
 /// example how to capture only the first occurrence of rgx capture groups
 /// using the captures() method for regex capture groups
-fn captures(rgx: &amp;Regex, test_string: &amp;str) {
+fn captures(rgx: &amp;Regex, test_string: &amp;str) {{
     println!(&quot;captures start&quot;);
     // same 3 possible syntax to react to the `possibility of absence` Option:None
     // as in the function find()
-    match rgx.captures(test_string) {
-        if m.len() == 2 {
-            ret.push_str(&amp;format!(&quot;1. captures: {} - {} \n&quot;, &amp;m[1], &amp;m[0]));
-        } else {
-            ret.push_str(&amp;format!(&quot;1. captures: Zero\n&quot;));
-        }
+    match rgx.captures(test_string) {{
+        Some(m) =&gt; {{
+            if m.len() == 2 {{
+                println!(&quot;1. captures: {{}} - {{}} \n&quot;, &amp;m[1], &amp;m[0]);
+            }} else {{
+                println!(&quot;1. captures: Zero\n&quot;);
+            }}
+        }}
         None =&gt; println!(&quot;1. captures: None&quot;),
-    }
+    }}
     println!(&quot;captures end&quot;);
-}
+}}
 
 /// example how to use captures_iter() method - iterator
-fn captures_iter(rgx: &amp;Regex, test_string: &amp;str) {
+fn captures_iter(rgx: &amp;Regex, test_string: &amp;str) {{
     println!(&quot;captures_iter start&quot;);
-    for m in rgx.captures_iter(test_string) {
-        if m.len() == 2 {
-            ret.push_str(&amp;format!(&quot;captures_iter: {} - {}\n&quot;, &amp;m[1], &amp;m[0]));
-        } else {
-            ret.push_str(&amp;format!(&quot;captures_iter: Zero\n&quot;));
-        }
-    }
+    for m in rgx.captures_iter(test_string) {{
+        if m.len() == 2 {{
+            println!(&quot;captures_iter: {{}} - {{}}\n&quot;, &amp;m[1], &amp;m[0]);
+        }} else {{
+            println!(&quot;captures_iter: Zero\n&quot;);
+        }}
+    }}
     println!(&quot;captures_iter end&quot;);
-}
+}}
 
 /// example of how to use replace_all() method
 /// the $1, $2,.. are placeholders for the found capture group
-fn replace_all(rgx: &amp;Regex, test_string: &amp;str, replace_string: &amp;str) {
+fn replace_all(rgx: &amp;Regex, test_string: &amp;str, replace_string: &amp;str) {{
     println!(&quot;replace_all start&quot;);
     let new_string = rgx.replace_all(test_string, replace_string).to_string();
-    println!(&quot;replaced:\n{}&quot;, new_string);
+    println!(&quot;replaced:\n{{}}&quot;, new_string);
     println!(&quot;replace_all end&quot;);
-}
-    &quot;#####</span>).<span class="ident">replace</span>(<span class="string">&quot;Luciano(Best)ia&quot;</span>,<span class="ident">regex_text</span>).<span class="ident">replace</span>(<span class="string">&quot;OnlyThe$1&quot;</span>, <span class="ident">substitution</span>).<span class="ident">replace</span>(<span class="string">r###&quot;origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)&quot;###</span>,<span class="ident">test_string</span>);
-
-    <span class="comment">//return</span>
-    <span class="ident">gen</span>
+}}
+    &quot;#####</span>
+    );
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "rust_regex_explanation_pwa";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>

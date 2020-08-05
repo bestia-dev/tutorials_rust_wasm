@@ -1,12 +1,12 @@
 // region: lmake_md_to_doc_comments include README.md A //!
 //! # rust_regex_explanation_pwa
 //!
-//! ***version: 2020.804.1245  date: 2020-08-04 authors: Luciano Bestia***  
+//! ***version: 2020.805.631  date: 2020-08-05 authors: Luciano Bestia***  
 //! **Rust regex explanations in PWA**
 //!
-//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1027-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
-//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-77-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
-//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-102-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1233-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-101-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-114-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //! [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //! [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //!
@@ -42,6 +42,32 @@
 //!
 //! I added the manifest, the worker and a bunch of icons.  
 //!
+//! ## Change colors
+//!
+//! Users can change the colors with the use of the Chrome extension User CSS:  
+//! <https://chrome.google.com/webstore/detail/user-css/okpjlejfhacmgjkmknjhadmkdbcldfcb>  
+//! Copy/paste and then edit and watch changes live:  
+//! ```css
+//! :root {
+//!     /* color palette */
+//!     /* background color */
+//!     --b_color_body: #24292E;
+//!     --b_color_code: #1B1D23;
+//!     --b_color_grid_header: #181A1F;
+//!     --b_color_container: #333842;
+//!     --b_color_button: dodgerblue;
+//!     /* front color */
+//!     --f_color_body: #dce0e9;
+//!     --f_color_code: #78C379;
+//!     --f_color_link: white;
+//!     --f_color_05: yellow;
+//!     --f_color_06: dark-white;
+//!     --f_color_07: black;
+//!     /* border color*/
+//!     --brd_color_01: #000;
+//!     --brd_color_02: #eaecef;
+//! }
+//! ```
 // endregion: lmake_md_to_doc_comments include README.md A //!
 
 use js_sys;

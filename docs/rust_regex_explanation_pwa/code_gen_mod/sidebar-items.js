@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["code_gen",""]]});
+initSidebarItems({"fn":[["code_gen_html","the variables must be html_encoded"],["code_gen_string","variables must be not html_encoded"],["init_code_template","the code template"]]});
