@@ -8,6 +8,7 @@
       <meta name="Description" content="Rust Regex explanations in PWA">
       <link rel="stylesheet" href="css/rust_regex_explanation_pwa.css">
       <meta name="viewport" content="width = device-width,initial-scale = 1.0" />
+      <link rel="shortcut icon" type="image/x-icon" data-su_favicon_route="href" href="favicon.png" />
       <!-- A lot of metadata for PWA -->
       <link rel="manifest" href="manifest.json">
       <meta name="mobile-web-app-capable" content="yes">
@@ -118,13 +119,14 @@
                   </div>
                   <div class="grid0_c left">
                         <pre ><code id="regex_examples" class="hljs" style="height:300px;">Try some example, click on the links below and watch the Regex result:
-<span id="example_email" class="pointer c_yellow">just a simple email validation - ^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</span>
 FInd the names of models on the page https://en.wikipedia.org/wiki/Terminator_(character). Simplified.
 <span id="example_model_1" class="pointer c_yellow">1. model name - T-</span> Find occurrences of this 2 literals.
 <span id="example_model_2" class="pointer c_yellow">2. model name - T-\d+</span> After that are one or more digits.
 <span id="example_model_3" class="pointer c_yellow">3. model name - T-(X|\d+)</span> There are always some exceptions, the T-X model.
 It also replaces T- with the word Robot().
-<span id="example_xml_1" class="pointer c_yellow">XML - &lt;title&gt;(.+?)&lt;/title&gt; </span> Find titles - not greedy.
+<span id="example_email" class="pointer c_yellow">4. just a simple email validation - ^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</span>
+<span id="example_xml_1" class="pointer c_yellow">5. XML - &lt;title&gt;(.+?)&lt;/title&gt; </span> Find titles - not greedy.
+
                         </code></pre>
                   </div>
                   <div class="grid0_c bold">
