@@ -319,16 +319,29 @@
 <span id="319">319</span>
 <span id="320">320</span>
 <span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// region: lmake_md_to_doc_comments include README.md A //!</span>
 <span class="doccomment">//! # rust_regex_explanation_pwa</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! ***version: 2020.805.631  date: 2020-08-05 authors: Luciano Bestia***  </span>
+<span class="doccomment">//! ***version: 2020.805.1222  date: 2020-08-05 authors: Luciano Bestia***  </span>
 <span class="doccomment">//! **Rust regex explanations in PWA**</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1233-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
-<span class="doccomment">//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-101-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
-<span class="doccomment">//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-114-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
+<span class="doccomment">//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1457-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
+<span class="doccomment">//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-131-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
+<span class="doccomment">//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-132-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
 <span class="doccomment">//! [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
 <span class="doccomment">//! [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
 <span class="doccomment">//!</span>
@@ -363,6 +376,10 @@
 <span class="doccomment">//! ## PWA</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! I added the manifest, the worker and a bunch of icons.  </span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ## contenteditable</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Every day something new. Modern browsers have a wysiwyg editor. Just add contenteditable to a &lt;div&gt; or &lt;code&gt;. Funny.  </span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Change colors</span>
 <span class="doccomment">//!</span>
@@ -400,6 +417,7 @@
 <span class="kw">use</span> <span class="ident">web_sys_mod</span>::<span class="kw-2">*</span>;
 
 <span class="kw">mod</span> <span class="ident">code_gen_mod</span>;
+<span class="kw">mod</span> <span class="ident">color_test_string_mod</span>;
 <span class="kw">mod</span> <span class="ident">regex_explanation_mod</span>;
 <span class="kw">mod</span> <span class="ident">regex_method_mod</span>;
 <span class="kw">mod</span> <span class="ident">web_sys_mod</span>;
@@ -440,7 +458,6 @@
     <span class="comment">//prepare the event listeners</span>
     <span class="macro">set_listener_on_keyup</span><span class="macro">!</span>(<span class="string">&quot;regex_text&quot;</span>, <span class="ident">run_regex</span>);
     <span class="macro">set_listener_on_keyup</span><span class="macro">!</span>(<span class="string">&quot;substitution&quot;</span>, <span class="ident">run_regex</span>);
-    <span class="macro">set_listener_on_keyup</span><span class="macro">!</span>(<span class="string">&quot;test_string&quot;</span>, <span class="ident">run_regex</span>);
     <span class="macro">set_listener_change_height_on_click</span><span class="macro">!</span>(
         <span class="string">&quot;explanation_less&quot;</span>,
         <span class="string">&quot;explanation&quot;</span>,
@@ -508,7 +525,7 @@
 <span class="kw">fn</span> <span class="ident">run_regex</span>() {
     <span class="kw">let</span> <span class="ident">regex_text</span> <span class="op">=</span> <span class="ident">get_text_area_element_value_string_by_id</span>(<span class="string">&quot;regex_text&quot;</span>);
     <span class="kw">let</span> <span class="ident">substitution</span> <span class="op">=</span> <span class="ident">get_text_area_element_value_string_by_id</span>(<span class="string">&quot;substitution&quot;</span>);
-    <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="ident">get_text_area_element_value_string_by_id</span>(<span class="string">&quot;test_string&quot;</span>);
+    <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="ident">get_element_inner_text_by_id</span>(<span class="string">&quot;test_string&quot;</span>);
 
     <span class="kw">let</span> <span class="ident">explanation</span> <span class="op">=</span> <span class="ident">regex_explanation_mod</span>::<span class="ident">lib_main</span>(<span class="ident">regex_text</span>.<span class="ident">clone</span>());
     <span class="ident">set_element_inner_html_by_id</span>(<span class="string">&quot;explanation&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">explanation</span>);
@@ -518,6 +535,10 @@
 
     <span class="kw">let</span> <span class="ident">code_gen</span> <span class="op">=</span> <span class="ident">code_gen_mod</span>::<span class="ident">code_gen_html</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">substitution</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
     <span class="ident">set_element_inner_html_by_id</span>(<span class="string">&quot;code_gen&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">code_gen</span>);
+
+    <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="ident">color_test_string_mod</span>::<span class="ident">color_test_string</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
+    <span class="ident">set_element_inner_html_by_id</span>(<span class="string">&quot;test_string&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
+
     <span class="comment">// Applies highlighting to the blocks on a page.</span>
     <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">js_sys</span>::<span class="ident">eval</span>(
         <span class="string">&quot;hljs.highlightBlock(document.getElementById(&#39;code_gen&#39;))&quot;</span>
@@ -567,8 +588,9 @@
     <span class="ident">set_text_area_element_value_string_by_id</span>(<span class="string">&quot;regex_text&quot;</span>, <span class="ident">regex_text</span>);
     <span class="kw">let</span> <span class="ident">substitution</span> <span class="op">=</span> <span class="string">&quot;The email domain is: $1&quot;</span>;
     <span class="ident">set_text_area_element_value_string_by_id</span>(<span class="string">&quot;substitution&quot;</span>, <span class="ident">substitution</span>);
-    <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="string">&quot;John.Connor@sky.net&quot;</span>;
-    <span class="ident">set_text_area_element_value_string_by_id</span>(<span class="string">&quot;test_string&quot;</span>, <span class="ident">test_string</span>);
+    <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="ident">HtmlEncoded</span>::<span class="ident">from_str</span>(<span class="string">&quot;John.Connor@sky.net&quot;</span>);
+    <span class="ident">set_element_inner_html_by_id</span>(<span class="string">&quot;test_string&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
+
     <span class="comment">// initial result</span>
     <span class="ident">run_regex</span>();
 }
@@ -579,8 +601,10 @@
     <span class="ident">set_text_area_element_value_string_by_id</span>(<span class="string">&quot;regex_text&quot;</span>, <span class="ident">regex_text</span>);
     <span class="kw">let</span> <span class="ident">substitution</span> <span class="op">=</span> <span class="string">&quot;Robot($1)&quot;</span>;
     <span class="ident">set_text_area_element_value_string_by_id</span>(<span class="string">&quot;substitution&quot;</span>, <span class="ident">substitution</span>);
-    <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="string">r#&quot;T-1000 (Robert Patrick) Terminator known as T-101 T-800 that managed to kill John Connor explicitly named T-600s and T-1000. it jams its remaining hydrogen fuel cell into the T-X&#39;s mouth from a T-1000 sent to kill her who has been transformed into a T-3000 improvement over the earlier T-600 units also refers to the character as T-850 used the T-800 and T-850 nomenclature memory of a T-888 model, tearing a malfunctioning T-600 in half&quot;#</span>;
-    <span class="ident">set_text_area_element_value_string_by_id</span>(<span class="string">&quot;test_string&quot;</span>, <span class="ident">test_string</span>);
+    <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="ident">HtmlEncoded</span>::<span class="ident">from_str</span>(
+        <span class="string">r#&quot;T-1000 (Robert Patrick) Terminator known as T-101 T-800 that managed to kill John Connor explicitly named T-600s and T-1000. it jams its remaining hydrogen fuel cell into the T-X&#39;s mouth from a T-1000 sent to kill her who has been transformed into a T-3000 improvement over the earlier T-600 units also refers to the character as T-850 used the T-800 and T-850 nomenclature memory of a T-888 model, tearing a malfunctioning T-600 in half&quot;#</span>,
+    );
+    <span class="ident">set_element_inner_html_by_id</span>(<span class="string">&quot;test_string&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
 }
 
 <span class="comment">// example model1</span>
@@ -611,7 +635,8 @@
     <span class="ident">set_text_area_element_value_string_by_id</span>(<span class="string">&quot;regex_text&quot;</span>, <span class="ident">regex_text</span>);
     <span class="kw">let</span> <span class="ident">substitution</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>;
     <span class="ident">set_text_area_element_value_string_by_id</span>(<span class="string">&quot;substitution&quot;</span>, <span class="ident">substitution</span>);
-    <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="string">r#&quot;&lt;catalog&gt;
+    <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="ident">HtmlEncoded</span>::<span class="ident">from_str</span>(
+        <span class="string">r#&quot;&lt;catalog&gt;
     &lt;cd&gt;
       &lt;title&gt;empire burlesque&lt;/title&gt;
       &lt;artist&gt;bob dylan&lt;/artist&gt;
@@ -637,8 +662,9 @@
       &lt;year&gt;1982&lt;/year&gt;
     &lt;/cd&gt;
   &lt;/catalog&gt;
-  &quot;#</span>;
-    <span class="ident">set_text_area_element_value_string_by_id</span>(<span class="string">&quot;test_string&quot;</span>, <span class="ident">test_string</span>);
+  &quot;#</span>,
+    );
+    <span class="ident">set_element_inner_html_by_id</span>(<span class="string">&quot;test_string&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
     <span class="ident">run_regex</span>();
 }
 </pre></div>

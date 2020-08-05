@@ -67,8 +67,10 @@
                         <p id="test_string_less" class="pointer c_white" >-</p>
                         <p id="test_string_more" class="pointer c_white" >+</p>
                   </div>
-                  <div class="grid0_c bold">
-                        <textarea name="test_string" id="test_string" class="textarea_full_width height_100px" ></textarea>
+                  <div class="grid0_c left">
+                        <pre ><code id="test_string" contenteditable="true" class="hljs" style="height:300px;">//comment
+                              println!("{}","one");
+                        </code></pre>
                   </div>
             </div>
       </div>
@@ -124,8 +126,9 @@ FInd the names of models on the page https://en.wikipedia.org/wiki/Terminator_(c
 <span id="example_model_2" class="pointer c_yellow">2. model name - T-\d+</span> After that are one or more digits.
 <span id="example_model_3" class="pointer c_yellow">3. model name - T-(X|\d+)</span> There are always some exceptions, the T-X model.
 It also replaces T- with the word Robot().
-<span id="example_email" class="pointer c_yellow">4. just a simple email validation - ^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</span>
-<span id="example_xml_1" class="pointer c_yellow">5. XML - &lt;title&gt;(.+?)&lt;/title&gt; </span> Find titles - not greedy.
+<span id="example_xml_1" class="pointer c_yellow">4. XML - &lt;title&gt;(.+?)&lt;/title&gt; </span> Find titles - not greedy.
+<span id="example_email" class="pointer c_yellow">5. Just a simple email validation - ^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</span>
+
 
                         </code></pre>
                   </div>

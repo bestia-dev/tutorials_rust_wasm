@@ -219,6 +219,32 @@
 <span id="219">219</span>
 <span id="220">220</span>
 <span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// web_sys_mod.rs</span>
 <span class="doccomment">//! helper functions for web_sys, window, document, dom, console,</span>
@@ -305,6 +331,15 @@
             <span class="kw">crate</span>::<span class="ident">web_sys_mod</span>::<span class="ident">html_encode</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">param_3</span>),
         ));
     };
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">html</span>: <span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">template</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">param_1</span>: <span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">param_2</span>: <span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">param_3</span>: <span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">param_4</span>: <span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">html</span>.<span class="ident">push_to_use_only_by_the_macro_html_encoded_push</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">template</span>,
+            <span class="kw">crate</span>::<span class="ident">web_sys_mod</span>::<span class="ident">html_encode</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">param_1</span>),
+            <span class="kw">crate</span>::<span class="ident">web_sys_mod</span>::<span class="ident">html_encode</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">param_2</span>),
+            <span class="kw">crate</span>::<span class="ident">web_sys_mod</span>::<span class="ident">html_encode</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">param_3</span>),
+            <span class="kw">crate</span>::<span class="ident">web_sys_mod</span>::<span class="ident">html_encode</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">param_4</span>),
+        ));
+    };
 }
 <span class="kw">impl</span> <span class="ident">HtmlEncoded</span> {
     <span class="doccomment">/// constructor of empty object</span>
@@ -326,6 +361,11 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push_to_use_only_by_the_macro_html_encoded_push</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">encoded</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
         <span class="self">self</span>.<span class="ident">html</span>.<span class="ident">push_str</span>(<span class="ident">encoded</span>);
     }
+    <span class="doccomment">/// push new line is very common</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push_new_line</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+        <span class="self">self</span>.<span class="ident">html</span>.<span class="ident">push_str</span>(<span class="string">&quot;\n&quot;</span>);
+    }
+
     <span class="doccomment">/// Replace inside the field with encode.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">replace_with_html_encode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">old</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">new</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
         <span class="self">self</span>.<span class="ident">html</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">html</span>.<span class="ident">replace</span>(<span class="ident">old</span>, <span class="kw-2">&amp;</span><span class="ident">html_encode</span>(<span class="ident">new</span>));
@@ -430,6 +470,18 @@
     <span class="comment">//debug_write(&quot;before value()&quot;);</span>
     <span class="kw">let</span> <span class="ident">html</span> <span class="op">=</span> <span class="ident">html</span>.<span class="ident">get_html</span>();
     <span class="ident">element</span>.<span class="ident">set_inner_html</span>(<span class="kw-2">&amp;</span><span class="ident">html</span>);
+}
+
+<span class="doccomment">/// get inner_text as string by id</span>
+<span class="doccomment">/// very usable for &quot;contenteditable&quot; div or code</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_element_inner_text_by_id</span>(<span class="ident">element_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
+    <span class="comment">//debug_write(&quot;before get_element_by_id&quot;);</span>
+    <span class="kw">let</span> <span class="ident">element</span> <span class="op">=</span> <span class="ident">get_element_by_id</span>(<span class="ident">element_id</span>);
+    <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">element</span>.<span class="ident">dyn_into</span>::<span class="op">&lt;</span><span class="ident">web_sys</span>::<span class="ident">HtmlElement</span><span class="op">&gt;</span>());
+    <span class="comment">// inner_html() contains all the html syntax. inner_text() only the text</span>
+    <span class="kw">let</span> <span class="ident">html</span> <span class="op">=</span> <span class="ident">html_element</span>.<span class="ident">inner_text</span>();
+    <span class="comment">// return</span>
+    <span class="ident">html</span>
 }
 
 <span class="doccomment">/// HTML encode - naive</span>

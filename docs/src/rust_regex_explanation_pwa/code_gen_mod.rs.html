@@ -169,6 +169,26 @@
 <span id="169">169</span>
 <span id="170">170</span>
 <span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">html_encoded_push</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">web_sys_mod</span>::<span class="ident">HtmlEncoded</span>;
@@ -306,10 +326,20 @@ fn captures(rgx: &amp;Regex, test_string: &amp;str) {{
     // as in the function find()
     match rgx.captures(test_string) {{
         Some(m) =&gt; {{
-            if m.len() == 2 {{
-                println!(&quot;1. captures: {{}} - {{}} \n&quot;, &amp;m[1], &amp;m[0]);
-            }} else {{
-                println!(&quot;1. captures: Zero\n&quot;);
+            // the whole match
+            println!(&quot;    match:    {{}}..{{}} {{}}\n&quot;,
+                &amp;m.get(0).unwrap().start().to_string(),
+                &amp;m.get(0).unwrap().end().to_string(),
+                m.get(0).unwrap().as_str()
+            );
+            // every group captured inside the match
+            for i in 1..m.len() {{
+              println!(&quot;    {{}}. group: {{}}..{{}} {{}}\n&quot;,
+                    &amp;i.to_string(),
+                    &amp;m.get(i).unwrap().start().to_string(),
+                    &amp;m.get(i).unwrap().end().to_string(),
+                    m.get(i).unwrap().as_str()
+                );
             }}
         }}
         None =&gt; println!(&quot;1. captures: None&quot;),
@@ -321,10 +351,20 @@ fn captures(rgx: &amp;Regex, test_string: &amp;str) {{
 fn captures_iter(rgx: &amp;Regex, test_string: &amp;str) {{
     println!(&quot;captures_iter start&quot;);
     for m in rgx.captures_iter(test_string) {{
-        if m.len() == 2 {{
-            println!(&quot;captures_iter: {{}} - {{}}\n&quot;, &amp;m[1], &amp;m[0]);
-        }} else {{
-            println!(&quot;captures_iter: Zero\n&quot;);
+        // the whole match
+        println!(&quot;    match:    {{}}..{{}} {{}}\n&quot;,
+            &amp;m.get(0).unwrap().start().to_string(),
+            &amp;m.get(0).unwrap().end().to_string(),
+            m.get(0).unwrap().as_str()
+        );
+        // every group captured inside the match
+        for i in 1..m.len() {{
+            println!(&quot;    {{}}. group: {{}}..{{}} {{}}\n&quot;,
+                &amp;i.to_string(),
+                &amp;m.get(i).unwrap().start().to_string(),
+                &amp;m.get(i).unwrap().end().to_string(),
+                m.get(i).unwrap().as_str()
+            );
         }}
     }}
     println!(&quot;captures_iter end&quot;);

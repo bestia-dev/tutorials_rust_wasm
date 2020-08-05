@@ -83,6 +83,15 @@ macro_rules! html_encoded_push {
             crate::web_sys_mod::html_encode($param_3),
         ));
     };
+    ($html: expr, $template:expr, $param_1: expr, $param_2: expr, $param_3: expr, $param_4: expr) => {
+        $html.push_to_use_only_by_the_macro_html_encoded_push(&format!(
+            $template,
+            crate::web_sys_mod::html_encode($param_1),
+            crate::web_sys_mod::html_encode($param_2),
+            crate::web_sys_mod::html_encode($param_3),
+            crate::web_sys_mod::html_encode($param_4),
+        ));
+    };
 }
 impl HtmlEncoded {
     /// constructor of empty object
@@ -104,6 +113,11 @@ impl HtmlEncoded {
     pub fn push_to_use_only_by_the_macro_html_encoded_push(&mut self, encoded: &str) {
         self.html.push_str(encoded);
     }
+    /// push new line is very common
+    pub fn push_new_line(&mut self) {
+        self.html.push_str("\n");
+    }
+
     /// Replace inside the field with encode.
     pub fn replace_with_html_encode(&mut self, old: &str, new: &str) {
         self.html = self.html.replace(old, &html_encode(new));
@@ -208,6 +222,18 @@ pub fn set_element_inner_html_by_id(element_id: &str, html: &HtmlEncoded) {
     //debug_write("before value()");
     let html = html.get_html();
     element.set_inner_html(&html);
+}
+
+/// get inner_text as string by id
+/// very usable for "contenteditable" div or code
+pub fn get_element_inner_text_by_id(element_id: &str) -> String {
+    //debug_write("before get_element_by_id");
+    let element = get_element_by_id(element_id);
+    let html_element = unwrap!(element.dyn_into::<web_sys::HtmlElement>());
+    // inner_html() contains all the html syntax. inner_text() only the text
+    let html = html_element.inner_text();
+    // return
+    html
 }
 
 /// HTML encode - naive

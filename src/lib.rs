@@ -1,12 +1,12 @@
 // region: lmake_md_to_doc_comments include README.md A //!
 //! # rust_regex_explanation_pwa
 //!
-//! ***version: 2020.805.631  date: 2020-08-05 authors: Luciano Bestia***  
+//! ***version: 2020.805.1222  date: 2020-08-05 authors: Luciano Bestia***  
 //! **Rust regex explanations in PWA**
 //!
-//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1233-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
-//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-101-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
-//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-114-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1457-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-131-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-132-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //! [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //! [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //!
@@ -41,6 +41,10 @@
 //! ## PWA
 //!
 //! I added the manifest, the worker and a bunch of icons.  
+//!
+//! ## contenteditable
+//!
+//! Every day something new. Modern browsers have a wysiwyg editor. Just add contenteditable to a <div> or <code>. Funny.  
 //!
 //! ## Change colors
 //!
@@ -78,6 +82,7 @@ use wasm_bindgen::{JsCast, JsValue};
 use web_sys_mod::*;
 
 mod code_gen_mod;
+mod color_test_string_mod;
 mod regex_explanation_mod;
 mod regex_method_mod;
 mod web_sys_mod;
@@ -118,7 +123,6 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     //prepare the event listeners
     set_listener_on_keyup!("regex_text", run_regex);
     set_listener_on_keyup!("substitution", run_regex);
-    set_listener_on_keyup!("test_string", run_regex);
     set_listener_change_height_on_click!(
         "explanation_less",
         "explanation",
@@ -186,7 +190,7 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
 fn run_regex() {
     let regex_text = get_text_area_element_value_string_by_id("regex_text");
     let substitution = get_text_area_element_value_string_by_id("substitution");
-    let test_string = get_text_area_element_value_string_by_id("test_string");
+    let test_string = get_element_inner_text_by_id("test_string");
 
     let explanation = regex_explanation_mod::lib_main(regex_text.clone());
     set_element_inner_html_by_id("explanation", &explanation);
@@ -196,6 +200,10 @@ fn run_regex() {
 
     let code_gen = code_gen_mod::code_gen_html(&regex_text, &substitution, &test_string);
     set_element_inner_html_by_id("code_gen", &code_gen);
+
+    let test_string = color_test_string_mod::color_test_string(&regex_text, &test_string);
+    set_element_inner_html_by_id("test_string", &test_string);
+
     // Applies highlighting to the blocks on a page.
     unwrap!(js_sys::eval(
         "hljs.highlightBlock(document.getElementById('code_gen'))"
@@ -245,8 +253,9 @@ fn example_email() {
     set_text_area_element_value_string_by_id("regex_text", regex_text);
     let substitution = "The email domain is: $1";
     set_text_area_element_value_string_by_id("substitution", substitution);
-    let test_string = "John.Connor@sky.net";
-    set_text_area_element_value_string_by_id("test_string", test_string);
+    let test_string = HtmlEncoded::from_str("John.Connor@sky.net");
+    set_element_inner_html_by_id("test_string", &test_string);
+
     // initial result
     run_regex();
 }
@@ -257,8 +266,10 @@ fn example_model_base() {
     set_text_area_element_value_string_by_id("regex_text", regex_text);
     let substitution = "Robot($1)";
     set_text_area_element_value_string_by_id("substitution", substitution);
-    let test_string = r#"T-1000 (Robert Patrick) Terminator known as T-101 T-800 that managed to kill John Connor explicitly named T-600s and T-1000. it jams its remaining hydrogen fuel cell into the T-X's mouth from a T-1000 sent to kill her who has been transformed into a T-3000 improvement over the earlier T-600 units also refers to the character as T-850 used the T-800 and T-850 nomenclature memory of a T-888 model, tearing a malfunctioning T-600 in half"#;
-    set_text_area_element_value_string_by_id("test_string", test_string);
+    let test_string = HtmlEncoded::from_str(
+        r#"T-1000 (Robert Patrick) Terminator known as T-101 T-800 that managed to kill John Connor explicitly named T-600s and T-1000. it jams its remaining hydrogen fuel cell into the T-X's mouth from a T-1000 sent to kill her who has been transformed into a T-3000 improvement over the earlier T-600 units also refers to the character as T-850 used the T-800 and T-850 nomenclature memory of a T-888 model, tearing a malfunctioning T-600 in half"#,
+    );
+    set_element_inner_html_by_id("test_string", &test_string);
 }
 
 // example model1
@@ -289,7 +300,8 @@ fn example_xml_1() {
     set_text_area_element_value_string_by_id("regex_text", regex_text);
     let substitution = "";
     set_text_area_element_value_string_by_id("substitution", substitution);
-    let test_string = r#"<catalog>
+    let test_string = HtmlEncoded::from_str(
+        r#"<catalog>
     <cd>
       <title>empire burlesque</title>
       <artist>bob dylan</artist>
@@ -315,7 +327,8 @@ fn example_xml_1() {
       <year>1982</year>
     </cd>
   </catalog>
-  "#;
-    set_text_area_element_value_string_by_id("test_string", test_string);
+  "#,
+    );
+    set_element_inner_html_by_id("test_string", &test_string);
     run_regex();
 }

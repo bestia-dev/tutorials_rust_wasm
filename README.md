@@ -4,15 +4,15 @@
 
 [comment]: # (lmake_cargo_toml_to_md start)
 
-***version: 2020.805.631  date: 2020-08-05 authors: Luciano Bestia***  
+***version: 2020.805.1222  date: 2020-08-05 authors: Luciano Bestia***  
 **Rust regex explanations in PWA**
 
 [comment]: # (lmake_cargo_toml_to_md end)
 
 [comment]: # (lmake_lines_of_code start)
-[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1233-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
-[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-101-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
-[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-114-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1457-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-131-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-132-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 
@@ -49,6 +49,10 @@ Ok, I had to use the javascript library `highlightjs` to bring some colors to th
 ## PWA
 
 I added the manifest, the worker and a bunch of icons.  
+
+## contenteditable
+
+Every day something new. Modern browsers have a wysiwyg editor. Just add contenteditable to a <div> or <code>. Funny.  
 
 ## Change colors
 

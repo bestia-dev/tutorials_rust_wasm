@@ -134,10 +134,20 @@ fn captures(rgx: &Regex, test_string: &str) {{
     // as in the function find()
     match rgx.captures(test_string) {{
         Some(m) => {{
-            if m.len() == 2 {{
-                println!("1. captures: {{}} - {{}} \n", &m[1], &m[0]);
-            }} else {{
-                println!("1. captures: Zero\n");
+            // the whole match
+            println!("    match:    {{}}..{{}} {{}}\n",
+                &m.get(0).unwrap().start().to_string(),
+                &m.get(0).unwrap().end().to_string(),
+                m.get(0).unwrap().as_str()
+            );
+            // every group captured inside the match
+            for i in 1..m.len() {{
+              println!("    {{}}. group: {{}}..{{}} {{}}\n",
+                    &i.to_string(),
+                    &m.get(i).unwrap().start().to_string(),
+                    &m.get(i).unwrap().end().to_string(),
+                    m.get(i).unwrap().as_str()
+                );
             }}
         }}
         None => println!("1. captures: None"),
@@ -149,10 +159,20 @@ fn captures(rgx: &Regex, test_string: &str) {{
 fn captures_iter(rgx: &Regex, test_string: &str) {{
     println!("captures_iter start");
     for m in rgx.captures_iter(test_string) {{
-        if m.len() == 2 {{
-            println!("captures_iter: {{}} - {{}}\n", &m[1], &m[0]);
-        }} else {{
-            println!("captures_iter: Zero\n");
+        // the whole match
+        println!("    match:    {{}}..{{}} {{}}\n",
+            &m.get(0).unwrap().start().to_string(),
+            &m.get(0).unwrap().end().to_string(),
+            m.get(0).unwrap().as_str()
+        );
+        // every group captured inside the match
+        for i in 1..m.len() {{
+            println!("    {{}}. group: {{}}..{{}} {{}}\n",
+                &i.to_string(),
+                &m.get(i).unwrap().start().to_string(),
+                &m.get(i).unwrap().end().to_string(),
+                m.get(i).unwrap().as_str()
+            );
         }}
     }}
     println!("captures_iter end");

@@ -23,13 +23,13 @@ pub fn lib_main(reg_str: String) -> HtmlEncoded {
         ..Default::default()
     };
 
-    html_encoded_push!(exp.html, "\n");
+    exp.html.push_new_line();
     html_encoded_push!(
         exp.html,
         r#"regex: <span class="hljs-section">{}</span>"#,
         &exp.reg_str
     );
-    html_encoded_push!(exp.html, "\n");
+    exp.html.push_new_line();
     let mut ast = regex_syntax::ast::parse::Parser::new();
     let ast = match ast.parse(&exp.reg_str) {
         Ok(a) => a,
@@ -42,7 +42,7 @@ pub fn lib_main(reg_str: String) -> HtmlEncoded {
     //dbg!(&ast);
     process_ast(&mut exp, &Box::new(ast));
     exp.print_literals();
-    html_encoded_push!(exp.html, "\n");
+    exp.html.push_new_line();
     // return
     exp.html
 }
@@ -78,7 +78,7 @@ impl Explanation {
             let rest = COL_WIDTH - fragment.len();
             html_encoded_push!(self.html, "{}", &" ".repeat(rest));
         } else {
-            html_encoded_push!(self.html, "\n");
+            self.html.push_new_line();
             html_encoded_push!(self.html, "{}", &" ".repeat(COL_WIDTH));
         }
     }
@@ -95,7 +95,7 @@ fn print(exp: &mut Explanation, symbol: &str, name: &str, range: Range<usize>) {
         &exp.symbol,
         &exp.explanation_single
     );
-    html_encoded_push!(exp.html, "\n");
+    exp.html.push_new_line();
 }
 
 fn greed(greedy: bool) -> &'static str {
