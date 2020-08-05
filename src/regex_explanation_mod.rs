@@ -1,3 +1,6 @@
+use crate::html_encoded_push;
+use crate::web_sys_mod::HtmlEncoded;
+
 use core::ops::Range;
 use regex_syntax::ast::*;
 
@@ -5,49 +8,50 @@ use regex_syntax::ast::*;
 pub struct Explanation {
     pub reg_str: String,
     pub indent: usize,
-    pub explanation_all: String,
+    // every string is html encoded with the macro html_encoded_push!()
+    pub html: HtmlEncoded,
     // print literals in one line for brevity
     pub fragment: String,
     pub symbol: String,
     pub explanation_single: String,
 }
 
-pub fn lib_main(reg_str: String) -> String {
+pub fn lib_main(reg_str: String) -> HtmlEncoded {
     let mut exp = Explanation {
         reg_str,
+        html: crate::web_sys_mod::HtmlEncoded::new(),
         ..Default::default()
     };
-    // exp.explanation_all.push_str(r#"<span class="hljs-comment">regex explanation start</span>"#);
-    exp.explanation_all.push_str("\n");
-    exp.explanation_all.push_str(&format!(
+
+    html_encoded_push!(exp.html, "\n");
+    html_encoded_push!(
+        exp.html,
         r#"regex: <span class="hljs-section">{}</span>"#,
         &exp.reg_str
-    ));
-    exp.explanation_all.push_str("\n");
+    );
+    html_encoded_push!(exp.html, "\n");
     let mut ast = regex_syntax::ast::parse::Parser::new();
     let ast = match ast.parse(&exp.reg_str) {
         Ok(a) => a,
         Err(e) => {
-            exp.explanation_all.push_str(&format!("Error: {}\n", e));
-            return exp.explanation_all.to_string();
+            html_encoded_push!(exp.html, "Error: {}\n", &e.to_string());
+            return exp.html;
         }
     };
 
     //dbg!(&ast);
     process_ast(&mut exp, &Box::new(ast));
     exp.print_literals();
-    //exp.explanation_all.push_str(r#"<span class="hljs-comment">regex explanation end</span>"#);
-    exp.explanation_all.push_str("\n");
+    html_encoded_push!(exp.html, "\n");
     // return
-    exp.explanation_all.to_string()
+    exp.html
 }
 
 impl Explanation {
     fn print_literals(&mut self) {
         if !self.fragment.is_empty() {
             self.print_fragment(&self.fragment.clone());
-            self.explanation_all
-                .push_str(&format!("{}\n", self.explanation_single));
+            html_encoded_push!(self.html, "{}\n", &self.explanation_single);
             self.fragment.clear();
             self.explanation_single.clear();
         }
@@ -65,18 +69,17 @@ impl Explanation {
     fn print_fragment(&mut self, fragment: &str) {
         // if is longler than 16, than new line and 16 spaces
         const COL_WIDTH: usize = 16;
-        self.explanation_all.push_str(&format!(
+        html_encoded_push!(
+            self.html,
             r#"<span class="hljs-section">{}</span>"#,
             fragment
-        ));
+        );
         if fragment.len() < COL_WIDTH + self.indent {
             let rest = COL_WIDTH - fragment.len();
-            self.explanation_all
-                .push_str(&format!("{}", " ".repeat(rest)));
+            html_encoded_push!(self.html, "{}", &" ".repeat(rest));
         } else {
-            self.explanation_all.push_str("\n");
-            self.explanation_all
-                .push_str(&format!("{}", " ".repeat(COL_WIDTH)));
+            html_encoded_push!(self.html, "\n");
+            html_encoded_push!(self.html, "{}", &" ".repeat(COL_WIDTH));
         }
     }
 }
@@ -86,11 +89,13 @@ fn print(exp: &mut Explanation, symbol: &str, name: &str, range: Range<usize>) {
     exp.print_literals();
     exp.print_fragment(&exp.reg_str[range].to_string());
     exp.set_explanation(symbol, name);
-    exp.explanation_all.push_str(&format!(
+    html_encoded_push!(
+        exp.html,
         r#"<span class="hljs-keyword">{}</span>{}"#,
-        &exp.symbol, &exp.explanation_single
-    ));
-    exp.explanation_all.push_str("\n");
+        &exp.symbol,
+        &exp.explanation_single
+    );
+    html_encoded_push!(exp.html, "\n");
 }
 
 fn greed(greedy: bool) -> &'static str {
@@ -151,7 +156,7 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
                 );
                 match &b.kind {
                     ClassSet::Item(i) => class_set_item(exp, i, b.negated),
-                    _ => exp.explanation_all.push_str(&format!("unimplemented 1\n")),
+                    _ => html_encoded_push!(exp.html, "unimplemented 1\n"),
                 }
             }
             Class::Perl(p) => match p.kind {
@@ -174,9 +179,7 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
                     p.span.start.offset..p.span.end.offset,
                 ),
             },
-            _ => exp
-                .explanation_all
-                .push_str(&format!("unimplemented Class\n")),
+            _ => html_encoded_push!(exp.html, "unimplemented Class\n"),
         },
         Ast::Concat(c) => {
             for a in c.asts.iter() {
@@ -191,9 +194,7 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
                 "Asserts position at the end of a line",
                 a.span.start.offset..a.span.end.offset,
             ),
-            _ => exp
-                .explanation_all
-                .push_str(&format!("unimplemented Assertion\n")),
+            _ => html_encoded_push!(exp.html, "unimplemented Assertion\n"),
         },
         Ast::Alternation(a) => {
             print(
@@ -267,9 +268,7 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
                         ),
                         r.span.start.offset..r.span.end.offset,
                     ),
-                    _ => exp
-                        .explanation_all
-                        .push_str(&format!("unimplemented RepetitionRange\n")),
+                    _ => html_encoded_push!(exp.html, "unimplemented RepetitionRange\n"),
                 },
             }
             process_ast(exp, &r.ast);
@@ -284,9 +283,7 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
             );
             flags(exp, &f.flags);
         }
-        _ => exp
-            .explanation_single
-            .push_str(&format!("unimplemented Ast")),
+        _ => html_encoded_push!(exp.html, "unimplemented Ast"),
     }
     exp.indent -= 1;
 }
@@ -486,9 +483,7 @@ pub fn class_set_item(exp: &mut Explanation, i: &ClassSetItem, negated: bool) {
                 a.span.start.offset..a.span.end.offset,
             ),
         },
-        _ => exp
-            .explanation_all
-            .push_str(&format!("unimplemented class_set_item\n")),
+        _ => html_encoded_push!(exp.html, "unimplemented class_set_item\n"),
     }
 }
 pub fn literal(exp: &mut Explanation, l: &Literal, negated: bool) {
@@ -514,8 +509,6 @@ pub fn literal(exp: &mut Explanation, l: &Literal, negated: bool) {
             "Matches the escaped character literally",
             l.span.start.offset..l.span.end.offset,
         ),
-        _ => exp
-            .explanation_all
-            .push_str(&format!("unimplemented literal\n")),
+        _ => html_encoded_push!(exp.html, "unimplemented literal\n"),
     }
 }

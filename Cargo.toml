@@ -1,6 +1,6 @@
 [package]
 name = "rust_regex_explanation_pwa"
-version = "2020.804.1526"
+version = "2020.805.631"
 authors = ["Luciano Bestia <Luciano.Bestia@gmail.com>"]
 edition = "2018"
 description = "Rust regex explanations in PWA"
@@ -29,6 +29,7 @@ version = "0.3.39"
 features = [
   "AbortController",
   "console",
+  "CharacterData",
   "CssStyleDeclaration",
   "Document",
   "Element",
@@ -51,6 +52,7 @@ features = [
   "Response",
   "Screen",
   "Storage",
+  "Text",
   "Window",
 ]
 
