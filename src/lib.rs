@@ -98,77 +98,54 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     set_element_inner_html_by_id("pkg_version", &html_encoded);
 
     // Initialize input fields
-    example_email();
+    example_xml_1_base();
 
     //prepare the event listeners
+    handle_click!("menu_explanation", display_block_2_and_scroll, "explanation_section", "explanation_label");
+    handle_click!(
+        "menu_regex_result",
+        display_block_2_and_scroll,
+        "regex_result_section",
+        "regex_result_label"
+    );
+    handle_click!("menu_code_gen", display_block_2_and_scroll, "code_gen_section", "code_gen_label");
+    handle_click!(
+        "menu_regex_examples",
+        display_block_2_and_scroll,
+        "regex_examples_section",
+        "regex_examples_label"
+    );
+    handle_click!("menu_regex_help", display_block_2_and_scroll, "regex_help_section", "regex_help_label");
+
     set_listener_on_keyup!("regex_text", run_regex);
     set_listener_on_keyup!("substitution", run_regex);
-    set_listener_on_click!(
-        "explanation_close",
-        display_none_2,
-        "explanation_section",
-        "explanation_label"
-    );
-    set_listener_on_click!(
-        "explanation_less",
-        change_height_on_click,
-        "explanation",
-        -100
-    );
-    set_listener_on_click!(
-        "explanation_more",
-        change_height_on_click,
-        "explanation",
-        100
-    );
-    set_listener_on_click!(
-        "regex_result_less",
-        change_height_on_click,
-        "regex_result",
-        -100
-    );
-    set_listener_on_click!(
-        "regex_result_more",
-        change_height_on_click,
-        "regex_result",
-        100
-    );
-    set_listener_on_click!("code_gen_less", change_height_on_click, "code_gen", -100);
-    set_listener_on_click!("code_gen_more", change_height_on_click, "code_gen", 100);
-    set_listener_on_click!(
-        "test_string_less",
-        change_height_on_click,
-        "test_string",
-        -100
-    );
-    set_listener_on_click!(
-        "test_string_more",
-        change_height_on_click,
-        "test_string",
-        100
-    );
-    set_listener_on_click!(
-        "regex_help_less",
-        change_height_on_click,
-        "regex_help",
-        -100
-    );
-    set_listener_on_click!("regex_help_more", change_height_on_click, "regex_help", 100);
-    set_listener_on_click!("example_email", example_email);
-    set_listener_on_click!("example_model_1", example_model_1);
-    set_listener_on_click!("example_model_2", example_model_2);
-    set_listener_on_click!("example_model_3", example_model_3);
-    set_listener_on_click!("example_xml_1", example_xml_1);
+    handle_click!("test_string_close", display_none_2, "test_string_label", "test_string_section");
+    handle_click!("test_string_less", contract_height, "test_string");
+    handle_click!("test_string_more", expand_height_to_auto, "test_string");
+    handle_click!("explanation_close", display_none_2, "explanation_section", "explanation_label");
+    handle_click!("explanation_less", contract_height, "explanation");
+    handle_click!("explanation_more", expand_height_to_auto, "explanation");
+    handle_click!("regex_result_close", display_none_2, "regex_result_label", "regex_result_section");
+    handle_click!("regex_result_less", contract_height, "regex_result");
+    handle_click!("regex_result_more", expand_height_to_auto, "regex_result");
+    handle_click!("code_gen_close", display_none_2, "code_gen_section", "code_gen_label");
+    handle_click!("code_gen_less", contract_height, "code_gen");
+    handle_click!("code_gen_more", expand_height_to_auto, "code_gen");
+    handle_click!("regex_examples_close", display_none_2, "regex_examples_section", "regex_examples_label");
+    handle_click!("regex_examples_less", contract_height, "regex_examples");
+    handle_click!("regex_examples_more", expand_height_to_auto, "regex_examples");
+    handle_click!("regex_help_close", display_none_2, "regex_help_label", "regex_help_section");
+    handle_click!("regex_help_less", contract_height, "regex_help");
+    handle_click!("regex_help_more", expand_height_to_auto, "regex_help");
 
-    set_listener_on_click!(
-        "menu_explain",
-        display_block_2_and_scroll,
-        "explanation_section",
-        "explanation_label"
-    );
+    handle_click!("example_email", example_email);
+    handle_click!("example_model_1", example_model_1);
+    handle_click!("example_model_2", example_model_2);
+    handle_click!("example_model_3", example_model_3);
+    handle_click!("example_xml_1", example_xml_1);
 
-    set_listener_on_click!("code_gen_copy", code_gen_copy);
-    set_listener_on_click!("code_gen_run_in_playground", code_gen_run_in_playground);
+    handle_click!("code_gen_copy", code_gen_copy);
+    handle_click!("code_gen_run_in_playground", code_gen_run_in_playground);
 
     debug_write("--- rust_regex_explanation_pwa end ---");
     Ok(())
@@ -193,9 +170,7 @@ fn run_regex() {
     set_element_inner_html_by_id("test_string", &test_string);
 
     // Applies highlighting to the blocks on a page.
-    unwrap!(js_sys::eval(
-        "hljs.highlightBlock(document.getElementById('code_gen'))"
-    ));
+    unwrap!(js_sys::eval("hljs.highlightBlock(document.getElementById('code_gen'))"));
 }
 
 /// make visible and jump to it
@@ -227,17 +202,15 @@ fn display_none(element_id: &str) {
 }
 
 // change height on click code
-fn change_height_on_click(element_id: &str, height_lambda: i32) {
+fn expand_height_to_auto(element_id: &str) {
     let html_element = get_html_element_by_id(element_id);
-    let height = unwrap!(html_element.style().get_property_value("height"));
-    if height.is_empty() {
-        unwrap!(html_element.style().set_property("height", "300px"));
-    } else {
-        let height: String = height.replace("px", "");
-        let h = unwrap!(height.parse::<i32>());
-        let new_height = format!("{}px", h + height_lambda);
-        unwrap!(html_element.style().set_property("height", &new_height));
-    }
+    unwrap!(html_element.style().set_property("height", "auto"));
+}
+
+// change height on click code
+fn contract_height(element_id: &str) {
+    let html_element = get_html_element_by_id(element_id);
+    unwrap!(html_element.style().set_property("height", "150px"));
 }
 
 // copy to clipboard
@@ -272,6 +245,7 @@ fn example_email() {
 
     // initial result
     run_regex();
+    display_block_2_and_scroll("regex_text_label", "regex_text_section");
 }
 
 // example model_base
@@ -290,6 +264,7 @@ fn example_model_base() {
 fn example_model_1() {
     example_model_base();
     run_regex();
+    display_block_2_and_scroll("regex_text_label", "regex_text_section");
 }
 
 // example model2
@@ -298,6 +273,7 @@ fn example_model_2() {
     let regex_text = r#"T-\d+"#;
     set_text_area_element_value_string_by_id("regex_text", regex_text);
     run_regex();
+    display_block_2_and_scroll("regex_text_label", "regex_text_section");
 }
 
 // example model3
@@ -306,41 +282,48 @@ fn example_model_3() {
     let regex_text = r#"T-(X|\d+)"#;
     set_text_area_element_value_string_by_id("regex_text", regex_text);
     run_regex();
+    display_block_2_and_scroll("regex_text_label", "regex_text_section");
 }
 
 // example xml_1
 fn example_xml_1() {
+    example_xml_1_base();
+    display_block_2_and_scroll("regex_text_label", "regex_text_section");
+}
+
+// example xml_1 base
+fn example_xml_1_base() {
     let regex_text = r#"<title>(.+?)</title>"#;
     set_text_area_element_value_string_by_id("regex_text", regex_text);
     let substitution = "";
     set_text_area_element_value_string_by_id("substitution", substitution);
     let test_string = HtmlEncoded::from_str(
         r#"<catalog>
-    <cd>
-      <title>empire burlesque</title>
-      <artist>bob dylan</artist>
-      <country>usa</country>
-      <company>columbia</company>
-      <price>10.90</price>
-      <year>1985</year>
-    </cd>
-    <cd>
-      <title>hide your heart</title>
-      <artist>bonnie tyler</artist>
-      <country>uk</country>
-      <company>cbs records</company>
-      <price>9.90</price>
-      <year>1988</year>
-    </cd>
-    <cd>
-      <title>greatest hits</title>
-      <artist>dolly parton</artist>
-      <country>usa</country>
-      <company>rca</company>
-      <price>9.90</price>
-      <year>1982</year>
-    </cd>
-  </catalog>
+    <movie>
+        <title>The Terminator</title>
+        <year>1984</year>
+    </movie>
+    <movie>
+        <title>Terminator 2: Judgment Day</title>
+        <year>1991</year>
+    </movie>
+    <movie>
+        <title>Terminator 3: Rise of the Machines</title>
+        <year>2003</year>
+    </movie>
+    <movie>
+        <title>Terminator Salvation</title>
+        <year>2009</year>
+    </movie>
+    <movie>
+        <title>Terminator Genisys</title>
+        <year>2015</year>
+    </movie>
+    <movie>
+        <title>Terminator: Dark Fate</title>
+        <year>2019</year>
+    </movie>
+</catalog>
   "#,
     );
     set_element_inner_html_by_id("test_string", &test_string);

@@ -24,11 +24,7 @@ pub fn lib_main(reg_str: String) -> HtmlEncoded {
     };
 
     exp.html.push_new_line();
-    html_encoded_push!(
-        exp.html,
-        r#"regex: <span class="hljs-section">{}</span>"#,
-        &exp.reg_str
-    );
+    html_encoded_push!(exp.html, r#"regex: <span class="hljs-section">{}</span>"#, &exp.reg_str);
     exp.html.push_new_line();
     let mut ast = regex_syntax::ast::parse::Parser::new();
     let ast = match ast.parse(&exp.reg_str) {
@@ -60,8 +56,7 @@ impl Explanation {
         self.symbol.clear();
         self.symbol.push_str(&" ".repeat(self.indent * 2));
         self.symbol.push_str(symbol);
-        self.symbol
-            .push_str(if symbol.is_empty() { "" } else { " " });
+        self.symbol.push_str(if symbol.is_empty() { "" } else { " " });
 
         self.explanation_single.clear();
         self.explanation_single.push_str(name);
@@ -69,11 +64,7 @@ impl Explanation {
     fn print_fragment(&mut self, fragment: &str) {
         // if is longler than 16, than new line and 16 spaces
         const COL_WIDTH: usize = 16;
-        html_encoded_push!(
-            self.html,
-            r#"<span class="hljs-section">{}</span>"#,
-            fragment
-        );
+        html_encoded_push!(self.html, r#"<span class="hljs-section">{}</span>"#, fragment);
         if fragment.len() < COL_WIDTH + self.indent {
             let rest = COL_WIDTH - fragment.len();
             html_encoded_push!(self.html, "{}", &" ".repeat(rest));
@@ -118,24 +109,12 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
         Ast::Group(g) => {
             let span = g.span.start.offset..g.span.end.offset;
             match &g.kind {
-                GroupKind::CaptureIndex(i) => {
-                    print(exp, "( )", &format!("Capture Group {}", i), span)
-                }
-                GroupKind::CaptureName(n) => print(
-                    exp,
-                    "(?P<>",
-                    &format!("Named Capture Group {}", n.name),
-                    span,
-                ),
+                GroupKind::CaptureIndex(i) => print(exp, "( )", &format!("Capture Group {}", i), span),
+                GroupKind::CaptureName(n) => print(exp, "(?P<>", &format!("Named Capture Group {}", n.name), span),
                 GroupKind::NonCapturing(f) => {
                     print(exp, "(?:", "Non-capturing group", span);
                     if !f.items.is_empty() {
-                        print(
-                            exp,
-                            "(? )",
-                            &format!("Flags"),
-                            f.span.start.offset..f.span.end.offset,
-                        );
+                        print(exp, "(? )", &format!("Flags"), f.span.start.offset..f.span.end.offset);
                         flags(exp, &f);
                     }
                 }
@@ -147,11 +126,7 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
                 print(
                     exp,
                     if b.negated { "[^ ]" } else { "[ ]" },
-                    if b.negated {
-                        "Bracketed negated"
-                    } else {
-                        "Bracketed"
-                    },
+                    if b.negated { "Bracketed negated" } else { "Bracketed" },
                     b.span.start.offset..b.span.end.offset,
                 );
                 match &b.kind {
@@ -160,12 +135,7 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
                 }
             }
             Class::Perl(p) => match p.kind {
-                ClassPerlKind::Digit => print(
-                    exp,
-                    r"\d",
-                    r"Matches a digit (equal to [0-9])",
-                    p.span.start.offset..p.span.end.offset,
-                ),
+                ClassPerlKind::Digit => print(exp, r"\d", r"Matches a digit (equal to [0-9])", p.span.start.offset..p.span.end.offset),
                 ClassPerlKind::Space => print(
                     exp,
                     r"\s",
@@ -188,29 +158,14 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
         }
         Ast::Literal(l) => literal(exp, l, false),
         Ast::Assertion(a) => match a.kind {
-            AssertionKind::EndLine => print(
-                exp,
-                "$",
-                "Asserts position at the end of a line",
-                a.span.start.offset..a.span.end.offset,
-            ),
+            AssertionKind::EndLine => print(exp, "$", "Asserts position at the end of a line", a.span.start.offset..a.span.end.offset),
             _ => html_encoded_push!(exp.html, "unimplemented Assertion\n"),
         },
         Ast::Alternation(a) => {
-            print(
-                exp,
-                "|",
-                "Alternatives",
-                a.span.start.offset..a.span.end.offset,
-            );
+            print(exp, "|", "Alternatives", a.span.start.offset..a.span.end.offset);
             exp.indent += 1;
             for (i, x) in a.asts.iter().enumerate() {
-                print(
-                    exp,
-                    "|",
-                    &format!("Alternative {}", i),
-                    x.span().start.offset..x.span().end.offset,
-                );
+                print(exp, "|", &format!("Alternative {}", i), x.span().start.offset..x.span().end.offset);
                 exp.indent += 1;
                 process_ast(exp, &Box::new(x.clone()));
                 exp.indent -= 1;
@@ -222,50 +177,32 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
                 RepetitionKind::ZeroOrOne => print(
                     exp,
                     "?",
-                    &format!(
-                        "Quantifier — Matches between zero and one times - {}",
-                        greed(r.greedy)
-                    ),
+                    &format!("Quantifier — Matches between zero and one times - {}", greed(r.greedy)),
                     r.span.start.offset..r.span.end.offset,
                 ),
                 RepetitionKind::ZeroOrMore => print(
                     exp,
                     if r.greedy { "*" } else { "*?" },
-                    &format!(
-                        "Quantifier — Matches between zero and unlimited times - {}",
-                        greed(r.greedy)
-                    ),
+                    &format!("Quantifier — Matches between zero and unlimited times - {}", greed(r.greedy)),
                     r.span.start.offset..r.span.end.offset,
                 ),
                 RepetitionKind::OneOrMore => print(
                     exp,
                     if r.greedy { "+" } else { "+?" },
-                    &format!(
-                        "Quantifier — Matches between one and unlimited times - {}",
-                        greed(r.greedy)
-                    ),
+                    &format!("Quantifier — Matches between one and unlimited times - {}", greed(r.greedy)),
                     r.span.start.offset..r.span.end.offset,
                 ),
                 RepetitionKind::Range(rr) => match rr {
                     RepetitionRange::Exactly(e) => print(
                         exp,
                         "{n}",
-                        &format!(
-                            "Quantifier — Matches exactly {} times - {}",
-                            e,
-                            greed(r.greedy)
-                        ),
+                        &format!("Quantifier — Matches exactly {} times - {}", e, greed(r.greedy)),
                         r.span.start.offset..r.span.end.offset,
                     ),
                     RepetitionRange::Bounded(m, n) => print(
                         exp,
                         if r.greedy { "{m,n}" } else { "{m,n}?" },
-                        &format!(
-                            "Quantifier — Matches between {} and {} times - {}",
-                            m,
-                            n,
-                            greed(r.greedy)
-                        ),
+                        &format!("Quantifier — Matches between {} and {} times - {}", m, n, greed(r.greedy)),
                         r.span.start.offset..r.span.end.offset,
                     ),
                     _ => html_encoded_push!(exp.html, "unimplemented RepetitionRange\n"),
@@ -275,12 +212,7 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
             exp.print_literals();
         }
         Ast::Flags(f) => {
-            print(
-                exp,
-                "(? )",
-                &format!("Flags"),
-                f.span.start.offset..f.span.end.offset,
-            );
+            print(exp, "(? )", &format!("Flags"), f.span.start.offset..f.span.end.offset);
             flags(exp, &f.flags);
         }
         _ => html_encoded_push!(exp.html, "unimplemented Ast"),
@@ -289,51 +221,41 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
 }
 pub fn flags(exp: &mut Explanation, f: &Flags) {
     for item in f.items.iter() {
-        match item.kind{
-            FlagsItemKind::Negation => print(
-                exp,
-                "-",
-                &format!("Flag negation"),
-                item.span.start.offset..item.span.end.offset
-            ),
-            FlagsItemKind::Flag(flag)=>match flag{
-                Flag::CaseInsensitive=>print(
+        match item.kind {
+            FlagsItemKind::Negation => print(exp, "-", &format!("Flag negation"), item.span.start.offset..item.span.end.offset),
+            FlagsItemKind::Flag(flag) => match flag {
+                Flag::CaseInsensitive => print(
                     exp,
                     "i modifier",
                     &format!("insensitive. Case insensitive match (ignores case of [a-zA-Z])"),
-                    item.span.start.offset..item.span.end.offset
+                    item.span.start.offset..item.span.end.offset,
                 ),
-                    Flag::MultiLine=>print(
+                Flag::MultiLine => print(
                     exp,
                     "m modifier",
                     &format!(" multi line. Causes ^ and $ to match the begin/end of each line (not only begin/end of string)"),
-                    item.span.start.offset..item.span.end.offset
+                    item.span.start.offset..item.span.end.offset,
                 ),
-                    Flag::DotMatchesNewLine=>print(
+                Flag::DotMatchesNewLine => print(
                     exp,
                     "s modifier",
                     &format!(" single line. Dot matches also newline characters."),
-                    item.span.start.offset..item.span.end.offset
+                    item.span.start.offset..item.span.end.offset,
                 ),
-                Flag::SwapGreed=>print(
+                Flag::SwapGreed => print(
                     exp,
                     "U modifier",
                     &format!("ungreedy. The match becomes lazy by default. Now a ? following a quantifier makes it greedy"),
-                    item.span.start.offset..item.span.end.offset
+                    item.span.start.offset..item.span.end.offset,
                 ),
-                Flag::Unicode=>print(
-                    exp,
-                    "u modifier",
-                    &format!("unicode"),
-                    item.span.start.offset..item.span.end.offset
-                ),
-                Flag::IgnoreWhitespace=>print(
+                Flag::Unicode => print(exp, "u modifier", &format!("unicode"), item.span.start.offset..item.span.end.offset),
+                Flag::IgnoreWhitespace => print(
                     exp,
                     "x modifier",
                     &format!("ignore whotespace"),
-                    item.span.start.offset..item.span.end.offset
+                    item.span.start.offset..item.span.end.offset,
                 ),
-            }
+            },
         }
     }
 }
@@ -500,8 +422,7 @@ pub fn literal(exp: &mut Explanation, l: &Literal, negated: bool) {
                 exp.fragment.clear();
             }
             // add one literal to the same line
-            exp.fragment
-                .push_str(&exp.reg_str[l.span.start.offset..l.span.end.offset]);
+            exp.fragment.push_str(&exp.reg_str[l.span.start.offset..l.span.end.offset]);
         }
         LiteralKind::Punctuation => print(
             exp,

@@ -8,20 +8,14 @@ pub fn lib_main(regex_text: &str, substitution: &str, test_string: &str) -> Html
     let mut html = crate::web_sys_mod::HtmlEncoded::new();
     //html_encoded_push!(html, r#"<span class="hljs-comment">--- regex methods start ---</span>"#);
     html.push_new_line();
-    html_encoded_push!(
-        html,
-        "This is using the same Rust code of the section code-gen.\n"
-    );
+    html_encoded_push!(html, "This is using the same Rust code of the section code-gen.\n");
     html_encoded_push!(
         html,
         r##"<span class="hljs-keyword">let</span> <span class="hljs-variable">rgx</span> =  <span class="hljs-class">Regex</span>::<span class="hljs-function">new</span>(r#"<span class="hljs-section">{}</span>"#).<span class="hljs-function">unwrap()</span>;</span>"##,
         regex_text
     );
     html.push_new_line();
-    html_encoded_push!(
-        html,
-        "There are 6 important Regex methods for different use-cases:\n"
-    );
+    html_encoded_push!(html, "There are 6 important Regex methods for different use-cases:\n");
     html_encoded_push!(
         html,
         r#"<span class="hljs-function">is_match()</span>, <span class="hljs-function">find()</span>, <span class="hljs-function">find_iter()</span>, <span class="hljs-function">capture()</span>, <span class="hljs-function">capture_iter()</span>, <span class="hljs-function">replace_all()</span>"#
@@ -60,21 +54,12 @@ pub fn lib_main(regex_text: &str, substitution: &str, test_string: &str) -> Html
 
 /// example how to use the is_match() method
 fn is_match(rgx: &Regex, test_string: &str, html: &mut HtmlEncoded) {
-    html_encoded_push!(
-        html,
-        r#"<span class="hljs-function">rgx.is_match(test_string)</span>"#
-    );
+    html_encoded_push!(html, r#"<span class="hljs-function">rgx.is_match(test_string)</span>"#);
     html.push_new_line();
     if rgx.is_match(test_string) {
-        html_encoded_push!(
-            html,
-            r#"    <span class="hljs-keyword">True</span> - is match."#
-        );
+        html_encoded_push!(html, r#"    <span class="hljs-keyword">True</span> - is match."#);
     } else {
-        html_encoded_push!(
-            html,
-            r#"    <span class="hljs-keyword">False</span> - no match."#
-        );
+        html_encoded_push!(html, r#"    <span class="hljs-keyword">False</span> - no match."#);
     }
     html.push_new_line();
     html.push_new_line();
@@ -101,10 +86,7 @@ fn find(rgx: &Regex, test_string: &str, html: &mut HtmlEncoded) {
             &m.end().to_string(),
             &m.as_str()
         ),
-        None => html_encoded_push!(
-            html,
-            r#"    <span class="hljs-comment">1. syntax find:</span> None"#
-        ),
+        None => html_encoded_push!(html, r#"    <span class="hljs-comment">1. syntax find:</span> None"#),
     }
     html.push_new_line();
     // using `if let`syntax
@@ -117,10 +99,7 @@ fn find(rgx: &Regex, test_string: &str, html: &mut HtmlEncoded) {
             &m.as_str()
         );
     } else {
-        html_encoded_push!(
-            html,
-            r#"    <span class="hljs-comment">2. syntax find:</span> None"#
-        );
+        html_encoded_push!(html, r#"    <span class="hljs-comment">2. syntax find:</span> None"#);
     }
     html.push_new_line();
     // using map_or_else()
@@ -128,7 +107,8 @@ fn find(rgx: &Regex, test_string: &str, html: &mut HtmlEncoded) {
     rgx.find(test_string).map_or_else(
         || workaround.push_str(r#"    <span class="hljs-comment">3. syntax find:</span> None"#),
         |m| {
-            html_encoded_push!(html,
+            html_encoded_push!(
+                html,
                 r#"    <span class="hljs-comment">3. syntax find:</span> <span class="hljs-keyword">{}..{}</span> {}"#,
                 &m.start().to_string(),
                 &m.end().to_string(),
@@ -143,10 +123,7 @@ fn find(rgx: &Regex, test_string: &str, html: &mut HtmlEncoded) {
 
 /// example how to use find_iter() method - iterator
 fn find_iter(rgx: &Regex, test_string: &str, html: &mut HtmlEncoded) {
-    html_encoded_push!(
-        html,
-        r#"<span class="hljs-function">rgx.find_iter(test_string)</span>"#
-    );
+    html_encoded_push!(html, r#"<span class="hljs-function">rgx.find_iter(test_string)</span>"#);
     html.push_new_line();
     for m in rgx.find_iter(test_string) {
         html_encoded_push!(
@@ -196,10 +173,7 @@ fn captures(rgx: &Regex, test_string: &str, html: &mut HtmlEncoded) {
                 html.push_new_line();
             }
         }
-        None => html_encoded_push!(
-            html,
-            r#"    <span class="hljs-comment">1. captures:</span> None"#
-        ),
+        None => html_encoded_push!(html, r#"    <span class="hljs-comment">1. captures:</span> None"#),
     }
     //html.push_new_line();
     //html_encoded_push!(html, r#"<span class="hljs-comment">captures end</span>"#);
@@ -209,10 +183,7 @@ fn captures(rgx: &Regex, test_string: &str, html: &mut HtmlEncoded) {
 
 /// example how to use captures_iter() method - iterator
 fn captures_iter(rgx: &Regex, test_string: &str, html: &mut HtmlEncoded) {
-    html_encoded_push!(
-        html,
-        r#"<span class="hljs-function">rgx.captures_iter(test_string)</span>"#
-    );
+    html_encoded_push!(html, r#"<span class="hljs-function">rgx.captures_iter(test_string)</span>"#);
     html.push_new_line();
     for m in rgx.captures_iter(test_string) {
         // the whole match
@@ -244,16 +215,10 @@ fn captures_iter(rgx: &Regex, test_string: &str, html: &mut HtmlEncoded) {
 /// example of how to use replace_all() method
 /// the $1, $2,.. are placeholders for the found capture group
 fn replace_all(rgx: &Regex, test_string: &str, replace_string: &str, html: &mut HtmlEncoded) {
-    html_encoded_push!(
-        html,
-        r#"<span class="hljs-function">rgx.replace_all(test_string, replace_string)</span>"#
-    );
+    html_encoded_push!(html, r#"<span class="hljs-function">rgx.replace_all(test_string, replace_string)</span>"#);
     html.push_new_line();
     let new_string = rgx.replace_all(test_string, replace_string).to_string();
-    html_encoded_push!(
-        html,
-        r#"    <span class="hljs-comment">replaced string:</span>"#
-    );
+    html_encoded_push!(html, r#"    <span class="hljs-comment">replaced string:</span>"#);
     html.push_new_line();
     html_encoded_push!(html, "{}", &new_string);
     //html.push_new_line();

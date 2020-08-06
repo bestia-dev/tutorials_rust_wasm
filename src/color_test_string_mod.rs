@@ -40,11 +40,7 @@ pub fn color_test_string(regex_text: &str, test_string: &str) -> HtmlEncoded {
     for c in caps.iter() {
         html_encoded_push!(html, "{}", &test_string[cursor_pos..c.1]);
         if c.0 == 's' {
-            html_encoded_push!(
-                html,
-                r#"<span style="background-color:{}">"#,
-                colors[cursor_color].0
-            );
+            html_encoded_push!(html, r#"<span style="background-color:{}">"#, colors[cursor_color].0);
         } else {
             // c.0== 'e'
             html_encoded_push!(html, r#"</span>"#);

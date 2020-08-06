@@ -11,14 +11,14 @@ use web_sys::{Request, RequestInit, Response};
 // endregion: use
 
 /// Simple macro to set listener of onclick events to an element_id.
-/// no args: set_listener_on_click!(element_1_id, function_ident)
-/// no args: set_listener_on_click!("example_email",example_email)
-/// 1 args: set_listener_on_click!(element_1_id, function_ident, arg_1)
-/// 1 args: set_listener_on_click!("example_email",example_email, "arg_1")
-/// 2 args: set_listener_on_click!(element_1_id, function_ident, arg_1,arg_2)
-/// 2 args: set_listener_on_click!("example_email",example_email, "arg_1","arg_2")
+/// no args: handle_click!(element_1_id, function_ident)
+/// no args: handle_click!("example_email",example_email)
+/// 1 args: handle_click!(element_1_id, function_ident, arg_1)
+/// 1 args: handle_click!("example_email",example_email, "arg_1")
+/// 2 args: handle_click!(element_1_id, function_ident, arg_1,arg_2)
+/// 2 args: handle_click!("example_email",example_email, "arg_1","arg_2")
 #[macro_export]
-macro_rules! set_listener_on_click {
+macro_rules! handle_click {
     ($element_1_id: expr, $function_ident: ident) => {{
         let closure = Closure::wrap(Box::new(move || {
             $function_ident();
@@ -83,10 +83,7 @@ macro_rules! html_encoded_push {
         $html.push_to_use_only_by_the_macro_html_encoded_push(&format!($template));
     };
     ($html: expr, $template:expr, $param_1: expr) => {
-        $html.push_to_use_only_by_the_macro_html_encoded_push(&format!(
-            $template,
-            crate::web_sys_mod::html_encode($param_1)
-        ));
+        $html.push_to_use_only_by_the_macro_html_encoded_push(&format!($template, crate::web_sys_mod::html_encode($param_1)));
     };
     ($html: expr, $template:expr, $param_1: expr, $param_2: expr) => {
         $html.push_to_use_only_by_the_macro_html_encoded_push(&format!(
@@ -117,9 +114,7 @@ impl HtmlEncoded {
     /// constructor of empty object
     pub fn new() -> HtmlEncoded {
         // return
-        HtmlEncoded {
-            html: String::new(),
-        }
+        HtmlEncoded { html: String::new() }
     }
     /// html encode this str and create the object
     pub fn from_str(param_1: &str) -> HtmlEncoded {
@@ -169,10 +164,7 @@ pub fn get_element_by_id(element_id: &str) -> web_sys::Element {
     match document.get_element_by_id(element_id) {
         Some(el) => el,
         None => {
-            debug_write(&format!(
-                "Error: not found get_element_by_id {}",
-                element_id
-            ));
+            debug_write(&format!("Error: not found get_element_by_id {}", element_id));
             panic!("")
         }
     }
@@ -225,8 +217,7 @@ pub fn get_text_area_element_value_string_by_id(element_id: &str) -> String {
     // debug_write("before get_element_by_id");
     let text_area_element = get_element_by_id(element_id);
     // debug_write("before dyn_into");
-    let text_area_html_element =
-        unwrap!(text_area_element.dyn_into::<web_sys::HtmlTextAreaElement>());
+    let text_area_html_element = unwrap!(text_area_element.dyn_into::<web_sys::HtmlTextAreaElement>());
     // debug_write("before value()");
     text_area_html_element.value()
 }
@@ -236,8 +227,7 @@ pub fn set_text_area_element_value_string_by_id(element_id: &str, value: &str) {
     //debug_write("before get_element_by_id");
     let text_area_element = get_element_by_id(element_id);
     //debug_write("before dyn_into");
-    let text_area_html_element =
-        unwrap!(text_area_element.dyn_into::<web_sys::HtmlTextAreaElement>());
+    let text_area_html_element = unwrap!(text_area_element.dyn_into::<web_sys::HtmlTextAreaElement>());
     //debug_write("before value()");
     text_area_html_element.set_value(value);
 }

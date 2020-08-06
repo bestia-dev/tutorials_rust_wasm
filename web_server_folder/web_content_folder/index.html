@@ -45,15 +45,19 @@
             <div class="container0_content_not_grid">
                   <h2 class="c_yellow center">PWA for Rust Regex Explanations and Testing</h2>
                   <p class="small">You can "install" it in the browser's menu. It's a Progressive Web App for the desktop, Cross-Platform.</p>
-                  <span id="menu_explain" class="c_link_1 pointer">Explain</span>
+                  &gt;&gt; <span id="menu_regex_examples" class="c_link_1 pointer">Examples</span>
+                  &gt;&gt; <span id="menu_explanation" class="c_link_1 pointer">Explain</span>
+                  &gt;&gt; <span id="menu_regex_result" class="c_link_1 pointer">Result</span>
+                  &gt;&gt; <span id="menu_code_gen" class="c_link_1 pointer">CodeGen</span>
+                  &gt;&gt; <span id="menu_regex_help" class="c_link_1 pointer">Help</span>
             </div>
       </div>
       <div class="container_0">
             <div class="container0_content_grid_0" style="grid-template-columns: 80px minmax(100px, auto);">
-                  <div class="grid0_c bold">
+                  <div id="regex_text_label" class="grid0_c bold">
                         <label class="c_yellow" for="regex_text">write your Regex</label>
                   </div>
-                  <div class="grid0_c bold">
+                  <div id="regex_text_section" class="grid0_c bold">
                         <textarea name="regex_text" id="regex_text" class="full_width height_100px" ></textarea>
                   </div>
                   <div class="grid0_c bold">
@@ -63,12 +67,15 @@
                         <textarea name="substitution" id="substitution" class="full_width" style="height:50px;padding:2px;" ></textarea>
                   </div>
 
-                  <div class="grid0_c bold">
+                  <div id="test_string_label" class="grid0_c bold">
+                        <p>&nbsp;
+                        <span id="test_string_close" class="pointer c_white small" title="close">x</span>&nbsp;
+                        <span id="test_string_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="test_string_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                  </p>
                         <label for="test_string">test string</label>
-                        <p id="test_string_less" class="pointer c_white" >-</p>
-                        <p id="test_string_more" class="pointer c_white" >+</p>
                   </div>
-                  <div class="grid0_c left">
+                  <div id="test_string_section" class="grid0_c left">
                         <pre ><code id="test_string" contenteditable="true" class="hljs" style="height:300px;">//comment
                               println!("{}","one");
                         </code></pre>
@@ -78,10 +85,12 @@
       <div class="container_0">
             <div class="container0_content_grid_0" style="grid-template-columns: 80px minmax(100px, auto);">
                   <div id="explanation_label" class="grid0_c bold">
+                        <p>&nbsp;
+                        <span id="explanation_close" class="pointer c_white small" title="close">x</span>&nbsp;
+                        <span id="explanation_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="explanation_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                  </p>
                         <label for="explanation">explan- ation</label>
-                        <p id="explanation_close" class="pointer c_white" >x</p>
-                        <p id="explanation_less" class="pointer c_white" >-</p>
-                        <p id="explanation_more" class="pointer c_white" >+</p>
                   </div>
                   <div id="explanation_section" class="grid0_c left">
                         <pre ><code id="explanation" class="hljs" style="height:300px;width:50">//comment
@@ -89,25 +98,32 @@
                         </code></pre>
                   </div>
 
-                  <div class="grid0_c bold">
+                  <div id="regex_result_label" class="grid0_c bold">
+                        <p>&nbsp;
+                        <span id="regex_result_close" class="pointer c_white small" title="close">x</span>&nbsp;
+                        <span id="regex_result_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="regex_result_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                        </p>
                         <label for="regex_result">Regex result</label>
-                        <p id="regex_result_less" class="pointer c_white" >-</p>
-                        <p id="regex_result_more" class="pointer c_white" >+</p>
                   </div>
-                  <div class="grid0_c left">
+                  <div id="regex_result_section"  class="grid0_c left">
                         <pre ><code id="regex_result" class="hljs" style="height:300px;width:50">//comment
                               println!("{}","one");
                         </code></pre>
                   </div>
 
-                  <div class="grid0_c bold">
+                  <div id="code_gen_label" class="grid0_c bold">
+
+                        <p>&nbsp;
+                        <span id="code_gen_close" class="pointer c_white small" title="close">x</span>&nbsp;
+                        <span id="code_gen_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="code_gen_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                        </p>
                         <label for="code_gen">code gen</label>
-                        <p id="code_gen_less" class="pointer c_white" >-</p>
-                        <p id="code_gen_more" class="pointer c_white" >+</p>
-                        <p id="code_gen_copy" class="pointer c_white" >copy</p>
-                        <p id="code_gen_run_in_playground" class="pointer c_white" >play</p>
+                        <p id="code_gen_copy" class="pointer c_white small" >copy</p>
+                        <p id="code_gen_run_in_playground" class="pointer c_white small" >play</p>
                   </div>
-                  <div class="grid0_c left">
+                  <div id="code_gen_section" class="grid0_c left">
                         <pre ><code id="code_gen" class="language-rust hljs" style="height:300px;width:50">//comment
                               println!("{}","one");
                         </code></pre>
@@ -117,12 +133,15 @@
 
       <div class="container_0">
             <div class="container0_content_grid_0" style="grid-template-columns: 80px minmax(100px, auto);">
-                  <div class="grid0_c bold">
+                  <div id="regex_examples_label" class="grid0_c bold">
+                        <p>&nbsp;
+                        <span id="regex_examples_close" class="pointer c_white small" title="close">x</span>&nbsp;
+                        <span id="regex_examples_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="regex_examples_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                        </p>
                         <label for="regex_examples">examples</label>
-                        <p id="regex_examples_less" class="pointer c_white" >-</p>
-                        <p id="regex_examples_less" class="pointer c_white" >+</p>
                   </div>
-                  <div class="grid0_c left">
+                  <div id="regex_examples_section"  class="grid0_c left">
                         <pre ><code id="regex_examples" class="hljs" style="height:300px;">Try some example, click on the links below and watch the Regex result:
 FInd the names of models on the page https://en.wikipedia.org/wiki/Terminator_(character). Simplified.
 <span id="example_model_1" class="pointer c_yellow">1. model name - T-</span> Find occurrences of this 2 literals.
@@ -133,12 +152,15 @@ It also replaces T- with the word Robot().
 <span id="example_email" class="pointer c_yellow">5. Just a simple email validation - ^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</span>
                         </code></pre>
                   </div>
-                  <div class="grid0_c bold">
+                  <div id="regex_help_label" class="grid0_c bold">
+                        <p>&nbsp;
+                        <span id="regex_help_close" class="pointer c_white small" title="close">x</span>&nbsp;
+                        <span id="regex_help_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="regex_help_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                        </p>
                         <label for="regex_help">Regex help</label>
-                        <p id="regex_help_less" class="pointer c_white" >-</p>
-                        <p id="regex_help_more" class="pointer c_white" >+</p>
                   </div>
-                  <div class="grid0_c left">
+                  <div id="regex_help_section" class="grid0_c left">
                         <pre ><code id="regex_help" class="hljs" style="height:300px;">    Basic Regex syntax
 <span class="hljs-keyword">abc…</span>      Letters literally
 <span class="hljs-keyword">123…</span>      Digits literally
@@ -174,18 +196,12 @@ It also replaces T- with the word Robot().
 <span class="hljs-keyword">(?m)</span>    Multiple line matching (^$ -start/end of line)
 <span class="hljs-keyword">(?i)</span>    Case insensitive match
 <span class="hljs-keyword">(?U)</span>    Sets the engine to lazy matching - ungreedy
-</code></pre>
-                  </div>
-                  <div class="grid0_c bold">
-                        <label for="regex_suggestions">Regex suggestions</label>
-                  </div>
-                  <div class="grid0_c bold">
-                        <textarea name="regex_suggestions" id="regex_suggestions" class="full_width height_100px" >
+
 Avoid using .* dot (any character many times) because it is greedy. 
 Instead use a negation of the next delimiter like [^/]*.
 If needed, add Flags in the beginning like (?m) Multiple line matching.
-                        </textarea>
-                  </div>
+
+</code></pre>
             </div>
       </div>
       <div class="container_0">
