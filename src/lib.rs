@@ -87,26 +87,6 @@ mod regex_explanation_mod;
 mod regex_method_mod;
 mod web_sys_mod;
 
-// region: macros against boilerplate code
-
-/// set_listener_change_height_on_click!(element_1_id, element_2_id,function_ident, height_lambda)
-/// set_listener_change_height_on_click!("explanation_less","explanation", explanation_less_on_click, -100)
-#[macro_export]
-macro_rules! set_listener_change_height_on_click {
-    ($element_1_id: expr, $element_2_id: expr, $function_ident: ident, $lambda:expr) => {{
-        let closure = Closure::wrap(Box::new(move || {
-            $function_ident($element_2_id, $lambda);
-        }) as Box<dyn FnMut()>);
-
-        let html_element = get_element_by_id($element_1_id);
-        let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
-        html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));
-        closure.forget();
-    }};
-}
-
-// endregion: macros against boilerplate code
-
 /// To start the Wasm application, wasm_bindgen runs this functions
 #[wasm_bindgen(start)]
 pub fn wasm_bindgen_start() -> Result<(), JsValue> {
@@ -123,61 +103,69 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     //prepare the event listeners
     set_listener_on_keyup!("regex_text", run_regex);
     set_listener_on_keyup!("substitution", run_regex);
-    set_listener_change_height_on_click!(
+    set_listener_on_click!(
+        "explanation_close",
+        display_none_2,
+        "explanation_section",
+        "explanation_label"
+    );
+    set_listener_on_click!(
         "explanation_less",
-        "explanation",
         change_height_on_click,
+        "explanation",
         -100
     );
-    set_listener_change_height_on_click!(
+    set_listener_on_click!(
         "explanation_more",
+        change_height_on_click,
         "explanation",
-        change_height_on_click,
         100
     );
-    set_listener_change_height_on_click!(
+    set_listener_on_click!(
         "regex_result_less",
-        "regex_result",
         change_height_on_click,
+        "regex_result",
         -100
     );
-    set_listener_change_height_on_click!(
+    set_listener_on_click!(
         "regex_result_more",
+        change_height_on_click,
         "regex_result",
-        change_height_on_click,
         100
     );
-    set_listener_change_height_on_click!("code_gen_less", "code_gen", change_height_on_click, -100);
-    set_listener_change_height_on_click!("code_gen_more", "code_gen", change_height_on_click, 100);
-    set_listener_change_height_on_click!(
+    set_listener_on_click!("code_gen_less", change_height_on_click, "code_gen", -100);
+    set_listener_on_click!("code_gen_more", change_height_on_click, "code_gen", 100);
+    set_listener_on_click!(
         "test_string_less",
-        "test_string",
         change_height_on_click,
+        "test_string",
         -100
     );
-    set_listener_change_height_on_click!(
+    set_listener_on_click!(
         "test_string_more",
-        "test_string",
         change_height_on_click,
+        "test_string",
         100
     );
-    set_listener_change_height_on_click!(
+    set_listener_on_click!(
         "regex_help_less",
-        "regex_help",
         change_height_on_click,
+        "regex_help",
         -100
     );
-    set_listener_change_height_on_click!(
-        "regex_help_more",
-        "regex_help",
-        change_height_on_click,
-        100
-    );
+    set_listener_on_click!("regex_help_more", change_height_on_click, "regex_help", 100);
     set_listener_on_click!("example_email", example_email);
     set_listener_on_click!("example_model_1", example_model_1);
     set_listener_on_click!("example_model_2", example_model_2);
     set_listener_on_click!("example_model_3", example_model_3);
     set_listener_on_click!("example_xml_1", example_xml_1);
+
+    set_listener_on_click!(
+        "menu_explain",
+        display_block_2_and_scroll,
+        "explanation_section",
+        "explanation_label"
+    );
 
     set_listener_on_click!("code_gen_copy", code_gen_copy);
     set_listener_on_click!("code_gen_run_in_playground", code_gen_run_in_playground);
@@ -210,11 +198,37 @@ fn run_regex() {
     ));
 }
 
+/// make visible and jump to it
+fn display_block_2_and_scroll(element_1_id: &str, element_2_id: &str) {
+    display_block_and_scroll(element_1_id);
+    display_block_and_scroll(element_2_id);
+
+    let html_element = get_html_element_by_id(element_1_id);
+    html_element.scroll_into_view();
+}
+
+/// make visible the element
+fn display_block_and_scroll(element_id: &str) {
+    let html_element = get_html_element_by_id(element_id);
+    unwrap!(html_element.style().set_property("display", "block"));
+    html_element.scroll_into_view();
+}
+
+/// make invisible
+fn display_none_2(element_1_id: &str, element_2_id: &str) {
+    display_none(element_1_id);
+    display_none(element_2_id);
+}
+
+/// make invisible the element
+fn display_none(element_id: &str) {
+    let html_element = get_html_element_by_id(element_id);
+    unwrap!(html_element.style().set_property("display", "none"));
+}
+
 // change height on click code
 fn change_height_on_click(element_id: &str, height_lambda: i32) {
-    let html_element = get_element_by_id(element_id);
-    let html_element: web_sys::HtmlElement =
-        unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
+    let html_element = get_html_element_by_id(element_id);
     let height = unwrap!(html_element.style().get_property_value("height"));
     if height.is_empty() {
         unwrap!(html_element.style().set_property("height", "300px"));

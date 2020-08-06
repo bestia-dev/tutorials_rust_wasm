@@ -45,21 +45,22 @@
             <div class="container0_content_not_grid">
                   <h2 class="c_yellow center">PWA for Rust Regex Explanations and Testing</h2>
                   <p class="small">You can "install" it in the browser's menu. It's a Progressive Web App for the desktop, Cross-Platform.</p>
+                  <span id="menu_explain" class="c_link_1 pointer">Explain</span>
             </div>
       </div>
       <div class="container_0">
-            <div class="container0_content_grid_0" style="grid-template-columns: 80px auto;">
+            <div class="container0_content_grid_0" style="grid-template-columns: 80px minmax(100px, auto);">
                   <div class="grid0_c bold">
                         <label class="c_yellow" for="regex_text">write your Regex</label>
                   </div>
                   <div class="grid0_c bold">
-                        <textarea name="regex_text" id="regex_text" class="textarea_full_width height_100px" ></textarea>
+                        <textarea name="regex_text" id="regex_text" class="full_width height_100px" ></textarea>
                   </div>
                   <div class="grid0_c bold">
                         <label for="substitution">substi- tution</label>
                   </div>
                   <div class="grid0_c bold">
-                        <textarea name="substitution" id="substitution" class="textarea_full_width height_100px" class="textarea_full_width" ></textarea>
+                        <textarea name="substitution" id="substitution" class="full_width" style="height:50px;padding:2px;" ></textarea>
                   </div>
 
                   <div class="grid0_c bold">
@@ -75,14 +76,15 @@
             </div>
       </div>
       <div class="container_0">
-            <div class="container0_content_grid_0" style="grid-template-columns: 80px auto;">
-                  <div class="grid0_c bold">
+            <div class="container0_content_grid_0" style="grid-template-columns: 80px minmax(100px, auto);">
+                  <div id="explanation_label" class="grid0_c bold">
                         <label for="explanation">explan- ation</label>
+                        <p id="explanation_close" class="pointer c_white" >x</p>
                         <p id="explanation_less" class="pointer c_white" >-</p>
                         <p id="explanation_more" class="pointer c_white" >+</p>
                   </div>
-                  <div class="grid0_c left">
-                        <pre ><code id="explanation" class="hljs" style="height:300px;">//comment
+                  <div id="explanation_section" class="grid0_c left">
+                        <pre ><code id="explanation" class="hljs" style="height:300px;width:50">//comment
                               println!("{}","one");
                         </code></pre>
                   </div>
@@ -93,7 +95,7 @@
                         <p id="regex_result_more" class="pointer c_white" >+</p>
                   </div>
                   <div class="grid0_c left">
-                        <pre ><code id="regex_result" class="hljs" style="height:300px;">//comment
+                        <pre ><code id="regex_result" class="hljs" style="height:300px;width:50">//comment
                               println!("{}","one");
                         </code></pre>
                   </div>
@@ -106,14 +108,15 @@
                         <p id="code_gen_run_in_playground" class="pointer c_white" >play</p>
                   </div>
                   <div class="grid0_c left">
-                        <pre ><code id="code_gen" style="height:300px;" class="language-rust hljs">//comment
+                        <pre ><code id="code_gen" class="language-rust hljs" style="height:300px;width:50">//comment
                               println!("{}","one");
                         </code></pre>
                   </div>
             </div>
       </div>
+
       <div class="container_0">
-            <div class="container0_content_grid_0" style="grid-template-columns: 80px auto;">
+            <div class="container0_content_grid_0" style="grid-template-columns: 80px minmax(100px, auto);">
                   <div class="grid0_c bold">
                         <label for="regex_examples">examples</label>
                         <p id="regex_examples_less" class="pointer c_white" >-</p>
@@ -128,8 +131,6 @@ FInd the names of models on the page https://en.wikipedia.org/wiki/Terminator_(c
 It also replaces T- with the word Robot().
 <span id="example_xml_1" class="pointer c_yellow">4. XML - &lt;title&gt;(.+?)&lt;/title&gt; </span> Find titles - not greedy.
 <span id="example_email" class="pointer c_yellow">5. Just a simple email validation - ^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</span>
-
-
                         </code></pre>
                   </div>
                   <div class="grid0_c bold">
@@ -179,7 +180,7 @@ It also replaces T- with the word Robot().
                         <label for="regex_suggestions">Regex suggestions</label>
                   </div>
                   <div class="grid0_c bold">
-                        <textarea name="regex_suggestions" id="regex_suggestions" class="textarea_full_width height_100px" >
+                        <textarea name="regex_suggestions" id="regex_suggestions" class="full_width height_100px" >
 Avoid using .* dot (any character many times) because it is greedy. 
 Instead use a negation of the next delimiter like [^/]*.
 If needed, add Flags in the beginning like (?m) Multiple line matching.
@@ -188,17 +189,17 @@ If needed, add Flags in the beginning like (?m) Multiple line matching.
             </div>
       </div>
       <div class="container_0">
-            <div class="container0_content_not_grid">
+            <div class="container0_content_not_grid " >
                   <p >Regex or Regular expressions is a special programming language for search, match, validate and replace sub-strings.</p>
                   <p>It looks very cryptic. But it is powerful and you should use it. Look how crazy this is:</p>
                   <p class="c_white" >^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</p>
                   <p class="c_yellow">NO PANIC ! Try it !</p>
-                  <p>On every key-up in the Regex field, this PWA will calculate and show you the explanation, result of Regex methods and generate the Rust code with that Regex.</p>
+                  <p>On every key-up in the Regex section, this PWA will calculate and show you the explanation, result of Regex methods and generate the Rust code with that Regex.</p>
                   <p>Use this web app when you are coding in Rust and need to write a Regex. Enter your Regex, substitution and test_string.</p>
                   <p>Change your Regex gradually and observe the result. Great way of interactive learning!</p>
                   <p>The Regex explanation is 100% human readable. Easy like that!</p>
                   <p>Use the examples to fast see it all working. From simplest to more complex gradually.</p>
-                  <p>Click Copy and then Play in the code-gen field. In <a class="c_link_1" target="_blank" href="https://play.rust-lang.org">play.rust-lang.org</a> paste the the generated code and click Run to see it live in action.</p>
+                  <p>Click Copy and then Play in the code-gen section. In <a class="c_link_1" target="_blank" href="https://play.rust-lang.org">play.rust-lang.org</a> paste the generated code and click Run to see it live in action.</p>
                   <p>If you need more or less space, click on the + and - symbols.</p>
                   <p>This PWA (progressive web app) runs entirely inside your browser with 100% pure Rust Wasm/WebAssembly.</p>
                   <p>The web server only provides the files. No code is executed on the server.</p>

@@ -10,7 +10,7 @@ pub fn lib_main(regex_text: &str, substitution: &str, test_string: &str) -> Html
     html.push_new_line();
     html_encoded_push!(
         html,
-        "This is using the same Rust code of the field code-gen.\n"
+        "This is using the same Rust code of the section code-gen.\n"
     );
     html_encoded_push!(
         html,

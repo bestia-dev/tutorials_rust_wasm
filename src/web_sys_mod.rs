@@ -11,8 +11,12 @@ use web_sys::{Request, RequestInit, Response};
 // endregion: use
 
 /// Simple macro to set listener of onclick events to an element_id.
-/// set_listener_on_click!(element_1_id, function_ident)
-/// set_listener_on_click!("example_email",example_email)
+/// no args: set_listener_on_click!(element_1_id, function_ident)
+/// no args: set_listener_on_click!("example_email",example_email)
+/// 1 args: set_listener_on_click!(element_1_id, function_ident, arg_1)
+/// 1 args: set_listener_on_click!("example_email",example_email, "arg_1")
+/// 2 args: set_listener_on_click!(element_1_id, function_ident, arg_1,arg_2)
+/// 2 args: set_listener_on_click!("example_email",example_email, "arg_1","arg_2")
 #[macro_export]
 macro_rules! set_listener_on_click {
     ($element_1_id: expr, $function_ident: ident) => {{
@@ -20,8 +24,25 @@ macro_rules! set_listener_on_click {
             $function_ident();
         }) as Box<dyn FnMut()>);
 
-        let html_element = get_element_by_id($element_1_id);
-        let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
+        let html_element = get_html_element_by_id($element_1_id);
+        html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));
+        closure.forget();
+    }};
+    ($element_1_id: expr, $function_ident: ident, $arg_1: expr) => {{
+        let closure = Closure::wrap(Box::new(move || {
+            $function_ident($arg_1);
+        }) as Box<dyn FnMut()>);
+
+        let html_element = get_html_element_by_id($element_1_id);
+        html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));
+        closure.forget();
+    }};
+    ($element_1_id: expr, $function_ident: ident, $arg_1: expr, $arg_2: expr) => {{
+        let closure = Closure::wrap(Box::new(move || {
+            $function_ident($arg_1, $arg_2);
+        }) as Box<dyn FnMut()>);
+
+        let html_element = get_html_element_by_id($element_1_id);
         html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));
         closure.forget();
     }};
@@ -37,8 +58,7 @@ macro_rules! set_listener_on_keyup {
             $function_ident();
         }) as Box<dyn FnMut()>);
 
-        let html_element = get_element_by_id($element_id);
-        let html_element = unwrap!(html_element.dyn_into::<web_sys::HtmlElement>());
+        let html_element = get_html_element_by_id($element_id);
         html_element.set_onkeyup(Some(closure.as_ref().unchecked_ref()));
         closure.forget();
     }};
@@ -118,7 +138,7 @@ impl HtmlEncoded {
         self.html.push_str("\n");
     }
 
-    /// Replace inside the field with encode.
+    /// Replace inside the section with encode.
     pub fn replace_with_html_encode(&mut self, old: &str, new: &str) {
         self.html = self.html.replace(old, &html_encode(new));
     }
@@ -156,6 +176,13 @@ pub fn get_element_by_id(element_id: &str) -> web_sys::Element {
             panic!("")
         }
     }
+}
+/// get html element by id
+pub fn get_html_element_by_id(element_id: &str) -> web_sys::HtmlElement {
+    let element = get_element_by_id(element_id);
+    let html_element: web_sys::HtmlElement = unwrap!(element.dyn_into::<web_sys::HtmlElement>());
+    //return
+    html_element
 }
 
 #[allow(dead_code)]
@@ -228,8 +255,7 @@ pub fn set_element_inner_html_by_id(element_id: &str, html: &HtmlEncoded) {
 /// very usable for "contenteditable" div or code
 pub fn get_element_inner_text_by_id(element_id: &str) -> String {
     //debug_write("before get_element_by_id");
-    let element = get_element_by_id(element_id);
-    let html_element = unwrap!(element.dyn_into::<web_sys::HtmlElement>());
+    let html_element = get_html_element_by_id(element_id);
     // inner_html() contains all the html syntax. inner_text() only the text
     let html = html_element.inner_text();
     // return
