@@ -83,9 +83,12 @@ use web_sys_mod::*;
 
 mod code_gen_mod;
 mod color_test_string_mod;
+mod examples_mod;
 mod regex_explanation_mod;
 mod regex_method_mod;
 mod web_sys_mod;
+
+use crate::examples_mod::*;
 
 /// To start the Wasm application, wasm_bindgen runs this functions
 #[wasm_bindgen(start)]
@@ -100,7 +103,14 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     // Initialize input fields
     example_xml_1_base();
 
-    //prepare the event listeners
+    //everything is inside event listeners
+    handle_click!(
+        "menu_regex_examples",
+        display_block_2_and_scroll,
+        "regex_examples_section",
+        "regex_examples_label"
+    );
+    handle_click!("menu_test_string", display_block_2_and_scroll, "test_string_section", "test_string_label");
     handle_click!("menu_explanation", display_block_2_and_scroll, "explanation_section", "explanation_label");
     handle_click!(
         "menu_regex_result",
@@ -109,12 +119,6 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
         "regex_result_label"
     );
     handle_click!("menu_code_gen", display_block_2_and_scroll, "code_gen_section", "code_gen_label");
-    handle_click!(
-        "menu_regex_examples",
-        display_block_2_and_scroll,
-        "regex_examples_section",
-        "regex_examples_label"
-    );
     handle_click!("menu_regex_help", display_block_2_and_scroll, "regex_help_section", "regex_help_label");
 
     set_listener_on_keyup!("regex_text", run_regex);
@@ -147,7 +151,6 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     handle_click!("code_gen_copy", code_gen_copy);
     handle_click!("code_gen_run_in_playground", code_gen_run_in_playground);
 
-    debug_write("--- rust_regex_explanation_pwa end ---");
     Ok(())
 }
 
@@ -173,7 +176,7 @@ fn run_regex() {
     unwrap!(js_sys::eval("hljs.highlightBlock(document.getElementById('code_gen'))"));
 }
 
-/// make visible and jump to it
+/// make visible and jump to it (2 elements)
 fn display_block_2_and_scroll(element_1_id: &str, element_2_id: &str) {
     display_block_and_scroll(element_1_id);
     display_block_and_scroll(element_2_id);
@@ -201,13 +204,13 @@ fn display_none(element_id: &str) {
     unwrap!(html_element.style().set_property("display", "none"));
 }
 
-// change height on click code
+/// expand height on click
 fn expand_height_to_auto(element_id: &str) {
     let html_element = get_html_element_by_id(element_id);
     unwrap!(html_element.style().set_property("height", "auto"));
 }
 
-// change height on click code
+/// contract height on click
 fn contract_height(element_id: &str) {
     let html_element = get_html_element_by_id(element_id);
     unwrap!(html_element.style().set_property("height", "150px"));
@@ -227,105 +230,10 @@ fn code_gen_copy() {
 
 // open playground URL in new window
 fn code_gen_run_in_playground() {
+    // just an example of one method how to use javascript code inside Rust code
     let js_cmd = r#"{
         var win = window.open('https://play.rust-lang.org/', '_blank');
         win.focus();
         }"#;
     unwrap!(js_sys::eval(&js_cmd));
-}
-
-// example email
-fn example_email() {
-    let regex_text = r#"^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-zA-Z0-9-]+)*"#;
-    set_text_area_element_value_string_by_id("regex_text", regex_text);
-    let substitution = "The email domain is: $1";
-    set_text_area_element_value_string_by_id("substitution", substitution);
-    let test_string = HtmlEncoded::from_str("John.Connor@sky.net");
-    set_element_inner_html_by_id("test_string", &test_string);
-
-    // initial result
-    run_regex();
-    display_block_2_and_scroll("regex_text_label", "regex_text_section");
-}
-
-// example model_base
-fn example_model_base() {
-    let regex_text = r#"T-"#;
-    set_text_area_element_value_string_by_id("regex_text", regex_text);
-    let substitution = "Robot($1)";
-    set_text_area_element_value_string_by_id("substitution", substitution);
-    let test_string = HtmlEncoded::from_str(
-        r#"T-1000 (Robert Patrick) Terminator known as T-101 T-800 that managed to kill John Connor explicitly named T-600s and T-1000. it jams its remaining hydrogen fuel cell into the T-X's mouth from a T-1000 sent to kill her who has been transformed into a T-3000 improvement over the earlier T-600 units also refers to the character as T-850 used the T-800 and T-850 nomenclature memory of a T-888 model, tearing a malfunctioning T-600 in half"#,
-    );
-    set_element_inner_html_by_id("test_string", &test_string);
-}
-
-// example model1
-fn example_model_1() {
-    example_model_base();
-    run_regex();
-    display_block_2_and_scroll("regex_text_label", "regex_text_section");
-}
-
-// example model2
-fn example_model_2() {
-    example_model_base();
-    let regex_text = r#"T-\d+"#;
-    set_text_area_element_value_string_by_id("regex_text", regex_text);
-    run_regex();
-    display_block_2_and_scroll("regex_text_label", "regex_text_section");
-}
-
-// example model3
-fn example_model_3() {
-    example_model_base();
-    let regex_text = r#"T-(X|\d+)"#;
-    set_text_area_element_value_string_by_id("regex_text", regex_text);
-    run_regex();
-    display_block_2_and_scroll("regex_text_label", "regex_text_section");
-}
-
-// example xml_1
-fn example_xml_1() {
-    example_xml_1_base();
-    display_block_2_and_scroll("regex_text_label", "regex_text_section");
-}
-
-// example xml_1 base
-fn example_xml_1_base() {
-    let regex_text = r#"<title>(.+?)</title>"#;
-    set_text_area_element_value_string_by_id("regex_text", regex_text);
-    let substitution = "";
-    set_text_area_element_value_string_by_id("substitution", substitution);
-    let test_string = HtmlEncoded::from_str(
-        r#"<catalog>
-    <movie>
-        <title>The Terminator</title>
-        <year>1984</year>
-    </movie>
-    <movie>
-        <title>Terminator 2: Judgment Day</title>
-        <year>1991</year>
-    </movie>
-    <movie>
-        <title>Terminator 3: Rise of the Machines</title>
-        <year>2003</year>
-    </movie>
-    <movie>
-        <title>Terminator Salvation</title>
-        <year>2009</year>
-    </movie>
-    <movie>
-        <title>Terminator Genisys</title>
-        <year>2015</year>
-    </movie>
-    <movie>
-        <title>Terminator: Dark Fate</title>
-        <year>2019</year>
-    </movie>
-</catalog>
-  "#,
-    );
-    set_element_inner_html_by_id("test_string", &test_string);
-    run_regex();
 }
