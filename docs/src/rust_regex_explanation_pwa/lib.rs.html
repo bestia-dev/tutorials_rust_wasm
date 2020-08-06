@@ -329,19 +329,16 @@
 <span id="329">329</span>
 <span id="330">330</span>
 <span id="331">331</span>
-<span id="332">332</span>
-<span id="333">333</span>
-<span id="334">334</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// region: lmake_md_to_doc_comments include README.md A //!</span>
 <span class="doccomment">//! # rust_regex_explanation_pwa</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! ***version: 2020.805.1222  date: 2020-08-05 authors: Luciano Bestia***  </span>
+<span class="doccomment">//! ***version: 2020.806.1136  date: 2020-08-06 authors: Luciano Bestia***  </span>
 <span class="doccomment">//! **Rust regex explanations in PWA**</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1457-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
-<span class="doccomment">//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-131-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
-<span class="doccomment">//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-132-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
+<span class="doccomment">//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1347-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
+<span class="doccomment">//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-144-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
+<span class="doccomment">//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-134-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
 <span class="doccomment">//! [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
 <span class="doccomment">//! [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
 <span class="doccomment">//!</span>
@@ -422,26 +419,6 @@
 <span class="kw">mod</span> <span class="ident">regex_method_mod</span>;
 <span class="kw">mod</span> <span class="ident">web_sys_mod</span>;
 
-<span class="comment">// region: macros against boilerplate code</span>
-
-<span class="doccomment">/// set_listener_change_height_on_click!(element_1_id, element_2_id,function_ident, height_lambda)</span>
-<span class="doccomment">/// set_listener_change_height_on_click!(&quot;explanation_less&quot;,&quot;explanation&quot;, explanation_less_on_click, -100)</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">set_listener_change_height_on_click</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">element_1_id</span>: <span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">element_2_id</span>: <span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">function_ident</span>: <span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">lambda</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {{
-        <span class="kw">let</span> <span class="ident">closure</span> <span class="op">=</span> <span class="ident">Closure</span>::<span class="ident">wrap</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">function_ident</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">element_2_id</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">lambda</span>);
-        }) <span class="kw">as</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">FnMut</span>()<span class="op">&gt;</span>);
-
-        <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="ident">get_element_by_id</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">element_1_id</span>);
-        <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">html_element</span>.<span class="ident">dyn_into</span>::<span class="op">&lt;</span><span class="ident">web_sys</span>::<span class="ident">HtmlElement</span><span class="op">&gt;</span>());
-        <span class="ident">html_element</span>.<span class="ident">set_onclick</span>(<span class="prelude-val">Some</span>(<span class="ident">closure</span>.<span class="ident">as_ref</span>().<span class="ident">unchecked_ref</span>()));
-        <span class="ident">closure</span>.<span class="ident">forget</span>();
-    }};
-}
-
-<span class="comment">// endregion: macros against boilerplate code</span>
-
 <span class="doccomment">/// To start the Wasm application, wasm_bindgen runs this functions</span>
 <span class="attribute">#[<span class="ident">wasm_bindgen</span>(<span class="ident">start</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wasm_bindgen_start</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">JsValue</span><span class="op">&gt;</span> {
@@ -453,69 +430,54 @@
     <span class="ident">set_element_inner_html_by_id</span>(<span class="string">&quot;pkg_version&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">html_encoded</span>);
 
     <span class="comment">// Initialize input fields</span>
-    <span class="ident">example_email</span>();
+    <span class="ident">example_xml_1_base</span>();
 
     <span class="comment">//prepare the event listeners</span>
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;menu_explanation&quot;</span>, <span class="ident">display_block_2_and_scroll</span>, <span class="string">&quot;explanation_section&quot;</span>, <span class="string">&quot;explanation_label&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(
+        <span class="string">&quot;menu_regex_result&quot;</span>,
+        <span class="ident">display_block_2_and_scroll</span>,
+        <span class="string">&quot;regex_result_section&quot;</span>,
+        <span class="string">&quot;regex_result_label&quot;</span>
+    );
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;menu_code_gen&quot;</span>, <span class="ident">display_block_2_and_scroll</span>, <span class="string">&quot;code_gen_section&quot;</span>, <span class="string">&quot;code_gen_label&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(
+        <span class="string">&quot;menu_regex_examples&quot;</span>,
+        <span class="ident">display_block_2_and_scroll</span>,
+        <span class="string">&quot;regex_examples_section&quot;</span>,
+        <span class="string">&quot;regex_examples_label&quot;</span>
+    );
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;menu_regex_help&quot;</span>, <span class="ident">display_block_2_and_scroll</span>, <span class="string">&quot;regex_help_section&quot;</span>, <span class="string">&quot;regex_help_label&quot;</span>);
+
     <span class="macro">set_listener_on_keyup</span><span class="macro">!</span>(<span class="string">&quot;regex_text&quot;</span>, <span class="ident">run_regex</span>);
     <span class="macro">set_listener_on_keyup</span><span class="macro">!</span>(<span class="string">&quot;substitution&quot;</span>, <span class="ident">run_regex</span>);
-    <span class="macro">set_listener_change_height_on_click</span><span class="macro">!</span>(
-        <span class="string">&quot;explanation_less&quot;</span>,
-        <span class="string">&quot;explanation&quot;</span>,
-        <span class="ident">change_height_on_click</span>,
-        <span class="op">-</span><span class="number">100</span>
-    );
-    <span class="macro">set_listener_change_height_on_click</span><span class="macro">!</span>(
-        <span class="string">&quot;explanation_more&quot;</span>,
-        <span class="string">&quot;explanation&quot;</span>,
-        <span class="ident">change_height_on_click</span>,
-        <span class="number">100</span>
-    );
-    <span class="macro">set_listener_change_height_on_click</span><span class="macro">!</span>(
-        <span class="string">&quot;regex_result_less&quot;</span>,
-        <span class="string">&quot;regex_result&quot;</span>,
-        <span class="ident">change_height_on_click</span>,
-        <span class="op">-</span><span class="number">100</span>
-    );
-    <span class="macro">set_listener_change_height_on_click</span><span class="macro">!</span>(
-        <span class="string">&quot;regex_result_more&quot;</span>,
-        <span class="string">&quot;regex_result&quot;</span>,
-        <span class="ident">change_height_on_click</span>,
-        <span class="number">100</span>
-    );
-    <span class="macro">set_listener_change_height_on_click</span><span class="macro">!</span>(<span class="string">&quot;code_gen_less&quot;</span>, <span class="string">&quot;code_gen&quot;</span>, <span class="ident">change_height_on_click</span>, <span class="op">-</span><span class="number">100</span>);
-    <span class="macro">set_listener_change_height_on_click</span><span class="macro">!</span>(<span class="string">&quot;code_gen_more&quot;</span>, <span class="string">&quot;code_gen&quot;</span>, <span class="ident">change_height_on_click</span>, <span class="number">100</span>);
-    <span class="macro">set_listener_change_height_on_click</span><span class="macro">!</span>(
-        <span class="string">&quot;test_string_less&quot;</span>,
-        <span class="string">&quot;test_string&quot;</span>,
-        <span class="ident">change_height_on_click</span>,
-        <span class="op">-</span><span class="number">100</span>
-    );
-    <span class="macro">set_listener_change_height_on_click</span><span class="macro">!</span>(
-        <span class="string">&quot;test_string_more&quot;</span>,
-        <span class="string">&quot;test_string&quot;</span>,
-        <span class="ident">change_height_on_click</span>,
-        <span class="number">100</span>
-    );
-    <span class="macro">set_listener_change_height_on_click</span><span class="macro">!</span>(
-        <span class="string">&quot;regex_help_less&quot;</span>,
-        <span class="string">&quot;regex_help&quot;</span>,
-        <span class="ident">change_height_on_click</span>,
-        <span class="op">-</span><span class="number">100</span>
-    );
-    <span class="macro">set_listener_change_height_on_click</span><span class="macro">!</span>(
-        <span class="string">&quot;regex_help_more&quot;</span>,
-        <span class="string">&quot;regex_help&quot;</span>,
-        <span class="ident">change_height_on_click</span>,
-        <span class="number">100</span>
-    );
-    <span class="macro">set_listener_on_click</span><span class="macro">!</span>(<span class="string">&quot;example_email&quot;</span>, <span class="ident">example_email</span>);
-    <span class="macro">set_listener_on_click</span><span class="macro">!</span>(<span class="string">&quot;example_model_1&quot;</span>, <span class="ident">example_model_1</span>);
-    <span class="macro">set_listener_on_click</span><span class="macro">!</span>(<span class="string">&quot;example_model_2&quot;</span>, <span class="ident">example_model_2</span>);
-    <span class="macro">set_listener_on_click</span><span class="macro">!</span>(<span class="string">&quot;example_model_3&quot;</span>, <span class="ident">example_model_3</span>);
-    <span class="macro">set_listener_on_click</span><span class="macro">!</span>(<span class="string">&quot;example_xml_1&quot;</span>, <span class="ident">example_xml_1</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;test_string_close&quot;</span>, <span class="ident">display_none_2</span>, <span class="string">&quot;test_string_label&quot;</span>, <span class="string">&quot;test_string_section&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;test_string_less&quot;</span>, <span class="ident">contract_height</span>, <span class="string">&quot;test_string&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;test_string_more&quot;</span>, <span class="ident">expand_height_to_auto</span>, <span class="string">&quot;test_string&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;explanation_close&quot;</span>, <span class="ident">display_none_2</span>, <span class="string">&quot;explanation_section&quot;</span>, <span class="string">&quot;explanation_label&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;explanation_less&quot;</span>, <span class="ident">contract_height</span>, <span class="string">&quot;explanation&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;explanation_more&quot;</span>, <span class="ident">expand_height_to_auto</span>, <span class="string">&quot;explanation&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;regex_result_close&quot;</span>, <span class="ident">display_none_2</span>, <span class="string">&quot;regex_result_label&quot;</span>, <span class="string">&quot;regex_result_section&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;regex_result_less&quot;</span>, <span class="ident">contract_height</span>, <span class="string">&quot;regex_result&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;regex_result_more&quot;</span>, <span class="ident">expand_height_to_auto</span>, <span class="string">&quot;regex_result&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;code_gen_close&quot;</span>, <span class="ident">display_none_2</span>, <span class="string">&quot;code_gen_section&quot;</span>, <span class="string">&quot;code_gen_label&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;code_gen_less&quot;</span>, <span class="ident">contract_height</span>, <span class="string">&quot;code_gen&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;code_gen_more&quot;</span>, <span class="ident">expand_height_to_auto</span>, <span class="string">&quot;code_gen&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;regex_examples_close&quot;</span>, <span class="ident">display_none_2</span>, <span class="string">&quot;regex_examples_section&quot;</span>, <span class="string">&quot;regex_examples_label&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;regex_examples_less&quot;</span>, <span class="ident">contract_height</span>, <span class="string">&quot;regex_examples&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;regex_examples_more&quot;</span>, <span class="ident">expand_height_to_auto</span>, <span class="string">&quot;regex_examples&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;regex_help_close&quot;</span>, <span class="ident">display_none_2</span>, <span class="string">&quot;regex_help_label&quot;</span>, <span class="string">&quot;regex_help_section&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;regex_help_less&quot;</span>, <span class="ident">contract_height</span>, <span class="string">&quot;regex_help&quot;</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;regex_help_more&quot;</span>, <span class="ident">expand_height_to_auto</span>, <span class="string">&quot;regex_help&quot;</span>);
 
-    <span class="macro">set_listener_on_click</span><span class="macro">!</span>(<span class="string">&quot;code_gen_copy&quot;</span>, <span class="ident">code_gen_copy</span>);
-    <span class="macro">set_listener_on_click</span><span class="macro">!</span>(<span class="string">&quot;code_gen_run_in_playground&quot;</span>, <span class="ident">code_gen_run_in_playground</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;example_email&quot;</span>, <span class="ident">example_email</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;example_model_1&quot;</span>, <span class="ident">example_model_1</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;example_model_2&quot;</span>, <span class="ident">example_model_2</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;example_model_3&quot;</span>, <span class="ident">example_model_3</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;example_xml_1&quot;</span>, <span class="ident">example_xml_1</span>);
+
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;code_gen_copy&quot;</span>, <span class="ident">code_gen_copy</span>);
+    <span class="macro">handle_click</span><span class="macro">!</span>(<span class="string">&quot;code_gen_run_in_playground&quot;</span>, <span class="ident">code_gen_run_in_playground</span>);
 
     <span class="ident">debug_write</span>(<span class="string">&quot;--- rust_regex_explanation_pwa end ---&quot;</span>);
     <span class="prelude-val">Ok</span>(())
@@ -540,32 +502,54 @@
     <span class="ident">set_element_inner_html_by_id</span>(<span class="string">&quot;test_string&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
 
     <span class="comment">// Applies highlighting to the blocks on a page.</span>
-    <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">js_sys</span>::<span class="ident">eval</span>(
-        <span class="string">&quot;hljs.highlightBlock(document.getElementById(&#39;code_gen&#39;))&quot;</span>
-    ));
+    <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">js_sys</span>::<span class="ident">eval</span>(<span class="string">&quot;hljs.highlightBlock(document.getElementById(&#39;code_gen&#39;))&quot;</span>));
+}
+
+<span class="doccomment">/// make visible and jump to it</span>
+<span class="kw">fn</span> <span class="ident">display_block_2_and_scroll</span>(<span class="ident">element_1_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">element_2_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
+    <span class="ident">display_block_and_scroll</span>(<span class="ident">element_1_id</span>);
+    <span class="ident">display_block_and_scroll</span>(<span class="ident">element_2_id</span>);
+
+    <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="ident">get_html_element_by_id</span>(<span class="ident">element_1_id</span>);
+    <span class="ident">html_element</span>.<span class="ident">scroll_into_view</span>();
+}
+
+<span class="doccomment">/// make visible the element</span>
+<span class="kw">fn</span> <span class="ident">display_block_and_scroll</span>(<span class="ident">element_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
+    <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="ident">get_html_element_by_id</span>(<span class="ident">element_id</span>);
+    <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">html_element</span>.<span class="ident">style</span>().<span class="ident">set_property</span>(<span class="string">&quot;display&quot;</span>, <span class="string">&quot;block&quot;</span>));
+    <span class="ident">html_element</span>.<span class="ident">scroll_into_view</span>();
+}
+
+<span class="doccomment">/// make invisible</span>
+<span class="kw">fn</span> <span class="ident">display_none_2</span>(<span class="ident">element_1_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">element_2_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
+    <span class="ident">display_none</span>(<span class="ident">element_1_id</span>);
+    <span class="ident">display_none</span>(<span class="ident">element_2_id</span>);
+}
+
+<span class="doccomment">/// make invisible the element</span>
+<span class="kw">fn</span> <span class="ident">display_none</span>(<span class="ident">element_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
+    <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="ident">get_html_element_by_id</span>(<span class="ident">element_id</span>);
+    <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">html_element</span>.<span class="ident">style</span>().<span class="ident">set_property</span>(<span class="string">&quot;display&quot;</span>, <span class="string">&quot;none&quot;</span>));
 }
 
 <span class="comment">// change height on click code</span>
-<span class="kw">fn</span> <span class="ident">change_height_on_click</span>(<span class="ident">element_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">height_lambda</span>: <span class="ident">i32</span>) {
-    <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="ident">get_element_by_id</span>(<span class="ident">element_id</span>);
-    <span class="kw">let</span> <span class="ident">html_element</span>: <span class="ident">web_sys</span>::<span class="ident">HtmlElement</span> <span class="op">=</span>
-        <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">html_element</span>.<span class="ident">dyn_into</span>::<span class="op">&lt;</span><span class="ident">web_sys</span>::<span class="ident">HtmlElement</span><span class="op">&gt;</span>());
-    <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">html_element</span>.<span class="ident">style</span>().<span class="ident">get_property_value</span>(<span class="string">&quot;height&quot;</span>));
-    <span class="kw">if</span> <span class="ident">height</span>.<span class="ident">is_empty</span>() {
-        <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">html_element</span>.<span class="ident">style</span>().<span class="ident">set_property</span>(<span class="string">&quot;height&quot;</span>, <span class="string">&quot;300px&quot;</span>));
-    } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="ident">height</span>: <span class="ident">String</span> <span class="op">=</span> <span class="ident">height</span>.<span class="ident">replace</span>(<span class="string">&quot;px&quot;</span>, <span class="string">&quot;&quot;</span>);
-        <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">height</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>());
-        <span class="kw">let</span> <span class="ident">new_height</span> <span class="op">=</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}px&quot;</span>, <span class="ident">h</span> <span class="op">+</span> <span class="ident">height_lambda</span>);
-        <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">html_element</span>.<span class="ident">style</span>().<span class="ident">set_property</span>(<span class="string">&quot;height&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">new_height</span>));
-    }
+<span class="kw">fn</span> <span class="ident">expand_height_to_auto</span>(<span class="ident">element_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
+    <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="ident">get_html_element_by_id</span>(<span class="ident">element_id</span>);
+    <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">html_element</span>.<span class="ident">style</span>().<span class="ident">set_property</span>(<span class="string">&quot;height&quot;</span>, <span class="string">&quot;auto&quot;</span>));
+}
+
+<span class="comment">// change height on click code</span>
+<span class="kw">fn</span> <span class="ident">contract_height</span>(<span class="ident">element_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
+    <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="ident">get_html_element_by_id</span>(<span class="ident">element_id</span>);
+    <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">html_element</span>.<span class="ident">style</span>().<span class="ident">set_property</span>(<span class="string">&quot;height&quot;</span>, <span class="string">&quot;150px&quot;</span>));
 }
 
 <span class="comment">// copy to clipboard</span>
 <span class="kw">fn</span> <span class="ident">code_gen_copy</span>() {
     <span class="kw">let</span> <span class="ident">regex_text</span> <span class="op">=</span> <span class="ident">get_text_area_element_value_string_by_id</span>(<span class="string">&quot;regex_text&quot;</span>);
     <span class="kw">let</span> <span class="ident">substitution</span> <span class="op">=</span> <span class="ident">get_text_area_element_value_string_by_id</span>(<span class="string">&quot;substitution&quot;</span>);
-    <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="ident">get_text_area_element_value_string_by_id</span>(<span class="string">&quot;test_string&quot;</span>);
+    <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="ident">get_element_inner_text_by_id</span>(<span class="string">&quot;test_string&quot;</span>);
     <span class="kw">let</span> <span class="ident">code_gen</span> <span class="op">=</span> <span class="ident">code_gen_mod</span>::<span class="ident">code_gen_string</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">substitution</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
     <span class="comment">// escaping the backtick for the template string multi line that is delimited with backticks</span>
     <span class="kw">let</span> <span class="ident">code_gen</span> <span class="op">=</span> <span class="ident">code_gen</span>.<span class="ident">replace</span>(<span class="string">&quot;`&quot;</span>, <span class="string">r#&quot;\`&quot;#</span>);
@@ -593,6 +577,7 @@
 
     <span class="comment">// initial result</span>
     <span class="ident">run_regex</span>();
+    <span class="ident">display_block_2_and_scroll</span>(<span class="string">&quot;regex_text_label&quot;</span>, <span class="string">&quot;regex_text_section&quot;</span>);
 }
 
 <span class="comment">// example model_base</span>
@@ -611,6 +596,7 @@
 <span class="kw">fn</span> <span class="ident">example_model_1</span>() {
     <span class="ident">example_model_base</span>();
     <span class="ident">run_regex</span>();
+    <span class="ident">display_block_2_and_scroll</span>(<span class="string">&quot;regex_text_label&quot;</span>, <span class="string">&quot;regex_text_section&quot;</span>);
 }
 
 <span class="comment">// example model2</span>
@@ -619,6 +605,7 @@
     <span class="kw">let</span> <span class="ident">regex_text</span> <span class="op">=</span> <span class="string">r#&quot;T-\d+&quot;#</span>;
     <span class="ident">set_text_area_element_value_string_by_id</span>(<span class="string">&quot;regex_text&quot;</span>, <span class="ident">regex_text</span>);
     <span class="ident">run_regex</span>();
+    <span class="ident">display_block_2_and_scroll</span>(<span class="string">&quot;regex_text_label&quot;</span>, <span class="string">&quot;regex_text_section&quot;</span>);
 }
 
 <span class="comment">// example model3</span>
@@ -627,41 +614,48 @@
     <span class="kw">let</span> <span class="ident">regex_text</span> <span class="op">=</span> <span class="string">r#&quot;T-(X|\d+)&quot;#</span>;
     <span class="ident">set_text_area_element_value_string_by_id</span>(<span class="string">&quot;regex_text&quot;</span>, <span class="ident">regex_text</span>);
     <span class="ident">run_regex</span>();
+    <span class="ident">display_block_2_and_scroll</span>(<span class="string">&quot;regex_text_label&quot;</span>, <span class="string">&quot;regex_text_section&quot;</span>);
 }
 
 <span class="comment">// example xml_1</span>
 <span class="kw">fn</span> <span class="ident">example_xml_1</span>() {
+    <span class="ident">example_xml_1_base</span>();
+    <span class="ident">display_block_2_and_scroll</span>(<span class="string">&quot;regex_text_label&quot;</span>, <span class="string">&quot;regex_text_section&quot;</span>);
+}
+
+<span class="comment">// example xml_1 base</span>
+<span class="kw">fn</span> <span class="ident">example_xml_1_base</span>() {
     <span class="kw">let</span> <span class="ident">regex_text</span> <span class="op">=</span> <span class="string">r#&quot;&lt;title&gt;(.+?)&lt;/title&gt;&quot;#</span>;
     <span class="ident">set_text_area_element_value_string_by_id</span>(<span class="string">&quot;regex_text&quot;</span>, <span class="ident">regex_text</span>);
     <span class="kw">let</span> <span class="ident">substitution</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>;
     <span class="ident">set_text_area_element_value_string_by_id</span>(<span class="string">&quot;substitution&quot;</span>, <span class="ident">substitution</span>);
     <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="ident">HtmlEncoded</span>::<span class="ident">from_str</span>(
         <span class="string">r#&quot;&lt;catalog&gt;
-    &lt;cd&gt;
-      &lt;title&gt;empire burlesque&lt;/title&gt;
-      &lt;artist&gt;bob dylan&lt;/artist&gt;
-      &lt;country&gt;usa&lt;/country&gt;
-      &lt;company&gt;columbia&lt;/company&gt;
-      &lt;price&gt;10.90&lt;/price&gt;
-      &lt;year&gt;1985&lt;/year&gt;
-    &lt;/cd&gt;
-    &lt;cd&gt;
-      &lt;title&gt;hide your heart&lt;/title&gt;
-      &lt;artist&gt;bonnie tyler&lt;/artist&gt;
-      &lt;country&gt;uk&lt;/country&gt;
-      &lt;company&gt;cbs records&lt;/company&gt;
-      &lt;price&gt;9.90&lt;/price&gt;
-      &lt;year&gt;1988&lt;/year&gt;
-    &lt;/cd&gt;
-    &lt;cd&gt;
-      &lt;title&gt;greatest hits&lt;/title&gt;
-      &lt;artist&gt;dolly parton&lt;/artist&gt;
-      &lt;country&gt;usa&lt;/country&gt;
-      &lt;company&gt;rca&lt;/company&gt;
-      &lt;price&gt;9.90&lt;/price&gt;
-      &lt;year&gt;1982&lt;/year&gt;
-    &lt;/cd&gt;
-  &lt;/catalog&gt;
+    &lt;movie&gt;
+        &lt;title&gt;The Terminator&lt;/title&gt;
+        &lt;year&gt;1984&lt;/year&gt;
+    &lt;/movie&gt;
+    &lt;movie&gt;
+        &lt;title&gt;Terminator 2: Judgment Day&lt;/title&gt;
+        &lt;year&gt;1991&lt;/year&gt;
+    &lt;/movie&gt;
+    &lt;movie&gt;
+        &lt;title&gt;Terminator 3: Rise of the Machines&lt;/title&gt;
+        &lt;year&gt;2003&lt;/year&gt;
+    &lt;/movie&gt;
+    &lt;movie&gt;
+        &lt;title&gt;Terminator Salvation&lt;/title&gt;
+        &lt;year&gt;2009&lt;/year&gt;
+    &lt;/movie&gt;
+    &lt;movie&gt;
+        &lt;title&gt;Terminator Genisys&lt;/title&gt;
+        &lt;year&gt;2015&lt;/year&gt;
+    &lt;/movie&gt;
+    &lt;movie&gt;
+        &lt;title&gt;Terminator: Dark Fate&lt;/title&gt;
+        &lt;year&gt;2019&lt;/year&gt;
+    &lt;/movie&gt;
+&lt;/catalog&gt;
   &quot;#</span>,
     );
     <span class="ident">set_element_inner_html_by_id</span>(<span class="string">&quot;test_string&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
