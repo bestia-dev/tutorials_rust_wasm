@@ -36,7 +36,7 @@ Useful as learning tool and as development tool to edit/test/debug your regex fi
 First decision - no frameworks. Just vanilla. Then no javascript.  
 Some basic html. Some basic css.  
 `contenteditable` - Every day something new. Modern browsers have a wysiwyg editor.  
-Just add the attribute contenteditable to a <div> or <code>.  
+Just add the attribute contenteditable to a `div` or `code`.  
 All the rest is in Rust with web-sys/wasm-bindgen for all the programming needs.  
 No other special requirements.  
 Ok, I had to use the javascript library `highlightjs` to bring some colors to the code.  
