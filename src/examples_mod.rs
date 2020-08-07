@@ -8,7 +8,7 @@ pub fn example_email() {
     set_text_area_element_value_string_by_id("regex_text", regex_text);
     let substitution = "The email domain is: $1";
     set_text_area_element_value_string_by_id("substitution", substitution);
-    let test_string = HtmlEncoded::from_str("John.Connor@sky.net");
+    let test_string = HtmlEncoded::from_str("John.Connor.42@sky.net");
     set_element_inner_html_by_id("test_string", &test_string);
 
     // initial result
