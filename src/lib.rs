@@ -74,7 +74,6 @@
 //! ```
 // endregion: lmake_md_to_doc_comments include README.md A //!
 
-use js_sys;
 use std::env;
 use unwrap::unwrap;
 use wasm_bindgen::prelude::*;
@@ -103,55 +102,86 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     // Initialize input fields
     example_xml_1_base();
 
-    //everything is inside event listeners
-    handle_click!(
-        "menu_regex_examples",
-        display_block_2_and_scroll,
-        "regex_examples_section",
-        "regex_examples_label"
-    );
-    handle_click!("menu_test_string", display_block_2_and_scroll, "test_string_section", "test_string_label");
-    handle_click!("menu_explanation", display_block_2_and_scroll, "explanation_section", "explanation_label");
-    handle_click!(
-        "menu_regex_result",
-        display_block_2_and_scroll,
-        "regex_result_section",
-        "regex_result_label"
-    );
-    handle_click!("menu_code_gen", display_block_2_and_scroll, "code_gen_section", "code_gen_label");
-    handle_click!("menu_regex_help", display_block_2_and_scroll, "regex_help_section", "regex_help_label");
-
-    set_listener_on_keyup!("regex_text", run_regex);
-    set_listener_on_keyup!("substitution", run_regex);
-    handle_click!("test_string_close", display_none_2, "test_string_label", "test_string_section");
-    handle_click!("test_string_less", contract_height, "test_string");
-    handle_click!("test_string_more", expand_height_to_auto, "test_string");
-    handle_click!("explanation_close", display_none_2, "explanation_section", "explanation_label");
-    handle_click!("explanation_less", contract_height, "explanation");
-    handle_click!("explanation_more", expand_height_to_auto, "explanation");
-    handle_click!("regex_result_close", display_none_2, "regex_result_label", "regex_result_section");
-    handle_click!("regex_result_less", contract_height, "regex_result");
-    handle_click!("regex_result_more", expand_height_to_auto, "regex_result");
-    handle_click!("code_gen_close", display_none_2, "code_gen_section", "code_gen_label");
-    handle_click!("code_gen_less", contract_height, "code_gen");
-    handle_click!("code_gen_more", expand_height_to_auto, "code_gen");
-    handle_click!("regex_examples_close", display_none_2, "regex_examples_section", "regex_examples_label");
-    handle_click!("regex_examples_less", contract_height, "regex_examples");
-    handle_click!("regex_examples_more", expand_height_to_auto, "regex_examples");
-    handle_click!("regex_help_close", display_none_2, "regex_help_label", "regex_help_section");
-    handle_click!("regex_help_less", contract_height, "regex_help");
-    handle_click!("regex_help_more", expand_height_to_auto, "regex_help");
-
-    handle_click!("example_email", example_email);
-    handle_click!("example_model_1", example_model_1);
-    handle_click!("example_model_2", example_model_2);
-    handle_click!("example_model_3", example_model_3);
-    handle_click!("example_xml_1", example_xml_1);
-
-    handle_click!("code_gen_copy", code_gen_copy);
-    handle_click!("code_gen_run_in_playground", code_gen_run_in_playground);
+    set_all_event_listeners();
 
     Ok(())
+}
+
+// set all event handlers for DOM elements
+fn set_all_event_listeners() {
+    // parameters: element_is, function , arg_1, arg_2, ...  these are static arguments
+    on_click!(
+        "menu_examples",
+        display_block_2_and_scroll,
+        "examples_section",
+        "examples_label",
+        "examples_label"
+    );
+    on_click!(
+        "menu_test_string",
+        display_block_2_and_scroll,
+        "test_string_section",
+        "test_string_label",
+        "test_string_label"
+    );
+    on_click!(
+        "menu_explanation",
+        display_block_2_and_scroll,
+        "explanation_section",
+        "explanation_label",
+        "explanation_label"
+    );
+    on_click!(
+        "menu_result",
+        display_block_2_and_scroll,
+        "result_section",
+        "result_label",
+        "result_label"
+    );
+    on_click!(
+        "menu_code_gen",
+        display_block_2_and_scroll,
+        "code_gen_section",
+        "code_gen_label",
+        "code_gen_label"
+    );
+    on_click!(
+        "menu_regex_help",
+        display_block_2_and_scroll,
+        "regex_help_section",
+        "regex_help_label",
+        "regex_help_label"
+    );
+
+    on_keyup!("regex_text", run_regex);
+    on_keyup!("substitution", run_regex);
+    on_click!("test_string_close", display_none_2, "test_string_label", "test_string_section");
+    on_click!("test_string_less", change_height, "test_string", "150px");
+    on_click!("test_string_more", change_height, "test_string", "auto");
+    on_click!("explanation_close", display_none_2, "explanation_section", "explanation_label");
+    on_click!("explanation_less", change_height, "explanation", "150px");
+    on_click!("explanation_more", change_height, "explanation", "auto");
+    on_click!("result_close", display_none_2, "result_label", "result_section");
+    on_click!("result_less", change_height, "result", "150px");
+    on_click!("result_more", change_height, "result", "auto");
+    on_click!("code_gen_close", display_none_2, "code_gen_section", "code_gen_label");
+    on_click!("code_gen_less", change_height, "code_gen", "150px");
+    on_click!("code_gen_more", change_height, "code_gen", "auto");
+    on_click!("examples_close", display_none_2, "examples_section", "examples_label");
+    on_click!("examples_less", change_height, "examples", "150px");
+    on_click!("examples_more", change_height, "examples", "auto");
+    on_click!("regex_help_close", display_none_2, "regex_help_label", "regex_help_section");
+    on_click!("regex_help_less", change_height, "regex_help", "150px");
+    on_click!("regex_help_more", change_height, "regex_help", "auto");
+
+    on_click!("example_email", example_email);
+    on_click!("example_model_1", example_model_1);
+    on_click!("example_model_2", example_model_2);
+    on_click!("example_model_3", example_model_3);
+    on_click!("example_xml_1", example_xml_1);
+
+    on_click!("code_gen_copy", code_gen_copy);
+    on_click!("code_gen_run_in_playground", code_gen_run_in_playground);
 }
 
 /// on keyup code
@@ -163,8 +193,8 @@ fn run_regex() {
     let explanation = regex_explanation_mod::lib_main(regex_text.clone());
     set_element_inner_html_by_id("explanation", &explanation);
 
-    let regex_result = regex_method_mod::lib_main(&regex_text, &substitution, &test_string);
-    set_element_inner_html_by_id("regex_result", &regex_result);
+    let result = regex_method_mod::lib_main(&regex_text, &substitution, &test_string);
+    set_element_inner_html_by_id("result", &result);
 
     let code_gen = code_gen_mod::code_gen_html(&regex_text, &substitution, &test_string);
     set_element_inner_html_by_id("code_gen", &code_gen);
@@ -176,44 +206,17 @@ fn run_regex() {
     unwrap!(js_sys::eval("hljs.highlightBlock(document.getElementById('code_gen'))"));
 }
 
-/// make visible and jump to it (2 elements)
-fn display_block_2_and_scroll(element_1_id: &str, element_2_id: &str) {
-    display_block_and_scroll(element_1_id);
-    display_block_and_scroll(element_2_id);
-
-    let html_element = get_html_element_by_id(element_1_id);
-    html_element.scroll_into_view();
+/// make visible 2 elements and jump to the third element
+fn display_block_2_and_scroll(element_1_id: &str, element_2_id: &str, element_3_id: &str) {
+    display_block(element_1_id);
+    display_block(element_2_id);
+    scroll(element_3_id);
 }
 
-/// make visible the element
-fn display_block_and_scroll(element_id: &str) {
-    let html_element = get_html_element_by_id(element_id);
-    unwrap!(html_element.style().set_property("display", "block"));
-    html_element.scroll_into_view();
-}
-
-/// make invisible
+/// make 2 invisible
 fn display_none_2(element_1_id: &str, element_2_id: &str) {
     display_none(element_1_id);
     display_none(element_2_id);
-}
-
-/// make invisible the element
-fn display_none(element_id: &str) {
-    let html_element = get_html_element_by_id(element_id);
-    unwrap!(html_element.style().set_property("display", "none"));
-}
-
-/// expand height on click
-fn expand_height_to_auto(element_id: &str) {
-    let html_element = get_html_element_by_id(element_id);
-    unwrap!(html_element.style().set_property("height", "auto"));
-}
-
-/// contract height on click
-fn contract_height(element_id: &str) {
-    let html_element = get_html_element_by_id(element_id);
-    unwrap!(html_element.style().set_property("height", "150px"));
 }
 
 // copy to clipboard
@@ -222,18 +225,12 @@ fn code_gen_copy() {
     let substitution = get_text_area_element_value_string_by_id("substitution");
     let test_string = get_element_inner_text_by_id("test_string");
     let code_gen = code_gen_mod::code_gen_string(&regex_text, &substitution, &test_string);
-    // escaping the backtick for the template string multi line that is delimited with backticks
-    let code_gen = code_gen.replace("`", r#"\`"#);
-    let js_cmd = format!(r#"navigator.clipboard.writeText(`{}`)"#, code_gen);
-    unwrap!(js_sys::eval(&js_cmd));
+    copy_to_clipboard(&code_gen);
 }
 
 // open playground URL in new window
 fn code_gen_run_in_playground() {
-    // just an example of one method how to use javascript code inside Rust code
-    let js_cmd = r#"{
-        var win = window.open('https://play.rust-lang.org/', '_blank');
-        win.focus();
-        }"#;
-    unwrap!(js_sys::eval(&js_cmd));
+    code_gen_copy();
+    let uri = "https://play.integer32.com/?code=ctrl+a, ctrl+v = Paste here the code from the PWA Rust Regex.";
+    open_url_in_new_tab(&uri);
 }

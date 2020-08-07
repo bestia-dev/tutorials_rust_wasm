@@ -42,13 +42,13 @@
       <!-- a standard service worker is a must for PWA -->
       <script src="start_service_worker.js"></script>
       <div class="container_0">
-            <div class="container0_content_not_grid">
+            <div id="start_panel" class="container0_content_not_grid">
                   <h2 class="c_yellow center">PWA for Rust Regex Explanations and Testing</h2>
                   <p class="small">You can "install" it in the browser's menu. It's a Progressive Web App for the desktop, Cross-Platform.</p>
-                  &gt;&gt; <span id="menu_regex_examples" class="c_link_1 pointer">Examples</span>
+                  &gt;&gt; <span id="menu_examples" class="c_link_1 pointer">Examples</span>
                   &gt;&gt; <span id="menu_test_string" class="c_link_1 pointer">Test string</span>
                   &gt;&gt; <span id="menu_explanation" class="c_link_1 pointer">Explain</span>
-                  &gt;&gt; <span id="menu_regex_result" class="c_link_1 pointer">Result</span>
+                  &gt;&gt; <span id="menu_result" class="c_link_1 pointer">Result</span>
                   &gt;&gt; <span id="menu_code_gen" class="c_link_1 pointer">CodeGen</span>
                   &gt;&gt; <span id="menu_regex_help" class="c_link_1 pointer">Help</span>
             </div>
@@ -99,16 +99,16 @@
                         </code></pre>
                   </div>
 
-                  <div id="regex_result_label" class="grid0_c bold">
+                  <div id="result_label" class="grid0_c bold">
                         <p>&nbsp;
-                        <span id="regex_result_close" class="pointer c_white small" title="close">x</span>&nbsp;
-                        <span id="regex_result_less" class="pointer c_white small" title="contract">-</span>&nbsp;
-                        <span id="regex_result_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                        <span id="result_close" class="pointer c_white small" title="close">x</span>&nbsp;
+                        <span id="result_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="result_more" class="pointer c_white small" title="expand">+</span>&nbsp;
                         </p>
-                        <label for="regex_result">Regex result</label>
+                        <label for="result">Regex result</label>
                   </div>
-                  <div id="regex_result_section"  class="grid0_c left">
-                        <pre ><code id="regex_result" class="hljs" style="height:300px;width:50">//comment
+                  <div id="result_section"  class="grid0_c left">
+                        <pre ><code id="result" class="hljs" style="height:300px;width:50">//comment
                               println!("{}","one");
                         </code></pre>
                   </div>
@@ -121,8 +121,8 @@
                         <span id="code_gen_more" class="pointer c_white small" title="expand">+</span>&nbsp;
                         </p>
                         <label for="code_gen">code gen</label>
-                        <p id="code_gen_copy" class="pointer c_white small" >copy</p>
-                        <p id="code_gen_run_in_playground" class="pointer c_white small" >play</p>
+                        <p id="code_gen_copy" class="pointer c_white small" title="copy to clipboard" >copy</p>
+                        <p id="code_gen_run_in_playground" class="pointer c_white small" title="open play.rust-lang.org" >play</p>
                   </div>
                   <div id="code_gen_section" class="grid0_c left">
                         <pre ><code id="code_gen" class="language-rust hljs" style="height:300px;width:50">//comment
@@ -134,16 +134,16 @@
 
       <div class="container_0">
             <div class="container0_content_grid_0" style="grid-template-columns: 80px minmax(100px, auto);">
-                  <div id="regex_examples_label" class="grid0_c bold">
+                  <div id="examples_label" class="grid0_c bold">
                         <p>&nbsp;
-                        <span id="regex_examples_close" class="pointer c_white small" title="close">x</span>&nbsp;
-                        <span id="regex_examples_less" class="pointer c_white small" title="contract">-</span>&nbsp;
-                        <span id="regex_examples_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                        <span id="examples_close" class="pointer c_white small" title="close">x</span>&nbsp;
+                        <span id="examples_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="examples_more" class="pointer c_white small" title="expand">+</span>&nbsp;
                         </p>
-                        <label for="regex_examples">examples</label>
+                        <label for="examples">examples</label>
                   </div>
-                  <div id="regex_examples_section"  class="grid0_c left">
-                        <pre ><code id="regex_examples" class="hljs" style="height:300px;">Try some example, click on the links below and watch the Regex result:
+                  <div id="examples_section"  class="grid0_c left">
+                        <pre ><code id="examples" class="hljs" style="height:300px;">Try some example, click on the links below and watch the Regex result:
 FInd the names of models on the page https://en.wikipedia.org/wiki/Terminator_(character). Simplified.
 <span id="example_model_1" class="pointer c_yellow">1. model name - T-</span> Find occurrences of this 2 literals.
 <span id="example_model_2" class="pointer c_yellow">2. model name - T-\d+</span> After that are one or more digits.

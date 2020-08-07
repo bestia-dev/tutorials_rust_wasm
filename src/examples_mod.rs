@@ -13,7 +13,7 @@ pub fn example_email() {
 
     // initial result
     run_regex();
-    display_block_2_and_scroll("regex_text_label", "regex_text_section");
+    display_block_2_and_scroll("regex_text_label", "regex_text_section", "start_panel");
 }
 
 // example model_base
@@ -32,7 +32,7 @@ pub fn example_model_base() {
 pub fn example_model_1() {
     example_model_base();
     run_regex();
-    display_block_2_and_scroll("regex_text_label", "regex_text_section");
+    display_block_2_and_scroll("regex_text_label", "regex_text_section", "start_panel");
 }
 
 // example model2
@@ -41,7 +41,7 @@ pub fn example_model_2() {
     let regex_text = r#"T-\d+"#;
     set_text_area_element_value_string_by_id("regex_text", regex_text);
     run_regex();
-    display_block_2_and_scroll("regex_text_label", "regex_text_section");
+    display_block_2_and_scroll("regex_text_label", "regex_text_section", "start_panel");
 }
 
 // example model3
@@ -50,13 +50,15 @@ pub fn example_model_3() {
     let regex_text = r#"T-(X|\d+)"#;
     set_text_area_element_value_string_by_id("regex_text", regex_text);
     run_regex();
-    display_block_2_and_scroll("regex_text_label", "regex_text_section");
+    display_block_2_and_scroll("regex_text_label", "regex_text_section", "start_panel");
 }
 
 // example xml_1
 pub fn example_xml_1() {
     example_xml_1_base();
-    display_block_2_and_scroll("regex_text_label", "regex_text_section");
+    display_block("regex_text_label");
+    display_block("regex_text_section");
+    scroll("start_panel");
 }
 
 // example xml_1 base

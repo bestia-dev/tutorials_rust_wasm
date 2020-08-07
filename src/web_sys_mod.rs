@@ -11,14 +11,14 @@ use web_sys::{Request, RequestInit, Response};
 // endregion: use
 
 /// Simple macro to set listener of onclick events to an element_id.
-/// no args: handle_click!(element_1_id, function_ident)
-/// no args: handle_click!("example_email",example_email)
-/// 1 args: handle_click!(element_1_id, function_ident, arg_1)
-/// 1 args: handle_click!("example_email",example_email, "arg_1")
-/// 2 args: handle_click!(element_1_id, function_ident, arg_1,arg_2)
-/// 2 args: handle_click!("example_email",example_email, "arg_1","arg_2")
+/// no args: on_click!(element_1_id, function_ident)
+/// no args: on_click!("example_email",example_email)
+/// 1 args: on_click!(element_1_id, function_ident, arg_1)
+/// 1 args: on_click!("example_email",example_email, "arg_1")
+/// 2 args: on_click!(element_1_id, function_ident, arg_1,arg_2)
+/// 2 args: on_click!("example_email",example_email, "arg_1","arg_2")
 #[macro_export]
-macro_rules! handle_click {
+macro_rules! on_click {
     ($element_1_id: expr, $function_ident: ident) => {{
         let closure = Closure::wrap(Box::new(move || {
             $function_ident();
@@ -46,13 +46,22 @@ macro_rules! handle_click {
         html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));
         closure.forget();
     }};
+    ($element_1_id: expr, $function_ident: ident, $arg_1: expr, $arg_2: expr, $arg_3: expr) => {{
+        let closure = Closure::wrap(Box::new(move || {
+            $function_ident($arg_1, $arg_2, $arg_3);
+        }) as Box<dyn FnMut()>);
+
+        let html_element = get_html_element_by_id($element_1_id);
+        html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));
+        closure.forget();
+    }};
 }
 
 /// Simple macro to set listener of onkeyup events to an element_id.
-/// set_listener_on_keyup!(element_id, function_ident)
-/// set_listener_on_keyup!("regex_text", run_regex)
+/// on_keyup!(element_id, function_ident)
+/// on_keyup!("regex_text", run_regex)
 #[macro_export]
-macro_rules! set_listener_on_keyup {
+macro_rules! on_keyup {
     ($element_id: expr, $function_ident: ident) => {{
         let closure = Closure::wrap(Box::new(move || {
             $function_ident();
@@ -232,7 +241,7 @@ pub fn set_text_area_element_value_string_by_id(element_id: &str, value: &str) {
     text_area_html_element.set_value(value);
 }
 
-/// set code element value string by id
+/// set element inner text string by id
 pub fn set_element_inner_html_by_id(element_id: &str, html: &HtmlEncoded) {
     //debug_write("before get_element_by_id");
     let element = get_element_by_id(element_id);
@@ -242,7 +251,7 @@ pub fn set_element_inner_html_by_id(element_id: &str, html: &HtmlEncoded) {
 }
 
 /// get inner_text as string by id
-/// very usable for "contenteditable" div or code
+/// very usable for "contenteditable" div or pre>code
 pub fn get_element_inner_text_by_id(element_id: &str) -> String {
     //debug_write("before get_element_by_id");
     let html_element = get_html_element_by_id(element_id);
@@ -270,3 +279,59 @@ fn get_pseudo_random_int(max: i32) -> i32 {
     // return
     f as i32
 }
+
+/// jump to element
+pub fn scroll(element_1_id: &str) {
+    let html_element = get_html_element_by_id(element_1_id);
+    html_element.scroll_into_view();
+}
+
+/// make visible the element
+pub fn display_block(element_id: &str) {
+    let html_element = get_html_element_by_id(element_id);
+    unwrap!(html_element.style().set_property("display", "block"));
+}
+
+/// make invisible the element
+pub fn display_none(element_id: &str) {
+    let html_element = get_html_element_by_id(element_id);
+    unwrap!(html_element.style().set_property("display", "none"));
+}
+
+/// change height
+/// change_height("el_id","auto");
+/// change_height("el_id","150px");
+pub fn change_height(element_id: &str, height: &str) {
+    let html_element = get_html_element_by_id(element_id);
+    unwrap!(html_element.style().set_property("height", height));
+}
+
+/// copy to clipboard
+pub fn copy_to_clipboard(text: &str) {
+    // escaping the backtick for the template string multi line
+    // that is delimited with backticks in javascript
+    let text = text.replace("`", r#"\`"#);
+    let js_cmd = format!(r#"navigator.clipboard.writeText(`{}`)"#, text);
+    unwrap!(js_sys::eval(&js_cmd));
+}
+
+// open URL in new tab
+pub fn open_url_in_new_tab(url: &str) {
+    // just an example of one method how to use javascript code inside Rust code
+    let js_cmd = &format!(
+        r#"{{
+        var win = window.open('{}/', '_blank');
+        win.focus();
+        }}"#,
+        url,
+    );
+    unwrap!(js_sys::eval(&js_cmd));
+}
+
+// code for uri encode with `percent-encoding = "2.1.0"`
+/*
+// first encode it with uri escape
+// https://url.spec.whatwg.org/#fragment-percent-encode-set
+const FRAGMENT: &AsciiSet = &CONTROLS.add(b' ').add(b'"').add(b'<').add(b'>').add(b'`');
+let code_as_uri_parameter = percent_encoding::utf8_percent_encode(&code_gen, FRAGMENT).to_string();
+*/
