@@ -230,7 +230,6 @@ fn code_gen_copy() {
 
 // open playground URL in new window
 fn code_gen_run_in_playground() {
-    code_gen_copy();
-    let uri = "https://play.integer32.com/?code=ctrl+a, ctrl+v = Paste here the code from the PWA Rust Regex.";
+    let uri = "https://play.integer32.com/?version=stable&mode=debug&edition=2018&code=ctrl+a, ctrl+v = Paste here the code from the PWA Rust Regex and then click Run.";
     open_url_in_new_tab(&uri);
 }
