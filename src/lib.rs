@@ -81,10 +81,10 @@ use wasm_bindgen::{JsCast, JsValue};
 use web_sys_mod::*;
 
 mod code_gen_mod;
-mod color_test_string_mod;
 mod examples_mod;
 mod regex_explanation_mod;
 mod regex_method_mod;
+mod test_string_mod;
 mod web_sys_mod;
 
 use crate::examples_mod::*;
@@ -201,7 +201,7 @@ fn run_regex() {
     let code_gen = code_gen_mod::code_gen_html(&regex_text, &substitution, &test_string);
     set_element_inner_html_by_id("code_gen", &code_gen);
 
-    let test_string = color_test_string_mod::color_test_string(&regex_text, &test_string);
+    let test_string = test_string_mod::test_string_html(&regex_text, &test_string);
     set_element_inner_html_by_id("test_string", &test_string);
 
     // Applies highlighting to the blocks on a page.

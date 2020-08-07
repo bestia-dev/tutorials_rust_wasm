@@ -331,11 +331,3 @@ pub fn open_url_in_new_tab(url: &str) {
     );
     unwrap!(js_sys::eval(&js_cmd));
 }
-
-// code for uri encode with `percent-encoding = "2.1.0"`
-/*
-// first encode it with uri escape
-// https://url.spec.whatwg.org/#fragment-percent-encode-set
-const FRAGMENT: &AsciiSet = &CONTROLS.add(b' ').add(b'"').add(b'<').add(b'>').add(b'`');
-let code_as_uri_parameter = percent_encoding::utf8_percent_encode(&code_gen, FRAGMENT).to_string();
-*/

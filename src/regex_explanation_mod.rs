@@ -1,5 +1,5 @@
 use crate::html_encoded_push;
-use crate::web_sys_mod::HtmlEncoded;
+use crate::web_sys_mod::*;
 
 use core::ops::Range;
 use regex_syntax::ast::*;
@@ -7,20 +7,26 @@ use regex_syntax::ast::*;
 #[derive(Debug, Default)]
 pub struct Explanation {
     pub reg_str: String,
+    pub html: HtmlEncoded,
+    pub single_line: SingleLine,
     pub indent: usize,
     pub color_index: usize,
     /// ('s|e', pos, color_index)
     pub span_colors: Vec<(char, usize, usize)>,
-    // every string is html encoded with the macro html_encoded_push!()
-    pub html: HtmlEncoded,
-    // print literals in one line for brevity
-    pub single_line_fragment: String,
-    pub single_line_symbol: String,
-    pub single_line_explanation: String,
-    pub single_line_range_start: usize,
-    pub single_line_range_end: usize,
 }
 
+/// builder elements for a single line
+#[derive(Debug, Default)]
+pub struct SingleLine {
+    // print literals in one line for brevity
+    pub fragment: String,
+    pub symbol: String,
+    pub explanation: String,
+    pub range_start: usize,
+    pub range_end: usize,
+}
+
+/// creates html encoded with the macro html_encoded_push!()
 pub fn create_explanation_html(reg_str: String) -> HtmlEncoded {
     let mut exp = Explanation {
         reg_str,
@@ -51,35 +57,32 @@ pub fn create_explanation_html(reg_str: String) -> HtmlEncoded {
 
 impl Explanation {
     fn print_literals(&mut self) {
-        if !self.single_line_fragment.is_empty() {
-            let color_index = self.get_color_index_and_increment();
-            self.span_colors.push(('s', self.single_line_range_start, color_index));
-            self.span_colors.push(('e', self.single_line_range_end, color_index));
-
-            self.print_fragment(&self.single_line_fragment.clone());
-            html_encoded_push!(
-                self.html,
-                r#"<span style="background-color:{}">{}</span>"#,
-                get_color_str(self.color_index),
-                &self.single_line_explanation
-            );
+        if !self.single_line.fragment.is_empty() {
+            self.span_colors.push(('s', self.single_line.range_start, self.color_index));
+            self.span_colors.push(('e', self.single_line.range_end, self.color_index));
+            self.print_fragment(&self.single_line.fragment.clone());
+            html_encoded_push!(self.html, r#"{}"#, &self.single_line.explanation);
             self.html.push_new_line();
 
-            self.single_line_fragment.clear();
-            self.single_line_explanation.clear();
-            self.single_line_symbol.clear();
-            self.single_line_range_start = 0;
-            self.single_line_range_end = 0;
+            self.color_index_increment();
+            self.clear_single_line();
         }
     }
+    fn clear_single_line(&mut self) {
+        self.single_line.fragment.clear();
+        self.single_line.explanation.clear();
+        self.single_line.symbol.clear();
+        self.single_line.range_start = 0;
+        self.single_line.range_end = 0;
+    }
     fn set_explanation(&mut self, symbol: &str, name: &str) {
-        self.single_line_symbol.clear();
-        self.single_line_symbol.push_str(&" ".repeat(self.indent * 2));
-        self.single_line_symbol.push_str(symbol);
-        self.single_line_symbol.push_str(if symbol.is_empty() { "" } else { " " });
+        self.single_line.symbol.clear();
+        self.single_line.symbol.push_str(&" ".repeat(self.indent * 2));
+        self.single_line.symbol.push_str(symbol);
+        self.single_line.symbol.push_str(if symbol.is_empty() { "" } else { " " });
 
-        self.single_line_explanation.clear();
-        self.single_line_explanation.push_str(name);
+        self.single_line.explanation.clear();
+        self.single_line.explanation.push_str(name);
     }
     fn print_fragment(&mut self, fragment: &str) {
         // if is longer than 16, than new line and 16 spaces
@@ -87,8 +90,8 @@ impl Explanation {
 
         html_encoded_push!(
             self.html,
-            r#"<span style="background-color:{}">{}</span>"#,
-            get_color_str(self.color_index),
+            r#"<span class="b_color_{}">{}</span>"#,
+            &format!("{:02}", self.color_index),
             fragment
         );
         if fragment.len() < COL_WIDTH + self.indent {
@@ -99,11 +102,8 @@ impl Explanation {
             html_encoded_push!(self.html, "{}", &" ".repeat(COL_WIDTH));
         }
     }
-    fn get_color_index_and_increment(&mut self) -> usize {
-        let color_index = self.color_index;
+    fn color_index_increment(&mut self) {
         self.color_index += 1;
-        // return
-        color_index
     }
     /// return the regex with colors
     fn colorize_regex_text(&mut self) -> HtmlEncoded {
@@ -116,7 +116,7 @@ impl Explanation {
         for c in self.span_colors.iter() {
             html_encoded_push!(html_2nd, "{}", &self.reg_str[cursor_pos..c.1]);
             if c.0 == 's' {
-                html_encoded_push!(html_2nd, r#"<span style="background-color:{}">"#, get_color_str(c.2));
+                html_encoded_push!(html_2nd, r#"<span class="b_color_{}">"#, &format!("{:02}", c.2));
             } else {
                 // c.0== 'e'
                 html_encoded_push!(html_2nd, r#"</span>"#);
@@ -133,18 +133,18 @@ impl Explanation {
 /// print any token except literals
 fn print(exp: &mut Explanation, symbol: &str, name: &str, range: Range<usize>) {
     exp.print_literals();
-    let color_index = exp.get_color_index_and_increment();
-    exp.span_colors.push(('s', range.start, color_index));
-    exp.span_colors.push(('e', range.end, color_index));
+    exp.span_colors.push(('s', range.start, exp.color_index));
+    exp.span_colors.push(('e', range.end, exp.color_index));
     exp.print_fragment(&exp.reg_str[range].to_string());
     exp.set_explanation(symbol, name);
     html_encoded_push!(
         exp.html,
         r#"<span class="hljs-keyword">{}</span>{}"#,
-        &exp.single_line_symbol,
-        &exp.single_line_explanation
+        &exp.single_line.symbol,
+        &exp.single_line.explanation
     );
     exp.html.push_new_line();
+    exp.color_index_increment();
 }
 
 fn greed(greedy: bool) -> &'static str {
@@ -469,10 +469,10 @@ pub fn class_set_item(exp: &mut Explanation, i: &ClassSetItem, negated: bool) {
 pub fn literal(exp: &mut Explanation, l: &Literal, negated: bool) {
     match l.kind {
         LiteralKind::Verbatim => {
-            if exp.single_line_fragment.is_empty() {
-                exp.single_line_fragment.clear();
-                exp.single_line_explanation.clear();
-                exp.single_line_symbol.clear();
+            if exp.single_line.fragment.is_empty() {
+                exp.single_line.fragment.clear();
+                exp.single_line.explanation.clear();
+                exp.single_line.symbol.clear();
                 // start the line, but don't print, leave the possibility to add more literals
                 // the actual print will happen when somebody else call print.
                 if negated {
@@ -480,11 +480,11 @@ pub fn literal(exp: &mut Explanation, l: &Literal, negated: bool) {
                 } else {
                     exp.set_explanation("", "Matches characters literally");
                 }
-                exp.single_line_range_start = l.span.start.offset;
+                exp.single_line.range_start = l.span.start.offset;
             }
             // add one literal to the same line
-            exp.single_line_fragment.push_str(&exp.reg_str[l.span.start.offset..l.span.end.offset]);
-            exp.single_line_range_end = l.span.end.offset;
+            exp.single_line.fragment.push_str(&exp.reg_str[l.span.start.offset..l.span.end.offset]);
+            exp.single_line.range_end = l.span.end.offset;
         }
         LiteralKind::Punctuation => print(
             exp,
@@ -494,116 +494,4 @@ pub fn literal(exp: &mut Explanation, l: &Literal, negated: bool) {
         ),
         _ => html_encoded_push!(exp.html, "unimplemented literal\n"),
     }
-}
-
-/// dark colors shuffled
-fn get_color_str(pos: usize) -> &'static str {
-    let colors = vec![
-        ("#29304e", "Midnight Blue"),
-        ("#80444c", "Deep Purple"),
-        ("#004953", "Poker Green"),
-        ("#11574a", "Field Maple"),
-        ("#004400", "Aura Orange"),
-        ("#5c5337", "Polished Brown"),
-        ("#553f2d", "Blackened Brown"),
-        ("#3b2820", "Tuk Tuk"),
-        ("#985538", "Toffee"),
-        ("#363737", "Dusty Olive"),
-        ("#220a0a", "Rustic Red"),
-        ("#742802", "Dark Brown"),
-        ("#302621", "Black Chocolate"),
-        ("#3b3c36", "Black Pearl"),
-        ("#184343", "Very Blue"),
-        ("#2a2b2d", "Tarmac"),
-        ("#11887b", "Kabocha Green"),
-        ("#820000", "Heavy Red"),
-        ("#35654d", "Racing Green"),
-        ("#214559", "Blue Charcoal"),
-        ("#014600", "Smoke Pine"),
-        ("#25342b", "Lunar Green"),
-        ("#442200", "Brown Stone"),
-        ("#ba160c", "Winter Sunset"),
-        ("#900020", "Burnt Maroon"),
-        ("#b0306a", "Alien Purple"),
-        ("#af2f0d", "Celestial Pink"),
-        ("#980036", "Red Bean"),
-        ("#673a3f", "Purple Stone"),
-        ("#34414e", "Night Blue"),
-        ("#4a0100", "Pink Raspberry"),
-        ("#5c4450", "Purple Brown"),
-        ("#716e61", "Heavy Charcoal"),
-        ("#36013f", "Medium Taupe"),
-        ("#2a2a35", "Polished Steel"),
-        ("#1e272c", "Coffee Bean"),
-        ("#4e5541", "Night Sky"),
-        ("#ca6636", "Capital Yellow"),
-        ("#696006", "Green Ink"),
-        ("#937a62", "Marsh"),
-        ("#6f7755", "Elm Green"),
-        ("#800000", "Old Mahagony"),
-        ("#391285", "Reflecting Pond"),
-        ("#062e03", "Woodland Grass"),
-        ("#50574c", "Very Dark Brown"),
-        ("#5a5348", "Thyme"),
-        ("#565350", "Holly"),
-        ("#420303", "Dark Red"),
-        ("#d1001c", "Brick Orange"),
-        ("#0a0502", "Pot Black"),
-        ("#495e35", "Green Brown"),
-        ("#c65102", "International Orange"),
-        ("#333333", "Dark Grey"),
-        ("#23191e", "Liquorice"),
-        ("#7f7053", "Hardwood"),
-        ("#35063e", "Dark Strawberry"),
-        ("#280137", "Pickled Beet"),
-        ("#490648", "Brownish Purple"),
-        ("#0f3b57", "Dark Navy Blue"),
-        ("#373e02", "Dill"),
-        ("#3b302f", "Black"),
-        ("#2b0202", "Void"),
-        ("#7f4330", "Dark Orange"),
-        ("#404854", "Sooty Willow Bamboo"),
-        ("#840000", "Deep Maroon"),
-        ("#2b6867", "Medieval Blue"),
-        ("#00626f", "Blue Opal"),
-        ("#203e4a", "Tiber"),
-        ("#646356", "Flint"),
-        ("#3d6c54", "Very Dark Green"),
-        ("#040348", "Pixie Powder"),
-        ("#4e5552", "Carbon"),
-        ("#48412b", "Cape Cod"),
-        ("#00022e", "Dark Water"),
-        ("#d90166", "Dark Pink"),
-        ("#c14a09", "Copper Orange"),
-        ("#0000aa", "Very Dark Blue"),
-        ("#9c004a", "Dark Hot Pink"),
-        ("#044a05", "Midnight Green"),
-        ("#5d5242", "Black Olive"),
-        ("#9e1212", "Maroon"),
-        ("#3e6257", "Toad King"),
-        ("#3a181a", "Rusty Red"),
-        ("#754600", "Grey Brown"),
-        ("#674c47", "Midnight Purple"),
-        ("#593c39", "Chestnut"),
-        ("#76424e", "Dark Purple"),
-        ("#cb416b", "Rich Maroon"),
-        ("#033500", "Dark Olive"),
-        ("#3d0c02", "Red Ink"),
-        ("#573b2a", "Alien"),
-        ("#4f1507", "Flat Brown"),
-        ("#4d233d", "Purple Basil"),
-        ("#410200", "Earth Brown"),
-        ("#b4262a", "Blood Orange"),
-        ("#2a293e", "Magnetic Blue"),
-        ("#755139", "Tree House"),
-        ("#605467", "Antique Brown"),
-        ("#4d4b3a", "Space Grey"),
-        ("#362d26", "Cynical Black"),
-        ("#490206", "Deep Brown"),
-        ("#80884e", "Garden Green"),
-        ("#341c02", "Dark Chocolate"),
-        ("#415764", "Brick Grey"),
-    ];
-    //return
-    colors[pos].0
 }

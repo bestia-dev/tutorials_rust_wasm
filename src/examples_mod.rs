@@ -94,7 +94,7 @@ pub fn init_wit_example_xml_1_base() {
 pub fn example_xml_1_base() {
     let regex_text = r#"<title>(.+?)</title>"#;
     set_text_area_element_value_string_by_id("regex_text", regex_text);
-    let substitution = "";
+    let substitution = "<name>$1</name>";
     set_text_area_element_value_string_by_id("substitution", substitution);
     let test_string = HtmlEncoded::from_str(
         r#"<catalog>
