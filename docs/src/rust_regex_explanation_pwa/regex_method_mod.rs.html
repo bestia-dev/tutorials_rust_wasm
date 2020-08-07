@@ -226,6 +226,15 @@
 <span id="226">226</span>
 <span id="227">227</span>
 <span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">html_encoded_push</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">web_sys_mod</span>::<span class="ident">HtmlEncoded</span>;
@@ -233,10 +242,19 @@
 <span class="kw">use</span> <span class="ident">regex</span>::<span class="ident">Regex</span>;
 
 <span class="doccomment">/// runs 6 regex methods and show result as html</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lib_main</span>(<span class="ident">regex_text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">substitution</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">HtmlEncoded</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">run_regex_methods_html</span>(<span class="ident">regex_text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">substitution</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">test_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">HtmlEncoded</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">html</span> <span class="op">=</span> <span class="kw">crate</span>::<span class="ident">web_sys_mod</span>::<span class="ident">HtmlEncoded</span>::<span class="ident">new</span>();
     <span class="comment">//html_encoded_push!(html, r#&quot;&lt;span class=&quot;hljs-comment&quot;&gt;--- regex methods start ---&lt;/span&gt;&quot;#);</span>
+    <span class="comment">// temporary show all colors for choosing the good combinations</span>
+    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">100</span> {
+        <span class="kw">if</span> <span class="ident">i</span> <span class="op">%</span> <span class="number">5</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+            <span class="ident">html</span>.<span class="ident">push_new_line</span>();
+            <span class="macro">html_encoded_push</span><span class="macro">!</span>(<span class="ident">html</span>, <span class="string">r##&quot;{} &quot;##</span>, <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:02}&quot;</span>, <span class="ident">i</span>));
+        }
+        <span class="macro">html_encoded_push</span><span class="macro">!</span>(<span class="ident">html</span>, <span class="string">r##&quot;&lt;span class=&quot;b_color_{}&quot;&gt;abcdefg&lt;/span&gt;&quot;##</span>, <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:02}&quot;</span>, <span class="ident">i</span>));
+    }
     <span class="ident">html</span>.<span class="ident">push_new_line</span>();
+
     <span class="macro">html_encoded_push</span><span class="macro">!</span>(<span class="ident">html</span>, <span class="string">&quot;This is using the same Rust code of the section code-gen.\n&quot;</span>);
     <span class="macro">html_encoded_push</span><span class="macro">!</span>(
         <span class="ident">html</span>,

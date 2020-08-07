@@ -233,16 +233,18 @@
 <span id="233">233</span>
 <span id="234">234</span>
 <span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// region: lmake_md_to_doc_comments include README.md A //!</span>
 <span class="doccomment">//! # rust_regex_explanation_pwa</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! ***version: 2020.807.1036  date: 2020-08-07 authors: Luciano Bestia***  </span>
+<span class="doccomment">//! ***version: 2020.807.1441  date: 2020-08-07 authors: Luciano Bestia***  </span>
 <span class="doccomment">//! **Rust regex explanations in PWA**</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1406-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
-<span class="doccomment">//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-149-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
-<span class="doccomment">//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-140-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
+<span class="doccomment">//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1374-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
+<span class="doccomment">//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-153-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
+<span class="doccomment">//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-147-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
 <span class="doccomment">//! [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
 <span class="doccomment">//! [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)</span>
 <span class="doccomment">//!</span>
@@ -317,10 +319,10 @@
 <span class="kw">use</span> <span class="ident">web_sys_mod</span>::<span class="kw-2">*</span>;
 
 <span class="kw">mod</span> <span class="ident">code_gen_mod</span>;
-<span class="kw">mod</span> <span class="ident">color_test_string_mod</span>;
 <span class="kw">mod</span> <span class="ident">examples_mod</span>;
 <span class="kw">mod</span> <span class="ident">regex_explanation_mod</span>;
 <span class="kw">mod</span> <span class="ident">regex_method_mod</span>;
+<span class="kw">mod</span> <span class="ident">test_string_mod</span>;
 <span class="kw">mod</span> <span class="ident">web_sys_mod</span>;
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">examples_mod</span>::<span class="kw-2">*</span>;
@@ -336,7 +338,7 @@
     <span class="ident">set_element_inner_html_by_id</span>(<span class="string">&quot;pkg_version&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">html_encoded</span>);
 
     <span class="comment">// Initialize input fields</span>
-    <span class="ident">example_xml_1_base</span>();
+    <span class="ident">init_wit_example_xml_1_base</span>();
 
     <span class="ident">set_all_event_listeners</span>();
 
@@ -415,6 +417,8 @@
     <span class="macro">on_click</span><span class="macro">!</span>(<span class="string">&quot;example_model_2&quot;</span>, <span class="ident">example_model_2</span>);
     <span class="macro">on_click</span><span class="macro">!</span>(<span class="string">&quot;example_model_3&quot;</span>, <span class="ident">example_model_3</span>);
     <span class="macro">on_click</span><span class="macro">!</span>(<span class="string">&quot;example_xml_1&quot;</span>, <span class="ident">example_xml_1</span>);
+    <span class="macro">on_click</span><span class="macro">!</span>(<span class="string">&quot;example_xml_2&quot;</span>, <span class="ident">example_xml_2</span>);
+    <span class="macro">on_click</span><span class="macro">!</span>(<span class="string">&quot;example_xml_3&quot;</span>, <span class="ident">example_xml_3</span>);
 
     <span class="macro">on_click</span><span class="macro">!</span>(<span class="string">&quot;code_gen_copy&quot;</span>, <span class="ident">code_gen_copy</span>);
     <span class="macro">on_click</span><span class="macro">!</span>(<span class="string">&quot;code_gen_run_in_playground&quot;</span>, <span class="ident">code_gen_run_in_playground</span>);
@@ -426,16 +430,16 @@
     <span class="kw">let</span> <span class="ident">substitution</span> <span class="op">=</span> <span class="ident">get_text_area_element_value_string_by_id</span>(<span class="string">&quot;substitution&quot;</span>);
     <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="ident">get_element_inner_text_by_id</span>(<span class="string">&quot;test_string&quot;</span>);
 
-    <span class="kw">let</span> <span class="ident">explanation</span> <span class="op">=</span> <span class="ident">regex_explanation_mod</span>::<span class="ident">lib_main</span>(<span class="ident">regex_text</span>.<span class="ident">clone</span>());
+    <span class="kw">let</span> <span class="ident">explanation</span> <span class="op">=</span> <span class="ident">regex_explanation_mod</span>::<span class="ident">create_explanation_html</span>(<span class="ident">regex_text</span>.<span class="ident">clone</span>());
     <span class="ident">set_element_inner_html_by_id</span>(<span class="string">&quot;explanation&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">explanation</span>);
 
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">regex_method_mod</span>::<span class="ident">lib_main</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">substitution</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">regex_method_mod</span>::<span class="ident">run_regex_methods_html</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">substitution</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
     <span class="ident">set_element_inner_html_by_id</span>(<span class="string">&quot;result&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">result</span>);
 
     <span class="kw">let</span> <span class="ident">code_gen</span> <span class="op">=</span> <span class="ident">code_gen_mod</span>::<span class="ident">code_gen_html</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">substitution</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
     <span class="ident">set_element_inner_html_by_id</span>(<span class="string">&quot;code_gen&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">code_gen</span>);
 
-    <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="ident">color_test_string_mod</span>::<span class="ident">color_test_string</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
+    <span class="kw">let</span> <span class="ident">test_string</span> <span class="op">=</span> <span class="ident">test_string_mod</span>::<span class="ident">test_string_html</span>(<span class="kw-2">&amp;</span><span class="ident">regex_text</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
     <span class="ident">set_element_inner_html_by_id</span>(<span class="string">&quot;test_string&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">test_string</span>);
 
     <span class="comment">// Applies highlighting to the blocks on a page.</span>

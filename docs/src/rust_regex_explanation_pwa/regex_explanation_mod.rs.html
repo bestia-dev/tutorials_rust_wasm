@@ -433,9 +433,71 @@
 <span id="433">433</span>
 <span id="434">434</span>
 <span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
+<span id="474">474</span>
+<span id="475">475</span>
+<span id="476">476</span>
+<span id="477">477</span>
+<span id="478">478</span>
+<span id="479">479</span>
+<span id="480">480</span>
+<span id="481">481</span>
+<span id="482">482</span>
+<span id="483">483</span>
+<span id="484">484</span>
+<span id="485">485</span>
+<span id="486">486</span>
+<span id="487">487</span>
+<span id="488">488</span>
+<span id="489">489</span>
+<span id="490">490</span>
+<span id="491">491</span>
+<span id="492">492</span>
+<span id="493">493</span>
+<span id="494">494</span>
+<span id="495">495</span>
+<span id="496">496</span>
+<span id="497">497</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">html_encoded_push</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">web_sys_mod</span>::<span class="ident">HtmlEncoded</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">web_sys_mod</span>::<span class="kw-2">*</span>;
 
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">ops</span>::<span class="ident">Range</span>;
 <span class="kw">use</span> <span class="ident">regex_syntax</span>::<span class="ident">ast</span>::<span class="kw-2">*</span>;
@@ -443,24 +505,33 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Explanation</span> {
     <span class="kw">pub</span> <span class="ident">reg_str</span>: <span class="ident">String</span>,
-    <span class="kw">pub</span> <span class="ident">indent</span>: <span class="ident">usize</span>,
-    <span class="comment">// every string is html encoded with the macro html_encoded_push!()</span>
     <span class="kw">pub</span> <span class="ident">html</span>: <span class="ident">HtmlEncoded</span>,
+    <span class="kw">pub</span> <span class="ident">single_line</span>: <span class="ident">SingleLine</span>,
+    <span class="kw">pub</span> <span class="ident">indent</span>: <span class="ident">usize</span>,
+    <span class="kw">pub</span> <span class="ident">color_index</span>: <span class="ident">usize</span>,
+    <span class="doccomment">/// (&#39;s|e&#39;, pos, color_index)</span>
+    <span class="kw">pub</span> <span class="ident">span_colors</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">char</span>, <span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span>,
+}
+
+<span class="doccomment">/// builder elements for a single line</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SingleLine</span> {
     <span class="comment">// print literals in one line for brevity</span>
     <span class="kw">pub</span> <span class="ident">fragment</span>: <span class="ident">String</span>,
     <span class="kw">pub</span> <span class="ident">symbol</span>: <span class="ident">String</span>,
-    <span class="kw">pub</span> <span class="ident">explanation_single</span>: <span class="ident">String</span>,
+    <span class="kw">pub</span> <span class="ident">explanation</span>: <span class="ident">String</span>,
+    <span class="kw">pub</span> <span class="ident">range_start</span>: <span class="ident">usize</span>,
+    <span class="kw">pub</span> <span class="ident">range_end</span>: <span class="ident">usize</span>,
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lib_main</span>(<span class="ident">reg_str</span>: <span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">HtmlEncoded</span> {
+<span class="doccomment">/// creates html encoded with the macro html_encoded_push!()</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_explanation_html</span>(<span class="ident">reg_str</span>: <span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">HtmlEncoded</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exp</span> <span class="op">=</span> <span class="ident">Explanation</span> {
         <span class="ident">reg_str</span>,
         <span class="ident">html</span>: <span class="kw">crate</span>::<span class="ident">web_sys_mod</span>::<span class="ident">HtmlEncoded</span>::<span class="ident">new</span>(),
         ..<span class="ident">Default</span>::<span class="ident">default</span>()
     };
 
-    <span class="ident">exp</span>.<span class="ident">html</span>.<span class="ident">push_new_line</span>();
-    <span class="macro">html_encoded_push</span><span class="macro">!</span>(<span class="ident">exp</span>.<span class="ident">html</span>, <span class="string">r#&quot;regex: &lt;span class=&quot;hljs-section&quot;&gt;{}&lt;/span&gt;&quot;#</span>, <span class="kw-2">&amp;</span><span class="ident">exp</span>.<span class="ident">reg_str</span>);
     <span class="ident">exp</span>.<span class="ident">html</span>.<span class="ident">push_new_line</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ast</span> <span class="op">=</span> <span class="ident">regex_syntax</span>::<span class="ident">ast</span>::<span class="ident">parse</span>::<span class="ident">Parser</span>::<span class="ident">new</span>();
     <span class="kw">let</span> <span class="ident">ast</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ast</span>.<span class="ident">parse</span>(<span class="kw-2">&amp;</span><span class="ident">exp</span>.<span class="ident">reg_str</span>) {
@@ -474,33 +545,53 @@
     <span class="comment">//dbg!(&amp;ast);</span>
     <span class="ident">process_ast</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">exp</span>, <span class="kw-2">&amp;</span><span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">ast</span>));
     <span class="ident">exp</span>.<span class="ident">print_literals</span>();
-    <span class="ident">exp</span>.<span class="ident">html</span>.<span class="ident">push_new_line</span>();
+
+    <span class="kw">let</span> <span class="ident">html_2nd</span> <span class="op">=</span> <span class="ident">exp</span>.<span class="ident">colorize_regex_text</span>();
+    <span class="ident">exp</span>.<span class="ident">html</span>.<span class="ident">insert_html</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="ident">html_2nd</span>);
+
     <span class="comment">// return</span>
     <span class="ident">exp</span>.<span class="ident">html</span>
 }
 
 <span class="kw">impl</span> <span class="ident">Explanation</span> {
     <span class="kw">fn</span> <span class="ident">print_literals</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">fragment</span>.<span class="ident">is_empty</span>() {
-            <span class="self">self</span>.<span class="ident">print_fragment</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">fragment</span>.<span class="ident">clone</span>());
-            <span class="macro">html_encoded_push</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">html</span>, <span class="string">&quot;{}\n&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">explanation_single</span>);
-            <span class="self">self</span>.<span class="ident">fragment</span>.<span class="ident">clear</span>();
-            <span class="self">self</span>.<span class="ident">explanation_single</span>.<span class="ident">clear</span>();
+        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">fragment</span>.<span class="ident">is_empty</span>() {
+            <span class="self">self</span>.<span class="ident">span_colors</span>.<span class="ident">push</span>((<span class="string">&#39;s&#39;</span>, <span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">range_start</span>, <span class="self">self</span>.<span class="ident">color_index</span>));
+            <span class="self">self</span>.<span class="ident">span_colors</span>.<span class="ident">push</span>((<span class="string">&#39;e&#39;</span>, <span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">range_end</span>, <span class="self">self</span>.<span class="ident">color_index</span>));
+            <span class="self">self</span>.<span class="ident">print_fragment</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">fragment</span>.<span class="ident">clone</span>());
+            <span class="macro">html_encoded_push</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">html</span>, <span class="string">r#&quot;{}&quot;#</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">explanation</span>);
+            <span class="self">self</span>.<span class="ident">html</span>.<span class="ident">push_new_line</span>();
+
+            <span class="self">self</span>.<span class="ident">color_index_increment</span>();
+            <span class="self">self</span>.<span class="ident">clear_single_line</span>();
         }
     }
+    <span class="kw">fn</span> <span class="ident">clear_single_line</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+        <span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">fragment</span>.<span class="ident">clear</span>();
+        <span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">explanation</span>.<span class="ident">clear</span>();
+        <span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">symbol</span>.<span class="ident">clear</span>();
+        <span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">range_start</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">range_end</span> <span class="op">=</span> <span class="number">0</span>;
+    }
     <span class="kw">fn</span> <span class="ident">set_explanation</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">symbol</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
-        <span class="self">self</span>.<span class="ident">symbol</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">symbol</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="string">&quot; &quot;</span>.<span class="ident">repeat</span>(<span class="self">self</span>.<span class="ident">indent</span> <span class="op">*</span> <span class="number">2</span>));
-        <span class="self">self</span>.<span class="ident">symbol</span>.<span class="ident">push_str</span>(<span class="ident">symbol</span>);
-        <span class="self">self</span>.<span class="ident">symbol</span>.<span class="ident">push_str</span>(<span class="kw">if</span> <span class="ident">symbol</span>.<span class="ident">is_empty</span>() { <span class="string">&quot;&quot;</span> } <span class="kw">else</span> { <span class="string">&quot; &quot;</span> });
+        <span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">symbol</span>.<span class="ident">clear</span>();
+        <span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">symbol</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="string">&quot; &quot;</span>.<span class="ident">repeat</span>(<span class="self">self</span>.<span class="ident">indent</span> <span class="op">*</span> <span class="number">2</span>));
+        <span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">symbol</span>.<span class="ident">push_str</span>(<span class="ident">symbol</span>);
+        <span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">symbol</span>.<span class="ident">push_str</span>(<span class="kw">if</span> <span class="ident">symbol</span>.<span class="ident">is_empty</span>() { <span class="string">&quot;&quot;</span> } <span class="kw">else</span> { <span class="string">&quot; &quot;</span> });
 
-        <span class="self">self</span>.<span class="ident">explanation_single</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">explanation_single</span>.<span class="ident">push_str</span>(<span class="ident">name</span>);
+        <span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">explanation</span>.<span class="ident">clear</span>();
+        <span class="self">self</span>.<span class="ident">single_line</span>.<span class="ident">explanation</span>.<span class="ident">push_str</span>(<span class="ident">name</span>);
     }
     <span class="kw">fn</span> <span class="ident">print_fragment</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">fragment</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
-        <span class="comment">// if is longler than 16, than new line and 16 spaces</span>
+        <span class="comment">// if is longer than 16, than new line and 16 spaces</span>
         <span class="kw">const</span> <span class="ident">COL_WIDTH</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">16</span>;
-        <span class="macro">html_encoded_push</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">html</span>, <span class="string">r#&quot;&lt;span class=&quot;hljs-section&quot;&gt;{}&lt;/span&gt;&quot;#</span>, <span class="ident">fragment</span>);
+
+        <span class="macro">html_encoded_push</span><span class="macro">!</span>(
+            <span class="self">self</span>.<span class="ident">html</span>,
+            <span class="string">r#&quot;&lt;span class=&quot;b_color_{}&quot;&gt;{}&lt;/span&gt;&quot;#</span>,
+            <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:02}&quot;</span>, <span class="self">self</span>.<span class="ident">color_index</span>),
+            <span class="ident">fragment</span>
+        );
         <span class="kw">if</span> <span class="ident">fragment</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="ident">COL_WIDTH</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">indent</span> {
             <span class="kw">let</span> <span class="ident">rest</span> <span class="op">=</span> <span class="ident">COL_WIDTH</span> <span class="op">-</span> <span class="ident">fragment</span>.<span class="ident">len</span>();
             <span class="macro">html_encoded_push</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">html</span>, <span class="string">&quot;{}&quot;</span>, <span class="kw-2">&amp;</span><span class="string">&quot; &quot;</span>.<span class="ident">repeat</span>(<span class="ident">rest</span>));
@@ -509,20 +600,49 @@
             <span class="macro">html_encoded_push</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">html</span>, <span class="string">&quot;{}&quot;</span>, <span class="kw-2">&amp;</span><span class="string">&quot; &quot;</span>.<span class="ident">repeat</span>(<span class="ident">COL_WIDTH</span>));
         }
     }
+    <span class="kw">fn</span> <span class="ident">color_index_increment</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+        <span class="self">self</span>.<span class="ident">color_index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+    }
+    <span class="doccomment">/// return the regex with colors</span>
+    <span class="kw">fn</span> <span class="ident">colorize_regex_text</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">HtmlEncoded</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">html_2nd</span> <span class="op">=</span> <span class="kw">crate</span>::<span class="ident">web_sys_mod</span>::<span class="ident">HtmlEncoded</span>::<span class="ident">new</span>();
+        <span class="macro">html_encoded_push</span><span class="macro">!</span>(<span class="ident">html_2nd</span>, <span class="string">r#&quot;regex: &quot;#</span>);
+        <span class="comment">// sort the token events</span>
+        <span class="self">self</span>.<span class="ident">span_colors</span>.<span class="ident">sort_by</span>(<span class="op">|</span><span class="ident">a</span>, <span class="ident">b</span><span class="op">|</span> <span class="ident">a</span>.<span class="number">1</span>.<span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="ident">b</span>.<span class="number">1</span>).<span class="ident">unwrap</span>());
+        <span class="comment">//debug_write(&amp;format!(&quot;{:?}&quot;, self.span_colors));</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cursor_pos</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">for</span> <span class="ident">c</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">span_colors</span>.<span class="ident">iter</span>() {
+            <span class="macro">html_encoded_push</span><span class="macro">!</span>(<span class="ident">html_2nd</span>, <span class="string">&quot;{}&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">reg_str</span>[<span class="ident">cursor_pos</span>..<span class="ident">c</span>.<span class="number">1</span>]);
+            <span class="kw">if</span> <span class="ident">c</span>.<span class="number">0</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;s&#39;</span> {
+                <span class="macro">html_encoded_push</span><span class="macro">!</span>(<span class="ident">html_2nd</span>, <span class="string">r#&quot;&lt;span class=&quot;b_color_{}&quot;&gt;&quot;#</span>, <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:02}&quot;</span>, <span class="ident">c</span>.<span class="number">2</span>));
+            } <span class="kw">else</span> {
+                <span class="comment">// c.0== &#39;e&#39;</span>
+                <span class="macro">html_encoded_push</span><span class="macro">!</span>(<span class="ident">html_2nd</span>, <span class="string">r#&quot;&lt;/span&gt;&quot;#</span>);
+            }
+            <span class="ident">cursor_pos</span> <span class="op">=</span> <span class="ident">c</span>.<span class="number">1</span>;
+        }
+        <span class="macro">html_encoded_push</span><span class="macro">!</span>(<span class="ident">html_2nd</span>, <span class="string">&quot;{}&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">reg_str</span>[<span class="ident">cursor_pos</span>..]);
+        <span class="ident">html_2nd</span>.<span class="ident">push_new_line</span>();
+        <span class="comment">// return</span>
+        <span class="ident">html_2nd</span>
+    }
 }
 
 <span class="doccomment">/// print any token except literals</span>
 <span class="kw">fn</span> <span class="ident">print</span>(<span class="ident">exp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Explanation</span>, <span class="ident">symbol</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">range</span>: <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) {
     <span class="ident">exp</span>.<span class="ident">print_literals</span>();
+    <span class="ident">exp</span>.<span class="ident">span_colors</span>.<span class="ident">push</span>((<span class="string">&#39;s&#39;</span>, <span class="ident">range</span>.<span class="ident">start</span>, <span class="ident">exp</span>.<span class="ident">color_index</span>));
+    <span class="ident">exp</span>.<span class="ident">span_colors</span>.<span class="ident">push</span>((<span class="string">&#39;e&#39;</span>, <span class="ident">range</span>.<span class="ident">end</span>, <span class="ident">exp</span>.<span class="ident">color_index</span>));
     <span class="ident">exp</span>.<span class="ident">print_fragment</span>(<span class="kw-2">&amp;</span><span class="ident">exp</span>.<span class="ident">reg_str</span>[<span class="ident">range</span>].<span class="ident">to_string</span>());
     <span class="ident">exp</span>.<span class="ident">set_explanation</span>(<span class="ident">symbol</span>, <span class="ident">name</span>);
     <span class="macro">html_encoded_push</span><span class="macro">!</span>(
         <span class="ident">exp</span>.<span class="ident">html</span>,
         <span class="string">r#&quot;&lt;span class=&quot;hljs-keyword&quot;&gt;{}&lt;/span&gt;{}&quot;#</span>,
-        <span class="kw-2">&amp;</span><span class="ident">exp</span>.<span class="ident">symbol</span>,
-        <span class="kw-2">&amp;</span><span class="ident">exp</span>.<span class="ident">explanation_single</span>
+        <span class="kw-2">&amp;</span><span class="ident">exp</span>.<span class="ident">single_line</span>.<span class="ident">symbol</span>,
+        <span class="kw-2">&amp;</span><span class="ident">exp</span>.<span class="ident">single_line</span>.<span class="ident">explanation</span>
     );
     <span class="ident">exp</span>.<span class="ident">html</span>.<span class="ident">push_new_line</span>();
+    <span class="ident">exp</span>.<span class="ident">color_index_increment</span>();
 }
 
 <span class="kw">fn</span> <span class="ident">greed</span>(<span class="ident">greedy</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
@@ -688,7 +808,7 @@
                 <span class="ident">Flag</span>::<span class="ident">IgnoreWhitespace</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">print</span>(
                     <span class="ident">exp</span>,
                     <span class="string">&quot;x modifier&quot;</span>,
-                    <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;ignore whotespace&quot;</span>),
+                    <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;ignore whitespace&quot;</span>),
                     <span class="ident">item</span>.<span class="ident">span</span>.<span class="ident">start</span>.<span class="ident">offset</span>..<span class="ident">item</span>.<span class="ident">span</span>.<span class="ident">end</span>.<span class="ident">offset</span>,
                 ),
             },
@@ -847,7 +967,10 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">literal</span>(<span class="ident">exp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Explanation</span>, <span class="ident">l</span>: <span class="kw-2">&amp;</span><span class="ident">Literal</span>, <span class="ident">negated</span>: <span class="ident">bool</span>) {
     <span class="kw">match</span> <span class="ident">l</span>.<span class="ident">kind</span> {
         <span class="ident">LiteralKind</span>::<span class="ident">Verbatim</span> <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">if</span> <span class="ident">exp</span>.<span class="ident">fragment</span>.<span class="ident">is_empty</span>() {
+            <span class="kw">if</span> <span class="ident">exp</span>.<span class="ident">single_line</span>.<span class="ident">fragment</span>.<span class="ident">is_empty</span>() {
+                <span class="ident">exp</span>.<span class="ident">single_line</span>.<span class="ident">fragment</span>.<span class="ident">clear</span>();
+                <span class="ident">exp</span>.<span class="ident">single_line</span>.<span class="ident">explanation</span>.<span class="ident">clear</span>();
+                <span class="ident">exp</span>.<span class="ident">single_line</span>.<span class="ident">symbol</span>.<span class="ident">clear</span>();
                 <span class="comment">// start the line, but don&#39;t print, leave the possibility to add more literals</span>
                 <span class="comment">// the actual print will happen when somebody else call print.</span>
                 <span class="kw">if</span> <span class="ident">negated</span> {
@@ -855,10 +978,11 @@
                 } <span class="kw">else</span> {
                     <span class="ident">exp</span>.<span class="ident">set_explanation</span>(<span class="string">&quot;&quot;</span>, <span class="string">&quot;Matches characters literally&quot;</span>);
                 }
-                <span class="ident">exp</span>.<span class="ident">fragment</span>.<span class="ident">clear</span>();
+                <span class="ident">exp</span>.<span class="ident">single_line</span>.<span class="ident">range_start</span> <span class="op">=</span> <span class="ident">l</span>.<span class="ident">span</span>.<span class="ident">start</span>.<span class="ident">offset</span>;
             }
             <span class="comment">// add one literal to the same line</span>
-            <span class="ident">exp</span>.<span class="ident">fragment</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">exp</span>.<span class="ident">reg_str</span>[<span class="ident">l</span>.<span class="ident">span</span>.<span class="ident">start</span>.<span class="ident">offset</span>..<span class="ident">l</span>.<span class="ident">span</span>.<span class="ident">end</span>.<span class="ident">offset</span>]);
+            <span class="ident">exp</span>.<span class="ident">single_line</span>.<span class="ident">fragment</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">exp</span>.<span class="ident">reg_str</span>[<span class="ident">l</span>.<span class="ident">span</span>.<span class="ident">start</span>.<span class="ident">offset</span>..<span class="ident">l</span>.<span class="ident">span</span>.<span class="ident">end</span>.<span class="ident">offset</span>]);
+            <span class="ident">exp</span>.<span class="ident">single_line</span>.<span class="ident">range_end</span> <span class="op">=</span> <span class="ident">l</span>.<span class="ident">span</span>.<span class="ident">end</span>.<span class="ident">offset</span>;
         }
         <span class="ident">LiteralKind</span>::<span class="ident">Punctuation</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">print</span>(
             <span class="ident">exp</span>,

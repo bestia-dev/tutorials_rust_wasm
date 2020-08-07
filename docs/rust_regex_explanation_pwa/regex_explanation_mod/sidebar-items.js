@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["class_set_item",""],["flags",""],["greed",""],["lib_main",""],["literal",""],["print","print any token except literals"],["process_ast",""]],"struct":[["Explanation",""]]});
+initSidebarItems({"fn":[["class_set_item",""],["create_explanation_html","creates html encoded with the macro html_encoded_push!()"],["flags",""],["greed",""],["literal",""],["print","print any token except literals"],["process_ast",""]],"struct":[["Explanation",""],["SingleLine","builder elements for a single line"]]});
