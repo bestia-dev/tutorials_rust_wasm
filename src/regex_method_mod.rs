@@ -4,7 +4,7 @@ use crate::web_sys_mod::HtmlEncoded;
 use regex::Regex;
 
 /// runs 6 regex methods and show result as html
-pub fn lib_main(regex_text: &str, substitution: &str, test_string: &str) -> HtmlEncoded {
+pub fn run_regex_methods_html(regex_text: &str, substitution: &str, test_string: &str) -> HtmlEncoded {
     let mut html = crate::web_sys_mod::HtmlEncoded::new();
     //html_encoded_push!(html, r#"<span class="hljs-comment">--- regex methods start ---</span>"#);
     html.push_new_line();

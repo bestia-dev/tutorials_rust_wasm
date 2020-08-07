@@ -19,37 +19,34 @@ pub fn color_test_string(regex_text: &str, test_string: &str) -> HtmlEncoded {
     };
 
     let colors = colors_with_order();
-    /*
-        extern crate rand;
-    use rand::{Rng, StdRng};
-    let mut rng = StdRng::new().unwrap();
-    rng.shuffle(&mut x);
-    */
-    let mut cursor_color = 0;
-    let mut caps = vec![];
+
+    // vec of (kind, pos, color)
+    // kind id s- start, e-end
+    let mut span_colors = vec![];
     //first fill and then sort, start and end together
     for c in rgx.captures_iter(test_string) {
+        let mut cursor_color = 10;
         for i in 0..c.len() {
-            caps.push(('s', c.get(i).unwrap().start()));
-            caps.push(('e', c.get(i).unwrap().end()));
+            span_colors.push(('s', c.get(i).unwrap().start(), cursor_color));
+            span_colors.push(('e', c.get(i).unwrap().end(), cursor_color));
+            cursor_color += 1;
+            if cursor_color >= colors.len() {
+                cursor_color = 0;
+            }
         }
     }
-    caps.sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap());
-    //debug_write(&format!("{:?}", caps));
+    span_colors.sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap());
+    //debug_write(&format!("{:?}", span_colors));
     let mut cursor_pos = 0;
-    for c in caps.iter() {
+    for c in span_colors.iter() {
         html_encoded_push!(html, "{}", &test_string[cursor_pos..c.1]);
         if c.0 == 's' {
-            html_encoded_push!(html, r#"<span style="background-color:{}">"#, colors[cursor_color].0);
+            html_encoded_push!(html, r#"<span style="background-color:{}">"#, colors[c.2].0);
         } else {
             // c.0== 'e'
             html_encoded_push!(html, r#"</span>"#);
         }
         cursor_pos = c.1;
-        cursor_color += 1;
-        if cursor_color >= colors.len() {
-            cursor_color = 0;
-        }
     }
     html_encoded_push!(html, "{}", &test_string[cursor_pos..]);
     // return
@@ -59,7 +56,6 @@ pub fn color_test_string(regex_text: &str, test_string: &str) -> HtmlEncoded {
 /// dark colors shuffled
 fn colors_with_order() -> Vec<(&'static str, &'static str)> {
     vec![
-        ("#547053", "Evergreen"),
         ("#29304e", "Midnight Blue"),
         ("#80444c", "Deep Purple"),
         ("#004953", "Poker Green"),

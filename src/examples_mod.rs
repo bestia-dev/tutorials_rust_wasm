@@ -58,7 +58,36 @@ pub fn example_xml_1() {
     example_xml_1_base();
     display_block("regex_text_label");
     display_block("regex_text_section");
+    run_regex();
     scroll("start_panel");
+}
+
+// example xml_2
+pub fn example_xml_2() {
+    example_xml_1_base();
+    let regex_text = r#"<year>(1[789]\d\d)</year>"#;
+    set_text_area_element_value_string_by_id("regex_text", regex_text);
+    display_block("regex_text_label");
+    display_block("regex_text_section");
+    run_regex();
+    scroll("start_panel");
+}
+
+// example xml_3
+pub fn example_xml_3() {
+    example_xml_1_base();
+    let regex_text = r#"<year>(2\d{3})</year>"#;
+    set_text_area_element_value_string_by_id("regex_text", regex_text);
+    display_block("regex_text_label");
+    display_block("regex_text_section");
+    run_regex();
+    scroll("start_panel");
+}
+
+// example xml_1 base
+pub fn init_wit_example_xml_1_base() {
+    example_xml_1_base();
+    run_regex();
 }
 
 // example xml_1 base
@@ -97,5 +126,4 @@ pub fn example_xml_1_base() {
   "#,
     );
     set_element_inner_html_by_id("test_string", &test_string);
-    run_regex();
 }

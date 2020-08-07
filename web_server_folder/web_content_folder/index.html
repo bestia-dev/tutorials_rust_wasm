@@ -150,7 +150,9 @@ FInd the names of models on the page https://en.wikipedia.org/wiki/Terminator_(c
 <span id="example_model_3" class="pointer c_yellow">3. model name - T-(X|\d+)</span> There are always some exceptions, the T-X model.
 It also replaces T- with the word Robot().
 <span id="example_xml_1" class="pointer c_yellow">4. XML - &lt;title&gt;(.+?)&lt;/title&gt; </span> Find titles - not greedy.
-<span id="example_email" class="pointer c_yellow">5. Just a simple email validation - ^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</span>
+<span id="example_xml_2" class="pointer c_yellow">5. XML - &lt;year&gt;(1[89]\d\d)&lt;/year&gt; </span> Find old years.
+<span id="example_xml_3" class="pointer c_yellow">6. XML - &lt;year&gt;(2\d{3})&lt;/year&gt; </span> Find new years.
+<span id="example_email" class="pointer c_yellow">7. Just a simple email validation - ^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</span>
                         </code></pre>
                   </div>
                   <div id="regex_help_label" class="grid0_c bold">

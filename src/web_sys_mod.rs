@@ -151,6 +151,10 @@ impl HtmlEncoded {
         // return
         self.html.to_string()
     }
+    /// insert html as a position
+    pub fn insert_html(&mut self, pos: usize, html: &HtmlEncoded) {
+        self.html.insert_str(pos, &html.get_html());
+    }
 }
 
 /// return window object

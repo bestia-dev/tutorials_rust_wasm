@@ -100,7 +100,7 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     set_element_inner_html_by_id("pkg_version", &html_encoded);
 
     // Initialize input fields
-    example_xml_1_base();
+    init_wit_example_xml_1_base();
 
     set_all_event_listeners();
 
@@ -179,6 +179,8 @@ fn set_all_event_listeners() {
     on_click!("example_model_2", example_model_2);
     on_click!("example_model_3", example_model_3);
     on_click!("example_xml_1", example_xml_1);
+    on_click!("example_xml_2", example_xml_2);
+    on_click!("example_xml_3", example_xml_3);
 
     on_click!("code_gen_copy", code_gen_copy);
     on_click!("code_gen_run_in_playground", code_gen_run_in_playground);
@@ -190,10 +192,10 @@ fn run_regex() {
     let substitution = get_text_area_element_value_string_by_id("substitution");
     let test_string = get_element_inner_text_by_id("test_string");
 
-    let explanation = regex_explanation_mod::lib_main(regex_text.clone());
+    let explanation = regex_explanation_mod::create_explanation_html(regex_text.clone());
     set_element_inner_html_by_id("explanation", &explanation);
 
-    let result = regex_method_mod::lib_main(&regex_text, &substitution, &test_string);
+    let result = regex_method_mod::run_regex_methods_html(&regex_text, &substitution, &test_string);
     set_element_inner_html_by_id("result", &result);
 
     let code_gen = code_gen_mod::code_gen_html(&regex_text, &substitution, &test_string);
