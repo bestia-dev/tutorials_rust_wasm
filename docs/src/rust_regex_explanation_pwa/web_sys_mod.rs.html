@@ -270,6 +270,71 @@
 <span id="270">270</span>
 <span id="271">271</span>
 <span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// web_sys_mod.rs</span>
 <span class="doccomment">//! helper functions for web_sys, window, document, dom, console,</span>
@@ -284,14 +349,14 @@
 <span class="comment">// endregion: use</span>
 
 <span class="doccomment">/// Simple macro to set listener of onclick events to an element_id.</span>
-<span class="doccomment">/// no args: handle_click!(element_1_id, function_ident)</span>
-<span class="doccomment">/// no args: handle_click!(&quot;example_email&quot;,example_email)</span>
-<span class="doccomment">/// 1 args: handle_click!(element_1_id, function_ident, arg_1)</span>
-<span class="doccomment">/// 1 args: handle_click!(&quot;example_email&quot;,example_email, &quot;arg_1&quot;)</span>
-<span class="doccomment">/// 2 args: handle_click!(element_1_id, function_ident, arg_1,arg_2)</span>
-<span class="doccomment">/// 2 args: handle_click!(&quot;example_email&quot;,example_email, &quot;arg_1&quot;,&quot;arg_2&quot;)</span>
+<span class="doccomment">/// no args: on_click!(element_1_id, function_ident)</span>
+<span class="doccomment">/// no args: on_click!(&quot;example_email&quot;,example_email)</span>
+<span class="doccomment">/// 1 args: on_click!(element_1_id, function_ident, arg_1)</span>
+<span class="doccomment">/// 1 args: on_click!(&quot;example_email&quot;,example_email, &quot;arg_1&quot;)</span>
+<span class="doccomment">/// 2 args: on_click!(element_1_id, function_ident, arg_1,arg_2)</span>
+<span class="doccomment">/// 2 args: on_click!(&quot;example_email&quot;,example_email, &quot;arg_1&quot;,&quot;arg_2&quot;)</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">handle_click</span> {
+<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">on_click</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">element_1_id</span>: <span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">function_ident</span>: <span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="kw">let</span> <span class="ident">closure</span> <span class="op">=</span> <span class="ident">Closure</span>::<span class="ident">wrap</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
             <span class="macro-nonterminal">$</span><span class="macro-nonterminal">function_ident</span>();
@@ -319,13 +384,22 @@
         <span class="ident">html_element</span>.<span class="ident">set_onclick</span>(<span class="prelude-val">Some</span>(<span class="ident">closure</span>.<span class="ident">as_ref</span>().<span class="ident">unchecked_ref</span>()));
         <span class="ident">closure</span>.<span class="ident">forget</span>();
     }};
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">element_1_id</span>: <span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">function_ident</span>: <span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg_1</span>: <span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg_2</span>: <span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg_3</span>: <span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {{
+        <span class="kw">let</span> <span class="ident">closure</span> <span class="op">=</span> <span class="ident">Closure</span>::<span class="ident">wrap</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">function_ident</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg_1</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg_2</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg_3</span>);
+        }) <span class="kw">as</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">FnMut</span>()<span class="op">&gt;</span>);
+
+        <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="ident">get_html_element_by_id</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">element_1_id</span>);
+        <span class="ident">html_element</span>.<span class="ident">set_onclick</span>(<span class="prelude-val">Some</span>(<span class="ident">closure</span>.<span class="ident">as_ref</span>().<span class="ident">unchecked_ref</span>()));
+        <span class="ident">closure</span>.<span class="ident">forget</span>();
+    }};
 }
 
 <span class="doccomment">/// Simple macro to set listener of onkeyup events to an element_id.</span>
-<span class="doccomment">/// set_listener_on_keyup!(element_id, function_ident)</span>
-<span class="doccomment">/// set_listener_on_keyup!(&quot;regex_text&quot;, run_regex)</span>
+<span class="doccomment">/// on_keyup!(element_id, function_ident)</span>
+<span class="doccomment">/// on_keyup!(&quot;regex_text&quot;, run_regex)</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">set_listener_on_keyup</span> {
+<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">on_keyup</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">element_id</span>: <span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">function_ident</span>: <span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="kw">let</span> <span class="ident">closure</span> <span class="op">=</span> <span class="ident">Closure</span>::<span class="ident">wrap</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
             <span class="macro-nonterminal">$</span><span class="macro-nonterminal">function_ident</span>();
@@ -505,7 +579,7 @@
     <span class="ident">text_area_html_element</span>.<span class="ident">set_value</span>(<span class="ident">value</span>);
 }
 
-<span class="doccomment">/// set code element value string by id</span>
+<span class="doccomment">/// set element inner text string by id</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_element_inner_html_by_id</span>(<span class="ident">element_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">html</span>: <span class="kw-2">&amp;</span><span class="ident">HtmlEncoded</span>) {
     <span class="comment">//debug_write(&quot;before get_element_by_id&quot;);</span>
     <span class="kw">let</span> <span class="ident">element</span> <span class="op">=</span> <span class="ident">get_element_by_id</span>(<span class="ident">element_id</span>);
@@ -515,7 +589,7 @@
 }
 
 <span class="doccomment">/// get inner_text as string by id</span>
-<span class="doccomment">/// very usable for &quot;contenteditable&quot; div or code</span>
+<span class="doccomment">/// very usable for &quot;contenteditable&quot; div or pre&gt;code</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_element_inner_text_by_id</span>(<span class="ident">element_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
     <span class="comment">//debug_write(&quot;before get_element_by_id&quot;);</span>
     <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="ident">get_html_element_by_id</span>(<span class="ident">element_id</span>);
@@ -543,5 +617,61 @@
     <span class="comment">// return</span>
     <span class="ident">f</span> <span class="kw">as</span> <span class="ident">i32</span>
 }
+
+<span class="doccomment">/// jump to element</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scroll</span>(<span class="ident">element_1_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
+    <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="ident">get_html_element_by_id</span>(<span class="ident">element_1_id</span>);
+    <span class="ident">html_element</span>.<span class="ident">scroll_into_view</span>();
+}
+
+<span class="doccomment">/// make visible the element</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">display_block</span>(<span class="ident">element_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
+    <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="ident">get_html_element_by_id</span>(<span class="ident">element_id</span>);
+    <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">html_element</span>.<span class="ident">style</span>().<span class="ident">set_property</span>(<span class="string">&quot;display&quot;</span>, <span class="string">&quot;block&quot;</span>));
+}
+
+<span class="doccomment">/// make invisible the element</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">display_none</span>(<span class="ident">element_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
+    <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="ident">get_html_element_by_id</span>(<span class="ident">element_id</span>);
+    <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">html_element</span>.<span class="ident">style</span>().<span class="ident">set_property</span>(<span class="string">&quot;display&quot;</span>, <span class="string">&quot;none&quot;</span>));
+}
+
+<span class="doccomment">/// change height</span>
+<span class="doccomment">/// change_height(&quot;el_id&quot;,&quot;auto&quot;);</span>
+<span class="doccomment">/// change_height(&quot;el_id&quot;,&quot;150px&quot;);</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">change_height</span>(<span class="ident">element_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">height</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
+    <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="ident">get_html_element_by_id</span>(<span class="ident">element_id</span>);
+    <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">html_element</span>.<span class="ident">style</span>().<span class="ident">set_property</span>(<span class="string">&quot;height&quot;</span>, <span class="ident">height</span>));
+}
+
+<span class="doccomment">/// copy to clipboard</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">copy_to_clipboard</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
+    <span class="comment">// escaping the backtick for the template string multi line</span>
+    <span class="comment">// that is delimited with backticks in javascript</span>
+    <span class="kw">let</span> <span class="ident">text</span> <span class="op">=</span> <span class="ident">text</span>.<span class="ident">replace</span>(<span class="string">&quot;`&quot;</span>, <span class="string">r#&quot;\`&quot;#</span>);
+    <span class="kw">let</span> <span class="ident">js_cmd</span> <span class="op">=</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">r#&quot;navigator.clipboard.writeText(`{}`)&quot;#</span>, <span class="ident">text</span>);
+    <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">js_sys</span>::<span class="ident">eval</span>(<span class="kw-2">&amp;</span><span class="ident">js_cmd</span>));
+}
+
+<span class="comment">// open URL in new tab</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">open_url_in_new_tab</span>(<span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
+    <span class="comment">// just an example of one method how to use javascript code inside Rust code</span>
+    <span class="kw">let</span> <span class="ident">js_cmd</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
+        <span class="string">r#&quot;{{
+        var win = window.open(&#39;{}&#39;, &#39;_blank&#39;);
+        win.focus();
+        }}&quot;#</span>,
+        <span class="ident">url</span>,
+    );
+    <span class="macro">unwrap</span><span class="macro">!</span>(<span class="ident">js_sys</span>::<span class="ident">eval</span>(<span class="kw-2">&amp;</span><span class="ident">js_cmd</span>));
+}
+
+<span class="comment">// code for uri encode with `percent-encoding = &quot;2.1.0&quot;`</span>
+<span class="comment">/*
+// first encode it with uri escape
+// https://url.spec.whatwg.org/#fragment-percent-encode-set
+const FRAGMENT: &amp;AsciiSet = &amp;CONTROLS.add(b&#39; &#39;).add(b&#39;&quot;&#39;).add(b&#39;&lt;&#39;).add(b&#39;&gt;&#39;).add(b&#39;`&#39;);
+let code_as_uri_parameter = percent_encoding::utf8_percent_encode(&amp;code_gen, FRAGMENT).to_string();
+*/</span>
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "rust_regex_explanation_pwa";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
