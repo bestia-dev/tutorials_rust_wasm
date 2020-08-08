@@ -64,7 +64,7 @@ impl Explanation {
             html_encoded_push!(self.html, r#"{}"#, &self.single_line.explanation);
             self.html.push_new_line();
 
-            self.color_index_increment();
+            color_index_increment(&mut self.color_index);
             self.clear_single_line();
         }
     }
@@ -101,9 +101,6 @@ impl Explanation {
             self.html.push_new_line();
             html_encoded_push!(self.html, "{}", &" ".repeat(COL_WIDTH));
         }
-    }
-    fn color_index_increment(&mut self) {
-        self.color_index += 1;
     }
     /// return the regex with colors
     fn colorize_regex_text(&mut self) -> HtmlEncoded {
@@ -144,7 +141,7 @@ fn print(exp: &mut Explanation, symbol: &str, name: &str, range: Range<usize>) {
         &exp.single_line.explanation
     );
     exp.html.push_new_line();
-    exp.color_index_increment();
+    color_index_increment(&mut exp.color_index);
 }
 
 fn greed(greedy: bool) -> &'static str {

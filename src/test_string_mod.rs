@@ -24,11 +24,11 @@ pub fn test_string_html(regex_text: &str, test_string: &str) -> HtmlEncoded {
     //first fill and then sort, start and end together
     for c in rgx.captures_iter(test_string) {
         // start the index somewhere else than 0, to have different colors
-        let mut color_index = 8;
+        let mut color_index = 9;
         for i in 0..c.len() {
             span_colors.push(('s', c.get(i).unwrap().start(), color_index));
             span_colors.push(('e', c.get(i).unwrap().end(), color_index));
-            color_index += 1;
+            color_index_increment(&mut color_index);
         }
     }
     span_colors.sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap());

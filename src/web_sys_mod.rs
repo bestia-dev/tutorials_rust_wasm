@@ -331,3 +331,12 @@ pub fn open_url_in_new_tab(url: &str) {
     );
     unwrap!(js_sys::eval(&js_cmd));
 }
+
+/// in css there are 85 colors
+/// increment index with rotation at 85
+pub fn color_index_increment(color_index: &mut usize) {
+    *color_index += 1;
+    if *color_index > (85 as usize) {
+        *color_index = 0;
+    }
+}
