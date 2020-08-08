@@ -178,7 +178,7 @@ pub fn get_element_by_id(element_id: &str) -> web_sys::Element {
         Some(el) => el,
         None => {
             debug_write(&format!("Error: not found get_element_by_id {}", element_id));
-            panic!("")
+            panic!("Error: not found get_element_by_id")
         }
     }
 }

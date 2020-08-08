@@ -7,16 +7,17 @@ use regex::Regex;
 pub fn run_regex_methods_html(regex_text: &str, substitution: &str, test_string: &str) -> HtmlEncoded {
     let mut html = crate::web_sys_mod::HtmlEncoded::new();
     //html_encoded_push!(html, r#"<span class="hljs-comment">--- regex methods start ---</span>"#);
-    // temporary show all colors for choosing the good combinations
-    for i in 0..100 {
-        if i % 5 == 0 {
-            html.push_new_line();
-            html_encoded_push!(html, r##"{} "##, &format!("{:02}", i));
+    /*
+        // temporary show all colors for choosing the good combinations
+        for i in 0..100 {
+            if i % 5 == 0 {
+                html.push_new_line();
+                html_encoded_push!(html, r##"{} "##, &format!("{:02}", i));
+            }
+            html_encoded_push!(html, r##"<span class="b_color_{}">abcdefg</span>"##, &format!("{:02}", i));
         }
-        html_encoded_push!(html, r##"<span class="b_color_{}">abcdefg</span>"##, &format!("{:02}", i));
-    }
-    html.push_new_line();
-
+        html.push_new_line();
+    */
     html_encoded_push!(html, "This is using the same Rust code of the section code-gen.\n");
     html_encoded_push!(
         html,

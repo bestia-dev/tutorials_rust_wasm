@@ -177,19 +177,8 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
             process_ast(exp, &g.ast);
         }
         Ast::Class(c) => match c {
-            Class::Bracketed(b) => {
-                print(
-                    exp,
-                    if b.negated { "[^ ]" } else { "[ ]" },
-                    if b.negated { "Bracketed negated" } else { "Bracketed" },
-                    b.span.start.offset..b.span.end.offset,
-                );
-                match &b.kind {
-                    ClassSet::Item(i) => class_set_item(exp, i, b.negated),
-                    _ => html_encoded_push!(exp.html, "unimplemented 1\n"),
-                }
-            }
-            Class::Perl(p) => match p.kind {
+            Class::Bracketed(b) => bracketed(exp, b),
+            Class::Perl(p) => match &p.kind {
                 ClassPerlKind::Digit => print(exp, r"\d", r"Matches a digit (equal to [0-9])", p.span.start.offset..p.span.end.offset),
                 ClassPerlKind::Space => print(
                     exp,
@@ -204,7 +193,7 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
                     p.span.start.offset..p.span.end.offset,
                 ),
             },
-            _ => html_encoded_push!(exp.html, "unimplemented Class\n"),
+            Class::Unicode(u) => class_unicode(exp, u),
         },
         Ast::Concat(c) => {
             for a in c.asts.iter() {
@@ -213,8 +202,27 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
         }
         Ast::Literal(l) => literal(exp, l, false),
         Ast::Assertion(a) => match a.kind {
+            AssertionKind::StartLine => print(
+                exp,
+                "^",
+                "Asserts position at the start of a line",
+                a.span.start.offset..a.span.end.offset,
+            ),
+            AssertionKind::StartText => print(
+                exp,
+                r#"\A"#,
+                "Asserts position at the start of text",
+                a.span.start.offset..a.span.end.offset,
+            ),
             AssertionKind::EndLine => print(exp, "$", "Asserts position at the end of a line", a.span.start.offset..a.span.end.offset),
-            _ => html_encoded_push!(exp.html, "unimplemented Assertion\n"),
+            AssertionKind::EndText => print(
+                exp,
+                r#"\z"#,
+                "Asserts position at the end of text",
+                a.span.start.offset..a.span.end.offset,
+            ),
+            AssertionKind::NotWordBoundary => print(exp, r#"\B"#, "Asserts not word boundary", a.span.start.offset..a.span.end.offset),
+            AssertionKind::WordBoundary => print(exp, r#"\b"#, "Asserts word boundary", a.span.start.offset..a.span.end.offset),
         },
         Ast::Alternation(a) => {
             print(exp, "|", "Alternatives", a.span.start.offset..a.span.end.offset);
@@ -260,7 +268,12 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
                         &format!("Quantifier — Matches between {} and {} times - {}", m, n, greed(r.greedy)),
                         r.span.start.offset..r.span.end.offset,
                     ),
-                    _ => html_encoded_push!(exp.html, "unimplemented RepetitionRange\n"),
+                    RepetitionRange::AtLeast(m) => print(
+                        exp,
+                        if r.greedy { "{m,}" } else { "{m,}?" },
+                        &format!("Quantifier — Matches at least {} times - {}", m, greed(r.greedy)),
+                        r.span.start.offset..r.span.end.offset,
+                    ),
                 },
             }
             process_ast(exp, &r.ast);
@@ -270,7 +283,7 @@ pub fn process_ast(exp: &mut Explanation, ast: &Box<Ast>) {
             print(exp, "(? )", &format!("Flags"), f.span.start.offset..f.span.end.offset);
             flags(exp, &f.flags);
         }
-        _ => html_encoded_push!(exp.html, "unimplemented Ast"),
+        Ast::Empty(s) => print(exp, "", &format!("Empty regex matches everything"), s.start.offset..s.end.offset),
     }
     exp.indent -= 1;
 }
@@ -460,11 +473,13 @@ pub fn class_set_item(exp: &mut Explanation, i: &ClassSetItem, negated: bool) {
                 a.span.start.offset..a.span.end.offset,
             ),
         },
-        _ => html_encoded_push!(exp.html, "unimplemented class_set_item\n"),
+        ClassSetItem::Empty(s) => print(exp, "", &format!("Empty class set."), s.start.offset..s.end.offset),
+        ClassSetItem::Unicode(u) => class_unicode(exp, u),
+        ClassSetItem::Bracketed(b) => bracketed(exp, b),
     }
 }
 pub fn literal(exp: &mut Explanation, l: &Literal, negated: bool) {
-    match l.kind {
+    match &l.kind {
         LiteralKind::Verbatim => {
             if exp.single_line.fragment.is_empty() {
                 exp.single_line.fragment.clear();
@@ -489,6 +504,50 @@ pub fn literal(exp: &mut Explanation, l: &Literal, negated: bool) {
             "Matches the escaped character literally",
             l.span.start.offset..l.span.end.offset,
         ),
-        _ => html_encoded_push!(exp.html, "unimplemented literal\n"),
+        LiteralKind::HexBrace(_h) => print(exp, "", "Matches hex brace", l.span.start.offset..l.span.end.offset),
+        LiteralKind::HexFixed(_h) => print(exp, "", "Matches hex fixed", l.span.start.offset..l.span.end.offset),
+        LiteralKind::Octal => print(exp, "", "Matches octal", l.span.start.offset..l.span.end.offset),
+        LiteralKind::Special(_h) => print(exp, "", "Matches special literals.", l.span.start.offset..l.span.end.offset),
+    }
+}
+
+pub fn class_unicode(exp: &mut Explanation, u: &ClassUnicode) {
+    match &u.kind {
+        ClassUnicodeKind::OneLetter(_c) => print(
+            exp,
+            r#"\pN"#,
+            r#"Unicode - A one letter abbreviated class."#,
+            u.span.start.offset..u.span.end.offset,
+        ),
+        ClassUnicodeKind::Named(_s) => print(
+            exp,
+            "",
+            r#"Unicode - A binary property, general category or script."#,
+            u.span.start.offset..u.span.end.offset,
+        ),
+        ClassUnicodeKind::NamedValue { op: _, name: _, value: _ } => print(
+            exp,
+            "",
+            r#"Unicode - A property name and an associated value."#,
+            u.span.start.offset..u.span.end.offset,
+        ),
+    }
+}
+fn bracketed(exp: &mut Explanation, b: &ClassBracketed) {
+    print(
+        exp,
+        if b.negated { "[^ ]" } else { "[ ]" },
+        if b.negated { "Bracketed negated" } else { "Bracketed" },
+        b.span.start.offset..b.span.end.offset,
+    );
+    match &b.kind {
+        ClassSet::Item(i) => class_set_item(exp, i, b.negated),
+        ClassSet::BinaryOp(b) => match b.kind {
+            ClassSetBinaryOpKind::Intersection => print(exp, "&&", "Intersection binary operation.", b.span.start.offset..b.span.end.offset),
+            ClassSetBinaryOpKind::Difference => print(exp, "--", "Difference binary operation.", b.span.start.offset..b.span.end.offset),
+            ClassSetBinaryOpKind::SymmetricDifference => {
+                print(exp, "~~", "SymmetricDifference binary operation.", b.span.start.offset..b.span.end.offset)
+            }
+        },
     }
 }

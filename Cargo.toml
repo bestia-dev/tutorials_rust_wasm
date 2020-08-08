@@ -1,6 +1,6 @@
 [package]
 name = "rust_regex_explanation_pwa"
-version = "2020.808.445"
+version = "2020.808.1242"
 authors = ["Luciano Bestia <Luciano.Bestia@gmail.com>"]
 edition = "2018"
 description = "Rust regex explanations in PWA"
