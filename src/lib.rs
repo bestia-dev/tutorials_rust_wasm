@@ -1,11 +1,11 @@
 // region: lmake_md_to_doc_comments include README.md A //!
 //! # rust_regex_explanation_pwa
 //!
-//! ***version: 2020.807.1441  date: 2020-08-07 authors: Luciano Bestia***  
+//! ***version: 2020.808.1242  date: 2020-08-08 authors: Luciano Bestia***  
 //! **Rust regex explanations in PWA**
 //!
-//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1374-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
-//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-153-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1438-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-155-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-147-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //! [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //! [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)

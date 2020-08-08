@@ -75,11 +75,11 @@
     <span class="comment">//first fill and then sort, start and end together</span>
     <span class="kw">for</span> <span class="ident">c</span> <span class="kw">in</span> <span class="ident">rgx</span>.<span class="ident">captures_iter</span>(<span class="ident">test_string</span>) {
         <span class="comment">// start the index somewhere else than 0, to have different colors</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">color_index</span> <span class="op">=</span> <span class="number">8</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">color_index</span> <span class="op">=</span> <span class="number">9</span>;
         <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">c</span>.<span class="ident">len</span>() {
             <span class="ident">span_colors</span>.<span class="ident">push</span>((<span class="string">&#39;s&#39;</span>, <span class="ident">c</span>.<span class="ident">get</span>(<span class="ident">i</span>).<span class="ident">unwrap</span>().<span class="ident">start</span>(), <span class="ident">color_index</span>));
             <span class="ident">span_colors</span>.<span class="ident">push</span>((<span class="string">&#39;e&#39;</span>, <span class="ident">c</span>.<span class="ident">get</span>(<span class="ident">i</span>).<span class="ident">unwrap</span>().<span class="ident">end</span>(), <span class="ident">color_index</span>));
-            <span class="ident">color_index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            <span class="ident">color_index_increment</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">color_index</span>);
         }
     }
     <span class="ident">span_colors</span>.<span class="ident">sort_by</span>(<span class="op">|</span><span class="ident">a</span>, <span class="ident">b</span><span class="op">|</span> <span class="ident">a</span>.<span class="number">1</span>.<span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="ident">b</span>.<span class="number">1</span>).<span class="ident">unwrap</span>());
