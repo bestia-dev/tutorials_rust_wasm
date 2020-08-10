@@ -47,11 +47,33 @@
                   <h2 class="c_yellow center">PWA for Rust Regex Explanations and Testing</h2>
                   <p class="small">You can "install" it in the browser's menu. It's a Progressive Web App for the desktop, Cross-Platform.</p>
                   &gt;&gt; <span id="menu_examples" class="c_link_1 pointer">Examples</span>
-                  &gt;&gt; <span id="menu_test_string" class="c_link_1 pointer">Test string</span>
                   &gt;&gt; <span id="menu_explanation" class="c_link_1 pointer">Explain</span>
                   &gt;&gt; <span id="menu_result" class="c_link_1 pointer">Result</span>
                   &gt;&gt; <span id="menu_code_gen" class="c_link_1 pointer">CodeGen</span>
                   &gt;&gt; <span id="menu_regex_help" class="c_link_1 pointer">Help</span>
+            </div>
+            <div class="container0_content_grid_0" style="grid-template-columns: 80px minmax(100px, auto);">
+                  <div id="examples_label" class="grid0_c bold">
+                        <p>&nbsp;
+                        <span id="examples_close" class="pointer c_white small" title="close">x</span>&nbsp;
+                        <span id="examples_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="examples_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                        </p>
+                        <label for="examples">examples</label>
+                  </div>
+                  <div id="examples_section"  class="grid0_c left">
+                        <pre ><code id="examples" class="hljs" style="height:300px;">Try some example, click on the links below and watch the Regex result:
+FInd the names of models on the page https://en.wikipedia.org/wiki/Terminator_(character). Simplified.
+<span id="example_model_1" class="pointer c_yellow">1. model name - T-</span> Find occurrences of this 2 literals.
+<span id="example_model_2" class="pointer c_yellow">2. model name - T-\d+</span> After that are one or more digits.
+<span id="example_model_3" class="pointer c_yellow">3. model name - T-(X|\d+)</span> There are always some exceptions, the T-X model.
+It also replaces T- with the word Robot().
+<span id="example_xml_1" class="pointer c_yellow">4. XML - &lt;title&gt;(.+?)&lt;/title&gt; </span> Find titles - not greedy.
+<span id="example_xml_2" class="pointer c_yellow">5. XML - &lt;year&gt;(1[89]\d\d)&lt;/year&gt; </span> Find old years.
+<span id="example_xml_3" class="pointer c_yellow">6. XML - &lt;year&gt;(2\d{3})&lt;/year&gt; </span> Find new years.
+<span id="example_email" class="pointer c_yellow">7. Just a simple email validation - ^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</span>
+                        </code></pre>
+                  </div>
             </div>
       </div>
       <div class="container_0">
@@ -71,7 +93,6 @@
 
                   <div id="test_string_label" class="grid0_c bold">
                         <p>&nbsp;
-                        <span id="test_string_close" class="pointer c_white small" title="close">x</span>&nbsp;
                         <span id="test_string_less" class="pointer c_white small" title="contract">-</span>&nbsp;
                         <span id="test_string_more" class="pointer c_white small" title="expand">+</span>&nbsp;
                   </p>
@@ -135,27 +156,6 @@
 
       <div class="container_0">
             <div class="container0_content_grid_0" style="grid-template-columns: 80px minmax(100px, auto);">
-                  <div id="examples_label" class="grid0_c bold">
-                        <p>&nbsp;
-                        <span id="examples_close" class="pointer c_white small" title="close">x</span>&nbsp;
-                        <span id="examples_less" class="pointer c_white small" title="contract">-</span>&nbsp;
-                        <span id="examples_more" class="pointer c_white small" title="expand">+</span>&nbsp;
-                        </p>
-                        <label for="examples">examples</label>
-                  </div>
-                  <div id="examples_section"  class="grid0_c left">
-                        <pre ><code id="examples" class="hljs" style="height:300px;">Try some example, click on the links below and watch the Regex result:
-FInd the names of models on the page https://en.wikipedia.org/wiki/Terminator_(character). Simplified.
-<span id="example_model_1" class="pointer c_yellow">1. model name - T-</span> Find occurrences of this 2 literals.
-<span id="example_model_2" class="pointer c_yellow">2. model name - T-\d+</span> After that are one or more digits.
-<span id="example_model_3" class="pointer c_yellow">3. model name - T-(X|\d+)</span> There are always some exceptions, the T-X model.
-It also replaces T- with the word Robot().
-<span id="example_xml_1" class="pointer c_yellow">4. XML - &lt;title&gt;(.+?)&lt;/title&gt; </span> Find titles - not greedy.
-<span id="example_xml_2" class="pointer c_yellow">5. XML - &lt;year&gt;(1[89]\d\d)&lt;/year&gt; </span> Find old years.
-<span id="example_xml_3" class="pointer c_yellow">6. XML - &lt;year&gt;(2\d{3})&lt;/year&gt; </span> Find new years.
-<span id="example_email" class="pointer c_yellow">7. Just a simple email validation - ^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</span>
-                        </code></pre>
-                  </div>
                   <div id="regex_help_label" class="grid0_c bold">
                         <p>&nbsp;
                         <span id="regex_help_close" class="pointer c_white small" title="close">x</span>&nbsp;
@@ -230,7 +230,6 @@ If needed, add Flags in the beginning like (?m) Multiple line matching.
                   <p>If you use the same Regex library in you project, this PWA will show you exactly how Regex will work in your code.</p>
                   <p>Repository: <a class="c_link_1" target="_blank" href="https://github.com/LucianoBestia/rust_regex_explanation_pwa/">https://github.com/LucianoBestia/rust_regex_explanation_pwa/</a></p>
                   <p>Version: <span id="pkg_version">1</span> Licence: MIT </p>
-                  <p>This is still in beta and a few minor bugs will be corrected soon.</p>
                   <p>Donate: <a class="c_link_1" target="_blank" href="https://paypal.me/LucianoBestia">paypal.me/LucianoBestia</a></p>
             </div>
       </div>

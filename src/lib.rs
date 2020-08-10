@@ -1,12 +1,12 @@
 // region: lmake_md_to_doc_comments include README.md A //!
 //! # rust_regex_explanation_pwa
 //!
-//! ***version: 2020.808.1242  date: 2020-08-08 authors: Luciano Bestia***  
+//! ***version: 2020.810.542  date: 2020-08-10 authors: Luciano Bestia***  
 //! **Rust regex explanations in PWA**
 //!
-//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1438-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1474-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-155-blue.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
-//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-147-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
+//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-149-purple.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //! [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //! [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
 //!
@@ -100,7 +100,23 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     set_element_inner_html_by_id("pkg_version", &html_encoded);
 
     // Initialize input fields
-    init_wit_example_xml_1_base();
+    init_texts();
+    // hide/show sections
+    if load_string_from_local_storage("examples_section.display", "none") == "none" {
+        display_none_2("examples_section", "examples_label");
+    }
+    if load_string_from_local_storage("explanation_section.display", "none") == "none" {
+        display_none_2("explanation_section", "explanation_label");
+    }
+    if load_string_from_local_storage("result_label.display", "none") == "none" {
+        display_none_2("result_label", "result_section");
+    }
+    if load_string_from_local_storage("code_gen_section.display", "none") == "none" {
+        display_none_2("code_gen_section", "code_gen_label");
+    }
+    if load_string_from_local_storage("regex_help_label.display", "none") == "none" {
+        display_none_2("regex_help_label", "regex_help_section");
+    }
 
     set_all_event_listeners();
 
@@ -116,13 +132,6 @@ fn set_all_event_listeners() {
         "examples_section",
         "examples_label",
         "examples_label"
-    );
-    on_click!(
-        "menu_test_string",
-        display_block_2_and_scroll,
-        "test_string_section",
-        "test_string_label",
-        "test_string_label"
     );
     on_click!(
         "menu_explanation",
@@ -155,7 +164,6 @@ fn set_all_event_listeners() {
 
     on_keyup!("regex_text", run_regex);
     on_keyup!("substitution", run_regex);
-    on_click!("test_string_close", display_none_2, "test_string_label", "test_string_section");
     on_click!("test_string_less", change_height, "test_string", "150px");
     on_click!("test_string_more", change_height, "test_string", "auto");
     on_click!("explanation_close", display_none_2, "explanation_section", "explanation_label");
@@ -191,6 +199,11 @@ fn run_regex() {
     let regex_text = get_text_area_element_value_string_by_id("regex_text");
     let substitution = get_text_area_element_value_string_by_id("substitution");
     let test_string = get_element_inner_text_by_id("test_string");
+
+    //save the texts to local storage
+    save_to_local_storage("regex_text", &regex_text);
+    save_to_local_storage("substitution", &substitution);
+    save_to_local_storage("test_string", &test_string);
 
     let explanation = regex_explanation_mod::create_explanation_html(regex_text.clone());
     set_element_inner_html_by_id("explanation", &explanation);

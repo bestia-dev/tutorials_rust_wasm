@@ -292,12 +292,14 @@ pub fn scroll(element_1_id: &str) {
 
 /// make visible the element
 pub fn display_block(element_id: &str) {
+    save_to_local_storage(&format!("{}.display", element_id), "block");
     let html_element = get_html_element_by_id(element_id);
     unwrap!(html_element.style().set_property("display", "block"));
 }
 
 /// make invisible the element
 pub fn display_none(element_id: &str) {
+    save_to_local_storage(&format!("{}.display", element_id), "none");
     let html_element = get_html_element_by_id(element_id);
     unwrap!(html_element.style().set_property("display", "none"));
 }
