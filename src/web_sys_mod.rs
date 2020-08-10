@@ -326,7 +326,7 @@ pub fn open_url_in_new_tab(url: &str) {
     // just an example of one method how to use javascript code inside Rust code
     let js_cmd = &format!(
         r#"{{
-        var win = window.open('{}', '_blank');
+        var win = window.open('{}', '_blank','noopener');
         win.focus();
         }}"#,
         url,

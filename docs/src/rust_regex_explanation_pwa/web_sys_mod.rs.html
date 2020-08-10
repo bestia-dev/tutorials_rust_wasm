@@ -671,7 +671,7 @@
     <span class="comment">// just an example of one method how to use javascript code inside Rust code</span>
     <span class="kw">let</span> <span class="ident">js_cmd</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(
         <span class="string">r#&quot;{{
-        var win = window.open(&#39;{}&#39;, &#39;_blank&#39;);
+        var win = window.open(&#39;{}&#39;, &#39;_blank&#39;,&#39;noopener&#39;);
         win.focus();
         }}&quot;#</span>,
         <span class="ident">url</span>,
