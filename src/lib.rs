@@ -1,7 +1,7 @@
 // region: lmake_md_to_doc_comments include README.md A //!
 //! # rust_regex_explanation_pwa
 //!
-//! ***version: 2020.810.542  date: 2020-08-10 authors: Luciano Bestia***  
+//! ***version: 2020.810.611  date: 2020-08-10 authors: Luciano Bestia***  
 //! **Rust regex explanations in PWA**
 //!
 //! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1474-green.svg)](https://github.com/LucianoBestia/rust_regex_explanation_pwa/)
@@ -42,7 +42,8 @@
 //! - can work offline,  
 //! - can install as an "app"  
 //! - execution is sand-boxed in the browser  
-//! - no way to bring some malware (if the browser in not compromised)
+//! - no way to bring some malware (if the browser in not compromised)  
+//! - stores text and section visibility in LocalStorage of the browser  
 //!
 //! ## Change colors
 //!

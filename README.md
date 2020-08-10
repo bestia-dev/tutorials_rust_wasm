@@ -4,7 +4,7 @@
 
 [comment]: # (lmake_cargo_toml_to_md start)
 
-***version: 2020.810.542  date: 2020-08-10 authors: Luciano Bestia***  
+***version: 2020.810.611  date: 2020-08-10 authors: Luciano Bestia***  
 **Rust regex explanations in PWA**
 
 [comment]: # (lmake_cargo_toml_to_md end)
@@ -50,7 +50,8 @@ Now it :
 - can work offline,  
 - can install as an "app"  
 - execution is sand-boxed in the browser  
-- no way to bring some malware (if the browser in not compromised)
+- no way to bring some malware (if the browser in not compromised)  
+- stores text and section visibility in LocalStorage of the browser  
 
 ## Change colors
 

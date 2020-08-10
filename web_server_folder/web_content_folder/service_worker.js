@@ -4,9 +4,9 @@
 // install event and force previously cached
 // resources to be cached again.
 // but the new service worker will not be activated until all 
-//tabs with this webapp are closed.
+// tabs with this webapp are closed.
 
-const CACHE_NAME = '2020.810.542';
+const CACHE_NAME = '2020.810.611';
 
 self.addEventListener('install', event => {
     console.log('event install ', CACHE_NAME);
@@ -17,7 +17,15 @@ self.addEventListener('install', event => {
         caches.open(CACHE_NAME).then(function (cache) {
             return cache.addAll(
                 [
+                    'index.html',
+                    'favicon.ico',
+                    'favicon.png',
+                    'manifest.json',
+                    'start_service_worker.js',
                     'css/rust_regex_explanation_pwa.css',
+                    'css/colors.css',
+                    'hljs/highlight.pack.js',
+                    'hljs/hljs_bestia.css',
                     'pkg/rust_regex_explanation_pwa_bg.wasm',
                     'pkg/rust_regex_explanation_pwa.js'
                 ]
