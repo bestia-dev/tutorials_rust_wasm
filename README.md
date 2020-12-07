@@ -1,6 +1,6 @@
 # tutorials_rust_wasm
 Learning Rust and having fun  
-Luciano Bestia: 2020-12-07
+Luciano Bestia: 2020-12-07 [github repo](https://github.com/LucianoBestia/tutorials_rust_wasm)
 
 ## rust lang
 
