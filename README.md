@@ -36,40 +36,40 @@ Guess what? Rust is a great language for writing web servers, especially web ser
 
 ## let's start
 
-Be aware that things are changing fast. It is possible that the same tutorial would be different if I write it today. But it is impossible to go back and update everything that changed. Probably in some later tutorial I will address the change. Maybe. It is a complex ever changing world. Use all the information having the date of writing in mind.    
-The first contact with the rust world is described in this project:
-https://github.com/LucianoBestia/rust01_the_beginning
+Be aware that things are changing fast. It is possible that the same tutorial would be different if I write it today. But it is impossible to go back and update everything that changed. Probably in some later tutorial I will address the change. Maybe. It is a complex ever changing world. Use all the information having the date of writing in mind.     
+The first contact with the rust world is described in this project:  
+https://github.com/LucianoBestia/rust01_the_beginning  
 Next:  
 https://github.com/LucianoBestia/rust02_workspace_and_testing  
-I need to teach about this great file manager:
-https://github.com/LucianoBestia/total_commander_best_file_manager  
-A minimal example of PWA:
-https://github.com/LucianoBestia/rust_wasm_pwa_minimal_clock
-A more complex PWA:
-https://github.com/LucianoBestia/rust_regex_explanation_pwa
-Docker is nice to learn for easy publishing:
-https://github.com/LucianoBestia/docker_rust_minimal  
-An example of a library/crate:
-https://github.com/LucianoBestia/reader_for_microxml
-CLI examples (Command Line Interface) how to manipulate text files:
-https://github.com/LucianoBestia/lmake_cargo_toml_to_md
-https://github.com/LucianoBestia/lmake_lines_of_code
-https://github.com/LucianoBestia/lmake_version_from_date
-https://github.com/LucianoBestia/lmake_semver
-https://github.com/LucianoBestia/lmake_md_to_doc_comments
-Web server:
-https://github.com/LucianoBestia/cargo_crev_web
-Using rust CLI for shell scripting:
-https://github.com/LucianoBestia/wsl_open_browser  
+I need to teach about this great file manager:  
+https://github.com/LucianoBestia/total_commander_best_file_manager    
+A minimal example of PWA:  
+https://github.com/LucianoBestia/rust_wasm_pwa_minimal_clock  
+A more complex PWA:  
+https://github.com/LucianoBestia/rust_regex_explanation_pwa  
+Docker is nice to learn for easy publishing:  
+https://github.com/LucianoBestia/docker_rust_minimal    
+An example of a library/crate:  
+https://github.com/LucianoBestia/reader_for_microxml  
+CLI examples (Command Line Interface) how to manipulate text files:  
+https://github.com/LucianoBestia/lmake_cargo_toml_to_md  
+https://github.com/LucianoBestia/lmake_lines_of_code  
+https://github.com/LucianoBestia/lmake_version_from_date  
+https://github.com/LucianoBestia/lmake_semver  
+https://github.com/LucianoBestia/lmake_md_to_doc_comments  
+Web server:  
+https://github.com/LucianoBestia/cargo_crev_web  
+Using rust CLI for shell scripting:  
+https://github.com/LucianoBestia/wsl_open_browser    
   
 Finally a complex process of iterating over the programming of a simple game. Starting with a simple idea and changing it to a complex game version by version. Learning about modules, workspaces, documentation, task automation, wasm, PWA, web server, websocket, webRTC, tests, examples, split code into libraries,...:  
-https://github.com/LucianoBestia/mem1
-https://github.com/LucianoBestia/mem1_phonegap
-https://github.com/LucianoBestia/mem1_electron
-https://github.com/LucianoBestia/mem2
-https://github.com/LucianoBestia/mem2_server
-https://github.com/LucianoBestia/mem3_game
-https://github.com/LucianoBestia/mem4_game
-https://github.com/LucianoBestia/mem5_game
-https://github.com/LucianoBestia/mem6_game
+https://github.com/LucianoBestia/mem1  
+https://github.com/LucianoBestia/mem1_phonegap  
+https://github.com/LucianoBestia/mem1_electron  
+https://github.com/LucianoBestia/mem2  
+https://github.com/LucianoBestia/mem2_server  
+https://github.com/LucianoBestia/mem3_game  
+https://github.com/LucianoBestia/mem4_game  
+https://github.com/LucianoBestia/mem5_game  
+https://github.com/LucianoBestia/mem6_game  
 
