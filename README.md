@@ -46,7 +46,7 @@ https://github.com/LucianoBestia/total_commander_best_file_manager
 A minimal example of PWA:  
 https://github.com/LucianoBestia/rust_wasm_pwa_minimal_clock  
 A more complex PWA:  
-https://github.com/LucianoBestia/rust_wasm_png_resize_for_pwa  
+https://github.com/LucianoBestia/rust_wasm_helper_for_pwa  
 https://github.com/LucianoBestia/rust_regex_explanation_pwa  
 Docker is nice to learn for easy publishing:  
 https://github.com/LucianoBestia/docker_rust_minimal    
