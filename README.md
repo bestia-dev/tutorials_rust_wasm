@@ -4,8 +4,8 @@
 
 [comment]: # (lmake_cargo_toml_to_md start)
 
-***version: 2020.810.640  date: 2020-08-10 authors: Luciano Bestia***  
 **Rust regex explanations in PWA**
+***version: 2020.810.640  date: 2020-08-10 author: [dev_Bestia](https://bestia.dev) repository: [GitHub](https://github.com/LucianoBestia/rust_regex_explanation_pwa)***  
 
 [comment]: # (lmake_cargo_toml_to_md end)
 
