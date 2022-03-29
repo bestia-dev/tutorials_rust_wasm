@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `rust_regex_explanation_pwa` crate."><meta name="keywords" content="rust, rustlang, rust-lang, rust_regex_explanation_pwa"><title>rust_regex_explanation_pwa - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../dark.css"><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="shortcut icon" href="../favicon.ico"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../rust_regex_explanation_pwa/index.html'><div class='logo-container'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate rust_regex_explanation_pwa</p><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all rust_regex_explanation_pwa's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#functions">Functions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'rust_regex_explanation_pwa', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/rust_regex_explanation_pwa/lib.rs.html#2-251' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>rust_regex_explanation_pwa</a></span></h1><div class='docblock'><h1 id="rust_regex_explanation_pwa" class="section-header"><a href="#rust_regex_explanation_pwa">rust_regex_explanation_pwa</a></h1>
+<p><em><strong>version: 2020.810.640  date: 2020-08-10 authors: Luciano Bestia</strong></em><br />
+<strong>Rust regex explanations in PWA</strong></p>
+<p><a href="https://github.com/LucianoBestia/rust_regex_explanation_pwa/"><img src="https://img.shields.io/badge/Lines_in_Rust-1474-green.svg" alt="Lines in Rust code" /></a>
+<a href="https://github.com/LucianoBestia/rust_regex_explanation_pwa/"><img src="https://img.shields.io/badge/Lines_in_Doc_comments-156-blue.svg" alt="Lines in Doc comments" /></a>
+<a href="https://github.com/LucianoBestia/rust_regex_explanation_pwa/"><img src="https://img.shields.io/badge/Lines_in_comments-149-purple.svg" alt="Lines in Comments" /></a>
+<a href="https://github.com/LucianoBestia/rust_regex_explanation_pwa/"><img src="https://img.shields.io/badge/Lines_in_examples-0-yellow.svg" alt="Lines in examples" /></a>
+<a href="https://github.com/LucianoBestia/rust_regex_explanation_pwa/"><img src="https://img.shields.io/badge/Lines_in_tests-0-orange.svg" alt="Lines in tests" /></a></p>
+<p><a href="https://github.com/LucianoBestia/rust_regex_explanation_pwa/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Licence" /></a> <a href="https://github.com/LucianoBestia/rust_regex_explanation_pwa/"><img src="https://github.com/LucianoBestia/rust_regex_explanation_pwa/workflows/RustAction/badge.svg" alt="Rust" /></a></p>
+<h2 id="try-it" class="section-header"><a href="#try-it">Try it</a></h2>
+<p><a href="https://bestia.dev/rust_regex_explanation_pwa/">https://bestia.dev/rust_regex_explanation_pwa/</a></p>
+<h2 id="regex-explanation-and-testing" class="section-header"><a href="#regex-explanation-and-testing">Regex explanation and testing</a></h2>
+<p>Regex is great. But it is much easier to write and understand with a little help of explanations.<br />
+Regex has many flavors with subtle differences. This PWA uses Rust Regex crate.<br />
+It generates Rust code and shows that code results for the 6 important Regex methods.<br />
+Useful as learning tool and as development tool to edit/test/debug your regex first.</p>
+<h2 id="minimal-example-of-wasmwebassembly-with-vanilla-html-css-and-javascript" class="section-header"><a href="#minimal-example-of-wasmwebassembly-with-vanilla-html-css-and-javascript">Minimal example of Wasm/Webassembly with vanilla Html, Css and Javascript</a></h2>
+<p>First decision - no frameworks. Just vanilla. Then no javascript.<br />
+Some basic html. Some basic css.<br />
+<code>contenteditable</code> - Every day something new. Modern browsers have a wysiwyg editor.<br />
+Just add the attribute contenteditable to a <code>div</code> or <code>code</code>.<br />
+All the rest is in Rust with web-sys/wasm-bindgen for all the programming needs.<br />
+No other special requirements.<br />
+Ok, I had to use the javascript library <code>highlightjs</code> to bring some colors to the code.<br />
+It is more like a coding tutorial for creating PWA in Rust.</p>
+<h2 id="pwa" class="section-header"><a href="#pwa">PWA</a></h2>
+<p>I added the manifest, the worker and a bunch of icons.<br />
+Now it :</p>
+<ul>
+<li>can work offline,</li>
+<li>can install as an &quot;app&quot;</li>
+<li>execution is sand-boxed in the browser</li>
+<li>no way to bring some malware (if the browser in not compromised)</li>
+<li>stores text and section visibility in LocalStorage of the browser</li>
+</ul>
+<h2 id="change-colors" class="section-header"><a href="#change-colors">Change colors</a></h2>
+<p>Users can change the colors with the use of the Chrome extension <code>User CSS</code>:<br />
+<a href="https://chrome.google.com/webstore/detail/user-css/okpjlejfhacmgjkmknjhadmkdbcldfcb">https://chrome.google.com/webstore/detail/user-css/okpjlejfhacmgjkmknjhadmkdbcldfcb</a><br />
+Copy/paste and then edit the colors and watch changes alive:</p>
+<pre><code class="language-css">:root {
+    /* color palette */
+    /* background color */
+    --b_color_body: #24292E;
+    --b_color_code: #1B1D23;
+    --b_color_grid_header: #181A1F;
+    --b_color_container: #333842;
+    --b_color_button: dodgerblue;
+    /* front color */
+    --f_color_body: #dce0e9;
+    --f_color_code: #78C379;
+    --f_color_link: white;
+    --f_color_05: yellow;
+    --f_color_06: dark-white;
+    --f_color_07: black;
+    /* border color*/
+    --brd_color_01: #000;
+    --brd_color_02: #eaecef;
+}
+</code></pre>
+</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table><tr class='module-item'><td><a class="mod" href="code_gen_mod/index.html" title='rust_regex_explanation_pwa::code_gen_mod mod'>code_gen_mod</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="mod" href="examples_mod/index.html" title='rust_regex_explanation_pwa::examples_mod mod'>examples_mod</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="mod" href="regex_explanation_mod/index.html" title='rust_regex_explanation_pwa::regex_explanation_mod mod'>regex_explanation_mod</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="mod" href="regex_method_mod/index.html" title='rust_regex_explanation_pwa::regex_method_mod mod'>regex_method_mod</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="mod" href="test_string_mod/index.html" title='rust_regex_explanation_pwa::test_string_mod mod'>test_string_mod</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="mod" href="web_sys_mod/index.html" title='rust_regex_explanation_pwa::web_sys_mod mod'>web_sys_mod</a></td><td class='docblock-short'><p>helper functions for web_sys, window, document, dom, console,
+local_storage, session_storage,...</p>
+</td></tr></table><h2 id='macros' class='section-header'><a href="#macros">Macros</a></h2>
+<table><tr class='module-item'><td><a class="macro" href="macro.html_encoded_push.html" title='rust_regex_explanation_pwa::html_encoded_push macro'>html_encoded_push</a></td><td class='docblock-short'><p>Push html encoded variables inside unencoded literal to HtmlEncoded.
+Similar use as format! macro.
+html_encoded_push!(html, template, param_1)
+html_encoded_push!(exp.explanation_all.,&quot;{}&quot;, &amp;exp.reg_str)</p>
+</td></tr><tr class='module-item'><td><a class="macro" href="macro.on_click.html" title='rust_regex_explanation_pwa::on_click macro'>on_click</a></td><td class='docblock-short'><p>Simple macro to set listener of onclick events to an element_id.
+no args: on_click!(element_1_id, function_ident)
+no args: on_click!(&quot;example_email&quot;,example_email)
+1 args: on_click!(element_1_id, function_ident, arg_1)
+1 args: on_click!(&quot;example_email&quot;,example_email, &quot;arg_1&quot;)
+2 args: on_click!(element_1_id, function_ident, arg_1,arg_2)
+2 args: on_click!(&quot;example_email&quot;,example_email, &quot;arg_1&quot;,&quot;arg_2&quot;)</p>
+</td></tr><tr class='module-item'><td><a class="macro" href="macro.on_keyup.html" title='rust_regex_explanation_pwa::on_keyup macro'>on_keyup</a></td><td class='docblock-short'><p>Simple macro to set listener of onkeyup events to an element_id.
+on_keyup!(element_id, function_ident)
+on_keyup!(&quot;regex_text&quot;, run_regex)</p>
+</td></tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table><tr class='module-item'><td><a class="fn" href="fn.__wasm_bindgen_generated_wasm_bindgen_start.html" title='rust_regex_explanation_pwa::__wasm_bindgen_generated_wasm_bindgen_start fn'>__wasm_bindgen_generated_wasm_bindgen_start</a></td><td class='docblock-short'><p>To start the Wasm application, wasm_bindgen runs this functions</p>
+</td></tr><tr class='module-item'><td><a class="fn" href="fn.code_gen_copy.html" title='rust_regex_explanation_pwa::code_gen_copy fn'>code_gen_copy</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="fn" href="fn.code_gen_run_in_playground.html" title='rust_regex_explanation_pwa::code_gen_run_in_playground fn'>code_gen_run_in_playground</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="fn" href="fn.display_block_2_and_scroll.html" title='rust_regex_explanation_pwa::display_block_2_and_scroll fn'>display_block_2_and_scroll</a></td><td class='docblock-short'><p>make visible 2 elements and jump to the third element</p>
+</td></tr><tr class='module-item'><td><a class="fn" href="fn.display_none_2.html" title='rust_regex_explanation_pwa::display_none_2 fn'>display_none_2</a></td><td class='docblock-short'><p>make 2 invisible</p>
+</td></tr><tr class='module-item'><td><a class="fn" href="fn.run_regex.html" title='rust_regex_explanation_pwa::run_regex fn'>run_regex</a></td><td class='docblock-short'><p>on keyup code</p>
+</td></tr><tr class='module-item'><td><a class="fn" href="fn.set_all_event_listeners.html" title='rust_regex_explanation_pwa::set_all_event_listeners fn'>set_all_event_listeners</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="fn" href="fn.wasm_bindgen_start.html" title='rust_regex_explanation_pwa::wasm_bindgen_start fn'>wasm_bindgen_start</a></td><td class='docblock-short'><p>To start the Wasm application, wasm_bindgen runs this functions</p>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../";window.currentCrate = "rust_regex_explanation_pwa";</script><script src="../aliases.js"></script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

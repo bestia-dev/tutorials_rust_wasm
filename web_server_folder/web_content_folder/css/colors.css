@@ -1,0 +1,87 @@
+/* region special colors for highlight */
+.b_color_00{background-color: #cb416b;/*Rich Maroon*/}
+.b_color_01{background-color: #11887b;/*Kabocha Green*/}
+.b_color_02{background-color: #ba160c;/*Winter Sunset*/}
+.b_color_03{background-color: #ca6636;/*Capital Yellow*/}
+.b_color_04{background-color: #391285;/*Reflecting Pond*/}
+.b_color_05{background-color: #d1001c;/*Brick Orange*/}
+.b_color_06{background-color: #c65102;/*International Orange*/}
+.b_color_07{background-color: #490648;/*Brownish Purple*/}
+.b_color_08{background-color: #d90166;/*Dark Pink*/}
+.b_color_09{background-color: #0000aa;/*Very Dark Blue*/}
+.b_color_10{background-color: #5d5242;/*Black Olive*/}
+.b_color_11{background-color: #755139;/*Tree House*/}
+.b_color_12{background-color: #29304e;/*Midnight Blue*/}
+.b_color_13{background-color: #80444c;/*Deep Purple*/}
+.b_color_14{background-color: #004953;/*Poker Green*/}
+.b_color_15{background-color: #004400;/*Aura Orange*/}
+.b_color_16{background-color: #5c5337;/*Polished Brown*/}
+.b_color_17{background-color: #553f2d;/*Blackened Brown*/}
+.b_color_18{background-color: #3b2820;/*Tuk Tuk*/}
+.b_color_19{background-color: #985538;/*Toffee*/}
+.b_color_20{background-color: #363737;/*Dusty Olive*/}
+.b_color_21{background-color: #220a0a;/*Rustic Red*/}
+.b_color_22{background-color: #742802;/*Dark Brown*/}
+.b_color_23{background-color: #302621;/*Black Chocolate*/}
+.b_color_24{background-color: #3b3c36;/*Black Pearl*/}
+.b_color_25{background-color: #11574a;/*Field Maple*/}
+.b_color_26{background-color: #184343;/*Very Blue*/}
+.b_color_27{background-color: #2a2b2d;/*Tarmac*/}
+.b_color_28{background-color: #820000;/*Heavy Red*/}
+.b_color_29{background-color: #35654d;/*Racing Green*/}
+.b_color_30{background-color: #214559;/*Blue Charcoal*/}
+.b_color_31{background-color: #014600;/*Smoke Pine*/}
+.b_color_32{background-color: #25342b;/*Lunar Green*/}
+.b_color_33{background-color: #442200;/*Brown Stone*/}
+.b_color_34{background-color: #900020;/*Burnt Maroon*/}
+.b_color_35{background-color: #b0306a;/*Alien Purple*/}
+.b_color_36{background-color: #af2f0d;/*Celestial Pink*/}
+.b_color_37{background-color: #76424e;/*Dark Purple*/}
+.b_color_38{background-color: #980036;/*Red Bean*/}
+.b_color_39{background-color: #673a3f;/*Purple Stone*/}
+.b_color_40{background-color: #34414e;/*Night Blue*/}
+.b_color_41{background-color: #4a0100;/*Pink Raspberry*/}
+.b_color_42{background-color: #5c4450;/*Purple Brown*/}
+.b_color_43{background-color: #716e61;/*Heavy Charcoal*/}
+.b_color_44{background-color: #36013f;/*Medium Taupe*/}
+.b_color_45{background-color: #2a2a35;/*Polished Steel*/}
+.b_color_46{background-color: #1e272c;/*Coffee Bean*/}
+.b_color_47{background-color: #4e5541;/*Night Sky*/}
+.b_color_48{background-color: #696006;/*Green Ink*/}
+.b_color_49{background-color: #800000;/*Old Mahagony*/}
+.b_color_50{background-color: #062e03;/*Woodland Grass*/}
+.b_color_51{background-color: #0a0502;/*Pot Black*/}
+.b_color_52{background-color: #495e35;/*Green Brown*/}
+.b_color_53{background-color: #333333;/*Dark Grey*/}
+.b_color_54{background-color: #23191e;/*Liquorice*/}
+.b_color_55{background-color: #35063e;/*Dark Strawberry*/}
+.b_color_56{background-color: #280137;/*Pickled Beet*/}
+.b_color_57{background-color: #2a293e;/*Magnetic Blue*/}
+.b_color_58{background-color: #0f3b57;/*Dark Navy Blue*/}
+.b_color_59{background-color: #373e02;/*Dill*/}
+.b_color_60{background-color: #3b302f;/*Black*/}
+.b_color_61{background-color: #7f4330;/*Dark Orange*/}
+.b_color_62{background-color: #404854;/*Sooty Willow Bamboo*/}
+.b_color_63{background-color: #840000;/*Deep Maroon*/}
+.b_color_64{background-color: #2b6867;/*Medieval Blue*/}
+.b_color_65{background-color: #00626f;/*Blue Opal*/}
+.b_color_66{background-color: #203e4a;/*Tiber*/}
+.b_color_67{background-color: #3d6c54;/*Very Dark Green*/}
+.b_color_68{background-color: #040348;/*Pixie Powder*/}
+.b_color_69{background-color: #48412b;/*Cape Cod*/}
+.b_color_70{background-color: #00022e;/*Dark Water*/}
+.b_color_71{background-color: #c14a09;/*Copper Orange*/}
+.b_color_72{background-color: #9c004a;/*Dark Hot Pink*/}
+.b_color_73{background-color: #044a05;/*Midnight Green*/}
+.b_color_74{background-color: #9e1212;/*Maroon*/}
+.b_color_75{background-color: #3e6257;/*Toad King*/}
+.b_color_76{background-color: #3a181a;/*Rusty Red*/}
+.b_color_77{background-color: #754600;/*Grey Brown*/}
+.b_color_78{background-color: #76424e;/*Dark Purple*/}
+.b_color_79{background-color: #cb416b;/*Rich Maroon*/}
+.b_color_80{background-color: #033500;/*Dark Olive*/}
+.b_color_81{background-color: #573b2a;/*Alien*/}
+.b_color_82{background-color: #4f1507;/*Flat Brown*/}
+.b_color_83{background-color: #4d233d;/*Purple Basil*/}
+.b_color_84{background-color: #b4262a;/*Blood Orange*/}
+.b_color_85{background-color: #2a293e;/*Magnetic Blue*/}

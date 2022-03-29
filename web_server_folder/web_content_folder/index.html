@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <!-- classic header for a web page -->
+      <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+      <title>rust_regex_explanation_pwa</title>
+      <meta name="Description" content="Rust Regex explanations in PWA">
+      <link rel="stylesheet" href="css/rust_regex_explanation_pwa.css">
+      <link rel="stylesheet" href="css/colors.css">
+      <meta name="viewport" content="width = device-width,initial-scale = 1.0" />
+      <link rel="shortcut icon" type="image/x-icon" data-su_favicon_route="href" href="favicon.png" />
+      <!-- A lot of metadata for PWA -->
+      <link rel="manifest" href="manifest.json">
+      <meta name="mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+      <meta name="theme-color" content="#FFFF00">
+      <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
+      <link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
+      <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
+      <link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
+      <link rel="apple-touch-icon" href="images/icons-192.png">
+      <link rel="icon" type="image/png" sizes="192x192" href="images/android-icon-192x192.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+      <link rel="icon" type="image/png" href="images/icons-512.png" sizes="512x512">
+      <meta name="msapplication-TileColor" content="#FFFF00">
+      <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
+
+      <!-- syntax highlighting for rust -->
+      <link rel="stylesheet" href="hljs/hljs_bestia.css">
+      <script src="hljs/highlight.pack.js"></script>
+</head>
+
+<body>
+      <!-- a standard service worker is a must for PWA -->
+      <script src="start_service_worker.js"></script>
+      <div class="container_0">
+            <div id="start_panel" class="container0_content_not_grid">
+                  <h2 class="c_yellow center">PWA for Rust Regex Explanations and Testing</h2>
+                  <p class="small">You can "install" it in the browser's menu. It's a Progressive Web App for the desktop, Cross-Platform.</p>
+                  &gt;&gt; <span id="menu_examples" class="c_link_1 pointer">Examples</span>
+                  &gt;&gt; <span id="menu_explanation" class="c_link_1 pointer">Explain</span>
+                  &gt;&gt; <span id="menu_result" class="c_link_1 pointer">Result</span>
+                  &gt;&gt; <span id="menu_code_gen" class="c_link_1 pointer">CodeGen</span>
+                  &gt;&gt; <span id="menu_regex_help" class="c_link_1 pointer">Help</span>
+            </div>
+            <div class="container0_content_grid_0" style="grid-template-columns: 80px minmax(100px, auto);">
+                  <div id="examples_label" class="grid0_c bold">
+                        <p>&nbsp;
+                        <span id="examples_close" class="pointer c_white small" title="close">x</span>&nbsp;
+                        <span id="examples_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="examples_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                        </p>
+                        <label for="examples">examples</label>
+                  </div>
+                  <div id="examples_section"  class="grid0_c left">
+                        <pre ><code id="examples" class="hljs" style="height:300px;">Try some example, click on the links below and watch the Regex result:
+FInd the names of models on the page https://en.wikipedia.org/wiki/Terminator_(character). Simplified.
+<span id="example_model_1" class="pointer c_yellow">1. model name - T-</span> Find occurrences of this 2 literals.
+<span id="example_model_2" class="pointer c_yellow">2. model name - T-\d+</span> After that are one or more digits.
+<span id="example_model_3" class="pointer c_yellow">3. model name - T-(X|\d+)</span> There are always some exceptions, the T-X model.
+It also replaces T- with the word Robot().
+<span id="example_xml_1" class="pointer c_yellow">4. XML - &lt;title&gt;(.+?)&lt;/title&gt; </span> Find titles - not greedy.
+<span id="example_xml_2" class="pointer c_yellow">5. XML - &lt;year&gt;(1[89]\d\d)&lt;/year&gt; </span> Find old years.
+<span id="example_xml_3" class="pointer c_yellow">6. XML - &lt;year&gt;(2\d{3})&lt;/year&gt; </span> Find new years.
+<span id="example_email" class="pointer c_yellow">7. Just a simple email validation - ^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</span>
+                        </code></pre>
+                  </div>
+            </div>
+      </div>
+      <div class="container_0">
+            <div class="container0_content_grid_0" style="grid-template-columns: 80px minmax(100px, auto);">
+                  <div id="regex_text_label" class="grid0_c bold">
+                        <label class="c_yellow" for="regex_text">Regex</label>
+                  </div>
+                  <div id="regex_text_section" class="grid0_c bold">
+                        <textarea name="regex_text" id="regex_text" class="full_width height_100px" ></textarea>
+                  </div>
+                  <div class="grid0_c bold">
+                        <label for="substitution">substi- tution</label>
+                  </div>
+                  <div class="grid0_c bold">
+                        <textarea name="substitution" id="substitution" class="full_width" style="height:50px;padding:2px;" ></textarea>
+                  </div>
+
+                  <div id="test_string_label" class="grid0_c bold">
+                        <p>&nbsp;
+                        <span id="test_string_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="test_string_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                  </p>
+                        <label for="test_string">test string</label>
+                  </div>
+                  <div id="test_string_section" class="grid0_c left">
+                        <pre ><code id="test_string" contenteditable="true" class="hljs" style="height:300px;">//comment
+                              println!("{}","one");
+                        </code></pre>
+                  </div>
+            </div>
+      </div>
+      <div class="container_0">
+            <div class="container0_content_grid_0" style="grid-template-columns: 80px minmax(100px, auto);">
+                  <div id="explanation_label" class="grid0_c bold">
+                        <p>&nbsp;
+                        <span id="explanation_close" class="pointer c_white small" title="close">x</span>&nbsp;
+                        <span id="explanation_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="explanation_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                  </p>
+                        <label for="explanation">explan- ation</label>
+                  </div>
+                  <div id="explanation_section" class="grid0_c left">
+                        <pre ><code id="explanation" class="hljs" style="height:300px;width:50">//comment
+                              println!("{}","one");
+                        </code></pre>
+                  </div>
+
+                  <div id="result_label" class="grid0_c bold">
+                        <p>&nbsp;
+                        <span id="result_close" class="pointer c_white small" title="close">x</span>&nbsp;
+                        <span id="result_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="result_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                        </p>
+                        <label for="result">Regex result</label>
+                  </div>
+                  <div id="result_section"  class="grid0_c left">
+                        <pre ><code id="result" class="hljs" style="height:300px;width:50">//comment
+                              println!("{}","one");
+                        </code></pre>
+                  </div>
+
+                  <div id="code_gen_label" class="grid0_c bold">
+
+                        <p>&nbsp;
+                        <span id="code_gen_close" class="pointer c_white small" title="close">x</span>&nbsp;
+                        <span id="code_gen_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="code_gen_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                        </p>
+                        <label for="code_gen">code gen</label>
+                        <p id="code_gen_copy" class="pointer c_white small" title="copy to clipboard" >1. copy</p>
+                        <p id="code_gen_run_in_playground" class="pointer c_white small" title="open play.rust-lang.org" >2. play</p>
+                  </div>
+                  <div id="code_gen_section" class="grid0_c left">
+                        <pre ><code id="code_gen" class="language-rust hljs" style="height:300px;width:50">//comment
+                              println!("{}","one");
+                        </code></pre>
+                  </div>
+            </div>
+      </div>
+
+      <div class="container_0">
+            <div class="container0_content_grid_0" style="grid-template-columns: 80px minmax(100px, auto);">
+                  <div id="regex_help_label" class="grid0_c bold">
+                        <p>&nbsp;
+                        <span id="regex_help_close" class="pointer c_white small" title="close">x</span>&nbsp;
+                        <span id="regex_help_less" class="pointer c_white small" title="contract">-</span>&nbsp;
+                        <span id="regex_help_more" class="pointer c_white small" title="expand">+</span>&nbsp;
+                        </p>
+                        <label for="regex_help">Regex help</label>
+                  </div>
+                  <div id="regex_help_section" class="grid0_c left">
+                        <pre ><code id="regex_help" class="hljs" style="height:300px;">    Basic Regex syntax
+<span class="hljs-keyword">abc…</span>      Letters literally
+<span class="hljs-keyword">123…</span>      Digits literally
+<span class="hljs-keyword">[abc]</span>     Only a, b, or c
+<span class="hljs-keyword">[^abc]</span>    Not a, b, nor c
+<span class="hljs-keyword">[a-z]</span>     Characters a to z
+<span class="hljs-keyword">[0-9]</span>     Numbers 0 to 9
+<span class="hljs-keyword">\w</span>        Any Alphanumeric character
+<span class="hljs-keyword">\W</span>        Any Non-alphanumeric character
+<span class="hljs-keyword">\d</span>        Any Digit
+<span class="hljs-keyword">\D</span>        Any Non-digit character
+    Quantifiers:
+<span class="hljs-keyword">?</span>         Zero or one repetition
+<span class="hljs-keyword">*</span>         Zero or more repetitions
+<span class="hljs-keyword">+</span>         One or more repetitions
+<span class="hljs-keyword">{m}</span>       m Repetitions
+<span class="hljs-keyword">{m,n}</span>     m to n Repetitions
+
+<span class="hljs-keyword">\s</span>        Any Whitespace
+<span class="hljs-keyword">\S</span>        Any Non-whitespace character
+<span class="hljs-keyword">.</span>         Any Character (avoid using)
+<span class="hljs-keyword">\.</span>        Period - escaped
+<span class="hljs-keyword">^…$</span>       Starts and ends
+    Capture groups:
+<span class="hljs-keyword">(…)</span>       Capture Group    
+<span class="hljs-keyword">(?:…)</span>     Non-Capture Group
+<span class="hljs-keyword">(a(bc))</span>   Capture Sub-group
+<span class="hljs-keyword">(.*)</span>      Capture all
+<span class="hljs-keyword">(abc|def)</span> Matches abc or def
+    Substitution:
+<span class="hljs-keyword">$1, $2</span>    Captured group Substitution
+    Flags:
+<span class="hljs-keyword">(?m)</span>    Multiple line matching (^$ -start/end of line)
+<span class="hljs-keyword">(?i)</span>    Case insensitive match
+<span class="hljs-keyword">(?U)</span>    Sets the engine to lazy matching - ungreedy
+
+Avoid using .* dot (any character many times) because it is greedy. 
+Instead use a negation of the next delimiter like [^/]*.
+If needed, add Flags in the beginning like (?m) Multiple line matching.
+
+                        </code></pre>
+                  </div>
+            </div>
+      </div>
+      <div class="container_0">
+            <div class="container0_content_not_grid " style="grid-template-columns: 100px;">
+                  <p >Regex or Regular expressions is a special programming language for search, match, validate and replace sub-strings.</p>
+                  <p>It looks very cryptic. But it is powerful and you should use it. Look how crazy this is:</p>
+                  <p class="c_white" >^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</p>
+                  <p class="c_yellow">DON'T PANIC ! Try it !</p>
+                  <p>On every key-up in the Regex section, this PWA will calculate and show you the explanation, result of Regex methods and generate the Rust code with that Regex.</p>
+                  <p>Use this web app when you are coding in Rust and need to write a Regex. Enter your Regex, substitution and test_string.</p>
+                  <p>Change your Regex gradually and observe the result. Great way of interactive learning!</p>
+                  <p>The Regex explanation is 100% human readable. Easy like that!</p>
+                  <p>Use the examples to fast see it all working. From simplest to more complex gradually.</p>
+                  <p>Click Copy and then Play in the code-gen section. In <a class="c_link_1" target="_blank" rel="noreferrer" href="https://play.rust-lang.org">play.rust-lang.org</a> paste the generated code and click Run to see it live in action.</p>
+                  <p>If you need more or less space, click on the + and - symbols.</p>
+                  <p>This PWA (progressive web app) runs entirely inside your browser with 100% pure Rust Wasm/WebAssembly.</p>
+                  <p>The web server only provides the files. No code is executed on the server.</p>
+                  <p>This means you can use this web app offline. No need for internet connection, except for downloading the code the first time. PWA are used a lot in mobile, but this PWA is meant to be used in the desktop browser.</p>
+                  <p>Regex has many many features, therefor libraries are never 100% compatible. This "flavors" have differences that are subtle, but important for practical use. The Rust code of this app uses the Rust Regex library: <a class="c_link_1" target="_blank" rel="noreferrer" href="https://docs.rs/regex/">https://docs.rs/regex/</a></p>
+                  <p>Cargo.toml: regex = "1.3.9", regex-syntax="0.6.18"</p>
+                  <p>If you use the same Regex library in you project, this PWA will show you exactly how Regex will work in your code.</p>
+                  <p>Repository: <a class="c_link_1" target="_blank" rel="noreferrer" href="https://github.com/LucianoBestia/rust_regex_explanation_pwa/">https://github.com/LucianoBestia/rust_regex_explanation_pwa/</a></p>
+                  <p>Version: <span id="pkg_version">1</span> Licence: MIT </p>
+                  <p>Donate: <a class="c_link_1" target="_blank" rel="noreferrer" href="https://paypal.me/LucianoBestia">paypal.me/LucianoBestia</a></p>
+            </div>
+      </div>
+      <!-- import and init the wasm code -->
+      <script type="module">
+            import init from "./pkg/rust_regex_explanation_pwa.js";
+            init("./pkg/rust_regex_explanation_pwa_bg.wasm");
+      </script>
+</body>
+
+</html>
