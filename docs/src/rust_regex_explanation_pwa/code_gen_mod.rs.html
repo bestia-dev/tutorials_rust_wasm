@@ -199,7 +199,7 @@
     <span class="ident">init_code_template</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">html</span>);
     <span class="ident">html</span>.<span class="ident">replace_with_html_encode</span>(<span class="string">&quot;Luciano(Best)ia&quot;</span>, <span class="ident">regex_text</span>);
     <span class="ident">html</span>.<span class="ident">replace_with_html_encode</span>(<span class="string">&quot;OnlyThe$1&quot;</span>, <span class="ident">substitution</span>);
-    <span class="ident">html</span>.<span class="ident">replace_with_html_encode</span>(<span class="string">r###&quot;origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)&quot;###</span>,<span class="ident">test_string</span>);
+    <span class="ident">html</span>.<span class="ident">replace_with_html_encode</span>(<span class="string">r###&quot;origin  git@github.com:bestia-dev/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/bestia-dev/rust_regex_explanation_pwa (fetch)&quot;###</span>,<span class="ident">test_string</span>);
     <span class="comment">// return</span>
     <span class="ident">html</span>
 }
@@ -212,7 +212,7 @@
     <span class="kw">let</span> <span class="ident">html</span> <span class="op">=</span> <span class="ident">html</span>
     .<span class="ident">replace</span>(<span class="string">&quot;Luciano(Best)ia&quot;</span>,<span class="ident">regex_text</span>)
     .<span class="ident">replace</span>(<span class="string">&quot;OnlyThe$1&quot;</span>, <span class="ident">substitution</span>)
-    .<span class="ident">replace</span>(<span class="string">r###&quot;origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)&quot;###</span>,<span class="ident">test_string</span>);
+    .<span class="ident">replace</span>(<span class="string">r###&quot;origin  git@github.com:bestia-dev/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/bestia-dev/rust_regex_explanation_pwa (fetch)&quot;###</span>,<span class="ident">test_string</span>);
     <span class="comment">// return</span>
     <span class="ident">html</span>
 }
@@ -225,7 +225,7 @@
     <span class="macro">html_encoded_push</span><span class="macro">!</span>(
         <span class="ident">html</span>,
         <span class="string">r#####&quot;// Rust Regex code-gen  
-// https://github.com/LucianoBestia/rust_regex_explanation_pwa  
+// https://github.com/bestia-dev/rust_regex_explanation_pwa  
 // Run this code online in the playground:  
 // https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=10717a3fe934b9583fb675e327833edc  
 
@@ -254,7 +254,7 @@ fn main() {{
     println!(&quot;--- rust_regex_explanation_pwa start ---&quot;);
 
     // prepared example
-    let test_string = r###&quot;origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)&quot;###;
+    let test_string = r###&quot;origin  git@github.com:bestia-dev/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/bestia-dev/rust_regex_explanation_pwa (fetch)&quot;###;
     // substitution for replace_all()
     // the $1, $2,.. are placeholders for the found capture group
     let substitution = r###&quot;OnlyThe$1&quot;###;

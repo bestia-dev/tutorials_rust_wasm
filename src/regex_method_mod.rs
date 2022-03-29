@@ -33,7 +33,7 @@ pub fn run_regex_methods_html(regex_text: &str, substitution: &str, test_string:
     html.push_new_line();
     html.push_new_line();
     // prepared example
-    //let test_string = "origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)";
+    //let test_string = "origin  git@github.com:bestia-dev/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/bestia-dev/rust_regex_explanation_pwa (fetch)";
     // substitution for replace_all()
     // the $1, $2,.. are placeholders for the found capture group
     //let substitution = "OnlyThe$1";

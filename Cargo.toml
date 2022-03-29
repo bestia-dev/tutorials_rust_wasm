@@ -1,10 +1,10 @@
 [package]
 name = "rust_regex_explanation_pwa"
 version = "2020.810.640"
-authors = ["Luciano Bestia <Luciano.Bestia@gmail.com>"]
+authors = ["bestia.dev <info@bestia.dev>"]
 edition = "2018"
 description = "Rust regex explanations in PWA"
-repository = "https://github.com/LucianoBestia/rust_regex_explanation_pwa"
+repository = "https://github.com/bestia-dev/rust_regex_explanation_pwa"
 readme = "README.md"
 license = "MIT"
 keywords = ["wasm"]

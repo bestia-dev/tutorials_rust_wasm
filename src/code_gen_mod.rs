@@ -7,7 +7,7 @@ pub fn code_gen_html(regex_text: &str, substitution: &str, test_string: &str) ->
     init_code_template(&mut html);
     html.replace_with_html_encode("Luciano(Best)ia", regex_text);
     html.replace_with_html_encode("OnlyThe$1", substitution);
-    html.replace_with_html_encode(r###"origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)"###,test_string);
+    html.replace_with_html_encode(r###"origin  git@github.com:bestia-dev/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/bestia-dev/rust_regex_explanation_pwa (fetch)"###,test_string);
     // return
     html
 }
@@ -20,7 +20,7 @@ pub fn code_gen_string(regex_text: &str, substitution: &str, test_string: &str) 
     let html = html
     .replace("Luciano(Best)ia",regex_text)
     .replace("OnlyThe$1", substitution)
-    .replace(r###"origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)"###,test_string);
+    .replace(r###"origin  git@github.com:bestia-dev/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/bestia-dev/rust_regex_explanation_pwa (fetch)"###,test_string);
     // return
     html
 }
@@ -33,7 +33,7 @@ fn init_code_template(html: &mut HtmlEncoded) {
     html_encoded_push!(
         html,
         r#####"// Rust Regex code-gen  
-// https://github.com/LucianoBestia/rust_regex_explanation_pwa  
+// https://github.com/bestia-dev/rust_regex_explanation_pwa  
 // Run this code online in the playground:  
 // https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=10717a3fe934b9583fb675e327833edc  
 
@@ -62,7 +62,7 @@ fn main() {{
     println!("--- rust_regex_explanation_pwa start ---");
 
     // prepared example
-    let test_string = r###"origin  git@github.com:LucianoBestia/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/LucianoBestia/rust_regex_explanation_pwa (fetch)"###;
+    let test_string = r###"origin  git@github.com:bestia-dev/rust_regex_explanation_pwa.git (fetch)\norigin  https://github.com/bestia-dev/rust_regex_explanation_pwa (fetch)"###;
     // substitution for replace_all()
     // the $1, $2,.. are placeholders for the found capture group
     let substitution = r###"OnlyThe$1"###;
