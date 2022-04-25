@@ -2,6 +2,7 @@
 name = "rust_regex_explanation_pwa"
 version = "2020.810.640"
 authors = ["bestia.dev"]
+homepage = "https://bestia.dev"
 edition = "2018"
 description = "Rust regex explanations in PWA"
 repository = "https://github.com/LucianoBestia/rust_regex_explanation_pwa"
