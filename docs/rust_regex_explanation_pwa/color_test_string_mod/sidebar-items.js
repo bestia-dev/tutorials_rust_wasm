@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["color_test_string","color the test string"],["colors_with_order","dark colors shuffled"]]});

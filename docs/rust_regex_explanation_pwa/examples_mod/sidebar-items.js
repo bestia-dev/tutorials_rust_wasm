@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["example_email",""],["example_model_1",""],["example_model_2",""],["example_model_3",""],["example_model_base",""],["example_xml_1",""],["example_xml_1_base",""],["example_xml_2",""],["example_xml_3",""],["init_texts",""]]});

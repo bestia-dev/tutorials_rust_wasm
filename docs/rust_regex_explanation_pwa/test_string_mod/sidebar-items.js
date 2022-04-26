@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["test_string_html","color the test string"]]});
