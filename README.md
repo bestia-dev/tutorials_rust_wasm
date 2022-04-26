@@ -5,6 +5,8 @@
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fbestia-dev%2Ftutorials_rust_wasm&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
+Hashtags: #rustlang #tutorial
+
 ## rust lang
 
 [Rust](https://www.rust-lang.org/) is a fantastic "new" language that has many benefits, but a steep learning curve.
@@ -16,7 +18,7 @@ I am learning the language myself and I like to teach others, so I made my proje
 
 A web page is the only true cross-platform application. It works on virtually any device or OS: windows, macOS, linux, android, iOS,...
 Every modern internet browser comes with a programmable engine. Sadly the only programming language of all browsers is javascript. Everybody knows it is a terrible language.  
-But we are lucky that all browsers lately accepted the idea of [wasm/webassembly](https://www.rust-lang.org/what/wasm). This enables different languages to be compiled to a very efficient `assembly code` that works great inside the browser. Basically eliminates the need of javascript. The best language for wasm/webassembly is Rust. 
+But we are lucky that all browsers lately accepted the idea of [wasm/webassembly](https://www.rust-lang.org/what/wasm). This enables different languages to be compiled to a very efficient `assembly code` that works great inside the browser. Basically eliminates the need of javascript. The best language for wasm/webassembly is Rust.
 
 ## html5 + css for GUI
 
@@ -39,40 +41,40 @@ Guess what? Rust is a great language for writing web servers, especially web ser
 
 ## let's start
 
-Be aware that things are changing fast. It is possible that the same tutorial would be different if I write it today. But it is impossible to go back and update everything that changed. Probably in some later tutorial I will address the change. Maybe. It is a complex ever changing world. Use all the information having the date of writing in mind.     
+Be aware that things are changing fast. It is possible that the same tutorial would be different if I write it today. But it is impossible to go back and update everything that changed. Probably in some later tutorial I will address the change. Maybe. It is a complex ever changing world. Use all the information having the date of writing in mind.  
 The first contact with the rust world is described in this project:  
-https://github.com/bestia-dev/rust01_the_beginning  
+<https://github.com/bestia-dev/rust01_the_beginning>  
 Next:  
-https://github.com/bestia-dev/rust02_workspace_and_testing  
+<https://github.com/bestia-dev/rust02_workspace_and_testing>  
 I need to teach about this great file manager:  
-https://github.com/bestia-dev/total_commander_best_file_manager    
+<https://github.com/bestia-dev/total_commander_best_file_manager>
 A minimal example of PWA:  
-https://github.com/bestia-dev/rust_wasm_pwa_minimal_clock  
+<https://github.com/bestia-dev/rust_wasm_pwa_minimal_clock>  
 A more complex PWA:  
-https://github.com/bestia-dev/rust_wasm_helper_for_pwa  
-https://github.com/bestia-dev/rust_regex_explanation_pwa  
+<https://github.com/bestia-dev/rust_wasm_helper_for_pwa>  
+<https://github.com/bestia-dev/rust_regex_explanation_pwa>  
 Docker is nice to learn for easy publishing:  
-https://github.com/bestia-dev/docker_rust_minimal    
+<https://github.com/bestia-dev/docker_rust_minimal>
 An example of a library/crate:  
-https://github.com/bestia-dev/reader_for_microxml  
+<https://github.com/bestia-dev/reader_for_microxml>  
 CLI examples (Command Line Interface) how to manipulate text files:  
-https://github.com/bestia-dev/lmake_cargo_toml_to_md  
-https://github.com/bestia-dev/lmake_lines_of_code  
-https://github.com/bestia-dev/lmake_version_from_date  
-https://github.com/bestia-dev/lmake_semver  
-https://github.com/bestia-dev/lmake_md_to_doc_comments  
+<https://github.com/bestia-dev/lmake_cargo_toml_to_md>  
+<https://github.com/bestia-dev/lmake_lines_of_code>  
+<https://github.com/bestia-dev/lmake_version_from_date>  
+<https://github.com/bestia-dev/lmake_semver>  
+<https://github.com/bestia-dev/lmake_md_to_doc_comments>  
 Web server:  
-https://github.com/bestia-dev/cargo_crev_web  
+<https://github.com/bestia-dev/cargo_crev_web>  
 Using rust CLI for shell scripting:  
-https://github.com/bestia-dev/wsl_open_browser    
+<https://github.com/bestia-dev/wsl_open_browser>
   
 Finally a complex process of iterating over the programming of a simple game. Starting with a simple idea and changing it to a complex game version by version. Learning about modules, workspaces, documentation, task automation, wasm, PWA, web server, websocket, webRTC, tests, examples, split code into libraries,...:  
-https://github.com/bestia-dev/mem1  
-https://github.com/bestia-dev/mem1_phonegap  
-https://github.com/bestia-dev/mem1_electron  
-https://github.com/bestia-dev/mem2  
-https://github.com/bestia-dev/mem2_server  
-https://github.com/bestia-dev/mem3_game  
-https://github.com/bestia-dev/mem4_game  
-https://github.com/bestia-dev/mem5_game  
-https://github.com/bestia-dev/mem6_game  
+<https://github.com/bestia-dev/mem1>  
+<https://github.com/bestia-dev/mem1_phonegap>  
+<https://github.com/bestia-dev/mem1_electron>  
+<https://github.com/bestia-dev/mem2>  
+<https://github.com/bestia-dev/mem2_server>  
+<https://github.com/bestia-dev/mem3_game>  
+<https://github.com/bestia-dev/mem4_game>  
+<https://github.com/bestia-dev/mem5_game>  
+<https://github.com/bestia-dev/mem6_game>  
