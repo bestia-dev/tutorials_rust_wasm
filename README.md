@@ -12,7 +12,8 @@ Visit my web page: [bestia.dev](https://bestia.dev)
 
 ## youtube video tutorial
 
-In my video tutorial series I explain how I use my development environment. You can see hings that are not explained in README files.
+In my video tutorial series I explain how I use my development environment.  
+You can see steps and processes that are not explained in README files.
 
 <!-- markdownlint-disable MD033 -->
 [<img src="https://yt3.ggpht.com/m4B-DkHt1gefqpKw0oro0jYKgDBrdwthKbg79RaelpPt2Gfr_Wmq72ZWeNRxNYe0YpOtTw_4=s176-c-k-c0x00ffffff-no-rj-mo" width="200px">](https://www.youtube.com/channel/UCitt3zFHK2jDetDh6ezI05A)
