@@ -1,6 +1,6 @@
-# tutorials_rust_wasm
+# bestia.dev Tutorials for Rust programming language
 
-**Learning Rust and having fun**  
+**Learning Rust and Wasm programming and having fun. I just love programming!**  
 ***version 1.0 date: 2020-12-07  author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/tutorials_rust_wasm)***  
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fbestia-dev%2Ftutorials_rust_wasm&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
@@ -12,7 +12,7 @@ Visit my web page: [bestia.dev](https://bestia.dev)
 
 ## youtube video tutorial
 
-In my video tutorial series I explain how I use my development environment.  
+In my video tutorial series "bestia-dev Tutorials for Rust programming language" I explain how I use my development environment.  
 You can see steps and processes that are not explained in README files.
 
 <!-- markdownlint-disable MD033 -->
@@ -51,6 +51,11 @@ Complex apps could download and upload data to the server.
 But even the most simple PWA needs a web server to be run the first time and then maybe installed locally. The same web server is later used to update the PWA. This is the server of the original app author and not of some mirror or web-store that could theoretically inject some adware/malware or tax all purchases. The web servers for PWA must use the secure https connection to avoid man in the middle attacks. The TLS certificate also says a lot of the identity of the server owner. It feels a bit less frightening in this wild and dangerous internet.  
 Web servers are also needed for temporary caching of communication and to list users that are connected right now. I am talking about [websocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) and [WebRTC](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API) technologies for communication over web standards.  
 Guess what? Rust is a great language for writing web servers, especially web servers for special needs, not just good old static web-pages. Another name is maybe more appropriate here: web-services or micro-services. But technologically it is the same thing, just more specialized.  
+
+## databases
+
+On the server side I will use PostgreSQL in a container.
+Inside the browser there is the Indexeddb database.
 
 ## let's start
 
