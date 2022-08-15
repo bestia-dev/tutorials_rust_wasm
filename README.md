@@ -3,7 +3,7 @@
 **Learning Rust and Wasm programming and having fun. I just love programming!**  
 ***version 1.0 date: 2020-12-07  author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/tutorials_rust_wasm)***  
 
-![Hits](https://bestia.dev/webpage_hit_counter/get_svg_image/195219041)
+![Hits](https://bestia.dev/webpage_hit_counter/get_svg_image/195219041.svg)
 
 Hashtags: #rustlang #tutorial  
 My projects on Github are more like a tutorial than a finished product: [bestia-dev tutorials](https://github.com/bestia-dev/tutorials_rust_wasm).
