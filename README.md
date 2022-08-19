@@ -1,4 +1,4 @@
-# bestia.dev Tutorials for Rust programming language
+# bestia-dev Tutorials for Rust programming language
 
 **Learning Rust and Wasm programming and having fun. I just love programming!**  
 ***version 1.0 date: 2020-12-07  author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/tutorials_rust_wasm)***  
