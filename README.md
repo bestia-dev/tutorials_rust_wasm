@@ -12,8 +12,7 @@ Visit my web page: [bestia.dev](https://bestia.dev)
 
 ## youtube video tutorial
 
-In my video tutorial series "bestia-dev Tutorials for Rust programming language" I explain how I use my development environment.  
-You can see steps and processes that are not explained in README files.
+In my video tutorial series "bestia-dev Tutorials for Rust programming language" I explain how I use my development environment. You can see steps and processes that are not explained in README files.
 
 <!-- markdownlint-disable MD033 -->
 [<img src="images/channel.png" width="600px">](https://www.youtube.com/channel/UCitt3zFHK2jDetDh6ezI05A)
