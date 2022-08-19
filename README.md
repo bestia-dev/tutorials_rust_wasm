@@ -16,9 +16,8 @@ In my video tutorial series "bestia-dev Tutorials for Rust programming language"
 You can see steps and processes that are not explained in README files.
 
 <!-- markdownlint-disable MD033 -->
-[<img src="https://yt3.ggpht.com/m4B-DkHt1gefqpKw0oro0jYKgDBrdwthKbg79RaelpPt2Gfr_Wmq72ZWeNRxNYe0YpOtTw_4=s176-c-k-c0x00ffffff-no-rj-mo" width="200px">](https://www.youtube.com/channel/UCitt3zFHK2jDetDh6ezI05A)
+[<img src="channel.png" width="400px">](https://www.youtube.com/channel/UCitt3zFHK2jDetDh6ezI05A)
 <!-- markdownlint-enable MD033 -->
-
 
 ## rust lang
 
