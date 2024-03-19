@@ -66,14 +66,14 @@ The first contact with the rust world is described in this project:
 Next:  
 <https://github.com/bestia-dev/rust02_workspace_and_testing>  
 I need to teach about this great file manager:  
-<https://github.com/bestia-dev/total_commander_best_file_manager>
+<https://github.com/bestia-dev/total_commander_best_file_manager>  
 A minimal example of PWA:  
 <https://github.com/bestia-dev/rust_wasm_pwa_minimal_clock>  
 A more complex PWA:  
 <https://github.com/bestia-dev/rust_wasm_helper_for_pwa>  
 <https://github.com/bestia-dev/rust_regex_explanation_pwa>  
 Docker is nice to learn for easy publishing:  
-<https://github.com/bestia-dev/docker_rust_minimal>
+<https://github.com/bestia-dev/docker_rust_minimal>  
 An example of a library/crate:  
 <https://github.com/bestia-dev/reader_for_microxml>  
 CLI examples (Command Line Interface) of how to manipulate text files:  
