@@ -67,7 +67,7 @@ Next:
 <https://github.com/bestia-dev/rust02_workspace_and_testing>  
 I need to teach about this great file manager:  
 <<<<<<< HEAD
-<https://github.com/CRUSTDE-Containerized-Rust-Dev-Env/total_commander_best_file_manager>
+<https://github.com/CRUSTDE-Containerized-Rust-DevEnv/total_commander_best_file_manager>
 =======
 <https://github.com/bestia-dev/total_commander_best_file_manager>  
 >>>>>>> refs/remotes/origin/main
