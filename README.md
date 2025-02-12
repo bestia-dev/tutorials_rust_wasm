@@ -5,7 +5,10 @@
 **Learning Rust and Wasm programming and having fun. I just love programming!**  
 ***version 1.0 date: 2020-12-07  author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/tutorials_rust_wasm)***  
 
+ ![maintained](https://img.shields.io/badge/maintained-green)
+ ![ready_for_use](https://img.shields.io/badge/ready_for_use-green)
  ![tutorial](https://img.shields.io/badge/tutorial-yellow)
+ ![youtube](https://img.shields.io/badge/youtube-yellow)
  ![tutorials_rust_wasm](https://bestia.dev/webpage_hit_counter/get_svg_image/195219041.svg)
 
 Hashtags: #rustlang #tutorial  
