@@ -10,6 +10,7 @@
  ![ready_for_use](https://img.shields.io/badge/ready_for_use-green)
  ![tutorial](https://img.shields.io/badge/tutorial-yellow)
  ![youtube](https://img.shields.io/badge/youtube-yellow)
+ ![License](https://img.shields.io/badge/license-MIT-blue.svg)
  ![tutorials_rust_wasm](https://bestia.dev/webpage_hit_counter/get_svg_image/195219041.svg)
 
 Hashtags: #rustlang #tutorial  
