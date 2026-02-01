@@ -3,7 +3,8 @@
 
 # bestia-dev Tutorials for Rust programming language
 
-## ⚠️ Attention! I am migrating from GitHub to Codeberg in 2026!  
+## ⚠️ Attention! I am migrating from GitHub to Codeberg in 2026! 
+
 https://codeberg.org/bestia-dev
 
 **Learning Rust and Wasm programming and having fun. I just love programming!**  
@@ -66,7 +67,7 @@ Guess what? Rust is a great language for writing web servers, especially web ser
 On the server side, I will use PostgreSQL in a container.
 Inside the browser, there is the Indexeddb database.
 
-## let's start
+## lets start
 
 Be aware that things are changing fast. It is possible that the same tutorial would be different if I write it today. But it is impossible to go back and update everything that changed. Probably in some later tutorial, I will address the change. Maybe. It is a complex ever-changing world. Use all the information having the date of writing in mind.  
 The first contact with the rust world is described in this project:  
@@ -74,11 +75,8 @@ The first contact with the rust world is described in this project:
 Next:  
 <https://github.com/bestia-dev/rust02_workspace_and_testing>  
 I need to teach about this great file manager:  
-<<<<<<< HEAD
 <https://github.com/CRUSTDE-ContainerizedRustDevEnv/total_commander_best_file_manager>
-=======
-<https://github.com/bestia-dev/total_commander_best_file_manager>  
->>>>>>> refs/remotes/origin/main
+
 A minimal example of PWA:  
 <https://github.com/bestia-dev/rust_wasm_pwa_minimal_clock>  
 A more complex PWA:  
