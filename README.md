@@ -2,4 +2,4 @@
 
 ## ⚠️ Attention! I am migrating from GitHub to Codeberg in 2026! 
 
-https://codeberg.org/bestia-dev
+<https://codeberg.org/bestia-dev-ready-for-use/tutorials_rust_wasm>
